@@ -2,7 +2,7 @@ namespace _01.Scripts.Interfaces
 {
     public interface IClickable
     {
-        public bool IsClickable { get; set; }
+        public bool IsClickable { get; }
         void OnClick();
     }
 }

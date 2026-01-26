@@ -1,0 +1,65 @@
+using _01.Scripts.Interfaces;
+using UnityEngine;
+
+namespace _01.Scripts.Ingame.Click
+{
+    public class ClickManager : MonoBehaviour
+    {
+        [Header("Settings")]
+        [SerializeField] private Camera _mainCamera;
+        [SerializeField] private LayerMask _clickableLayer;
+
+        private float _clickDamage = 1f;
+
+        public float ClickDamage
+        {
+            get => _clickDamage;
+            set => _clickDamage = value;
+        }
+
+        private void Update()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                TryClick();
+            }
+        }
+
+        private void TryClick()
+        {
+            Vector2 mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero, 0f, _clickableLayer);
+
+            if (hit.collider == null)
+            {
+                return;
+            }
+
+            var clickable = hit.collider.GetComponent<IClickable>();
+            if (clickable == null || !clickable.IsClickable)
+            {
+                return;
+            }
+
+            clickable.OnClick();
+            DealClickDamage(hit.collider, hit.point);
+        }
+
+        private void DealClickDamage(Collider2D target, Vector2 hitPoint)
+        {
+            var damageable = target.GetComponent<IDamageable>();
+            if (damageable == null)
+            {
+                return;
+            }
+
+            var clickInfo = new ClickInfo(
+                damage: _clickDamage,
+                clickType: EClickType.Manual,
+                position: hitPoint
+            );
+
+            damageable.TakeDamage(clickInfo);
+        }
+    }
+}

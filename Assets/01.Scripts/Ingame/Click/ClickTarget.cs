@@ -1,16 +1,44 @@
 using UnityEngine;
+using System;
+using _01.Scripts.Interfaces;
 
-public class ClickTarget : MonoBehaviour
+namespace _01.Scripts.Ingame.Click
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class ClickTarget : MonoBehaviour, IClickable
     {
-        
-    }
+        [Header("Feedback")]
+        [SerializeField] private ClickFeedback _clickFeedback;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public event Action OnClicked;
+
+        private bool _isClickable = true;
+
+        public bool IsClickable => _isClickable;
+
+        public void OnClick()
+        {
+            if (!_isClickable)
+            {
+                return;
+            }
+
+            OnClicked?.Invoke();
+            PlayFeedback();
+        }
+
+        public void SetClickable(bool value)
+        {
+            _isClickable = value;
+        }
+
+        private void PlayFeedback()
+        {
+            if (_clickFeedback == null)
+            {
+                return;
+            }
+
+            _clickFeedback.PlayFeedback(transform.position);
+        }
     }
 }
