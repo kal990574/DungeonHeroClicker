@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 230e631ae5eb463cb3525fcfd641308c, type: 3}
+  m_Name: Mage
+  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Hero.CompanionData
+  _companionName: "\uB9C8\uBC95\uC0AC"
+  _icon: {fileID: 0}
+  _purchaseCost: 10000
+  _baseDPS: 25
+  _dpsPerLevel: 10
+  _baseUpgradeCost: 500
+  _costMultiplier: 1.15
