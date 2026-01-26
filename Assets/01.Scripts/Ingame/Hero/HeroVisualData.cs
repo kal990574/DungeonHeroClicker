@@ -30,7 +30,6 @@ namespace _01.Scripts.Ingame.Hero
 
         [Header("Visuals")]
         public string TierName;
-        public Sprite WeaponSprite;
-        public Sprite HeroSprite;
+        public GameObject HeroPrefab;
     }
 }

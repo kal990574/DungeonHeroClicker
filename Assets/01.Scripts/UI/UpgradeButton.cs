@@ -1,3 +1,4 @@
+using _01.Scripts.Outgame.Currency;
 using _01.Scripts.Outgame.Upgrade;
 using TMPro;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace _01.Scripts.UI
     {
         [Header("References")]
         [SerializeField] private Upgrade _upgrade;
+        [SerializeField] private GoldWallet _goldWallet;
         [SerializeField] private Button _button;
         [SerializeField] private TMP_Text _nameText;
         [SerializeField] private TMP_Text _costText;
@@ -28,11 +30,21 @@ namespace _01.Scripts.UI
         private void OnEnable()
         {
             _upgrade.OnUpgraded += HandleUpgraded;
+
+            if (_goldWallet != null)
+            {
+                _goldWallet.OnGoldChanged += HandleGoldChanged;
+            }
         }
 
         private void OnDisable()
         {
             _upgrade.OnUpgraded -= HandleUpgraded;
+
+            if (_goldWallet != null)
+            {
+                _goldWallet.OnGoldChanged -= HandleGoldChanged;
+            }
         }
 
         private void OnButtonClick()
@@ -43,6 +55,11 @@ namespace _01.Scripts.UI
         private void HandleUpgraded(Upgrade upgrade)
         {
             UpdateUI();
+        }
+
+        private void HandleGoldChanged(int gold)
+        {
+            _button.interactable = _upgrade.CanUpgrade;
         }
 
         private void UpdateUI()

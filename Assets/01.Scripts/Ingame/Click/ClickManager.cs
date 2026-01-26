@@ -1,4 +1,5 @@
 using _01.Scripts.Interfaces;
+using _01.Scripts.Outgame.Upgrade;
 using UnityEngine;
 
 namespace _01.Scripts.Ingame.Click
@@ -8,14 +9,12 @@ namespace _01.Scripts.Ingame.Click
         [Header("Settings")]
         [SerializeField] private Camera _mainCamera;
         [SerializeField] private LayerMask _clickableLayer;
+        [SerializeField] private float _baseClickDamage = 1f;
 
-        private float _clickDamage = 1f;
+        [Header("Dependencies")]
+        [SerializeField] private UpgradeManager _upgradeManager;
 
-        public float ClickDamage
-        {
-            get => _clickDamage;
-            set => _clickDamage = value;
-        }
+        private float ClickDamage => _baseClickDamage + (_upgradeManager != null ? _upgradeManager.TotalClickDamage : 0f);
 
         private void Update()
         {
@@ -54,7 +53,7 @@ namespace _01.Scripts.Ingame.Click
             }
 
             var clickInfo = new ClickInfo(
-                damage: _clickDamage,
+                damage: ClickDamage,
                 clickType: EClickType.Manual,
                 position: hitPoint
             );

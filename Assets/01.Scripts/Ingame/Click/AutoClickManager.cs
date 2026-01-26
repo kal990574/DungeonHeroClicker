@@ -1,5 +1,6 @@
-using UnityEngine;
+using _01.Scripts.Ingame.Hero;
 using _01.Scripts.Interfaces;
+using UnityEngine;
 
 namespace _01.Scripts.Ingame.Click
 {
@@ -8,21 +9,14 @@ namespace _01.Scripts.Ingame.Click
         [Header("Settings")]
         [SerializeField] private float _tickInterval = 0.1f;
 
+        [Header("Dependencies")]
+        [SerializeField] private CompanionManager _companionManager;
+
         private IDamageable _currentTarget;
         private Transform _targetTransform;
-        private float _totalDPS;
-        private float _damagePerTick;
         private float _timer;
 
-        public float TotalDPS
-        {
-            get => _totalDPS;
-            set
-            {
-                _totalDPS = value;
-                _damagePerTick = _totalDPS * _tickInterval;
-            }
-        }
+        private float TotalDPS => _companionManager != null ? _companionManager.TotalDPS : 0f;
 
         public void SetTarget(IDamageable target, Transform targetTransform)
         {
@@ -43,7 +37,7 @@ namespace _01.Scripts.Ingame.Click
                 return;
             }
 
-            if (_totalDPS <= 0f)
+            if (TotalDPS <= 0f)
             {
                 return;
             }
@@ -63,18 +57,14 @@ namespace _01.Scripts.Ingame.Click
                 ? _targetTransform.position
                 : Vector3.zero;
 
+            var damage = TotalDPS * _tickInterval;
             var clickInfo = new ClickInfo(
-                damage: _damagePerTick,
+                damage: damage,
                 clickType: EClickType.Auto,
                 position: targetPosition
             );
 
             _currentTarget.TakeDamage(clickInfo);
-        }
-
-        public void AddDPS(float amount)
-        {
-            TotalDPS += amount;
         }
     }
 }
