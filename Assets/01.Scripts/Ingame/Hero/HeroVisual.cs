@@ -10,6 +10,9 @@ namespace _01.Scripts.Ingame.Hero
         [Header("Spawn Point")]
         [SerializeField] private Transform _spawnPoint;
 
+        [Header("Animation")]
+        [SerializeField] private HeroAnimator _heroAnimator;
+
         private int _currentTierIndex = -1;
         private GameObject _currentHero;
 
@@ -20,6 +23,11 @@ namespace _01.Scripts.Ingame.Hero
             if (_spawnPoint == null)
             {
                 _spawnPoint = transform;
+            }
+
+            if (_heroAnimator == null)
+            {
+                _heroAnimator = GetComponent<HeroAnimator>();
             }
 
             UpdateVisual(1);
@@ -47,6 +55,16 @@ namespace _01.Scripts.Ingame.Hero
             if (tier.HeroPrefab != null)
             {
                 _currentHero = Instantiate(tier.HeroPrefab, _spawnPoint.position, Quaternion.identity, _spawnPoint);
+
+                // 오른쪽(몬스터 방향)을 바라보도록 설정.
+                _currentHero.transform.localScale = new Vector3(-1, 1, 1);
+
+                // HeroAnimator에 SPUM_Prefabs 전달.
+                var spumPrefabs = _currentHero.GetComponent<SPUM_Prefabs>();
+                if (_heroAnimator != null && spumPrefabs != null)
+                {
+                    _heroAnimator.Initialize(spumPrefabs);
+                }
             }
 
             Debug.Log($"[HeroVisual] Tier Changed: {tier.TierName}");

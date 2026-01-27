@@ -1,3 +1,4 @@
+using _01.Scripts.Ingame.Hero;
 using _01.Scripts.Interfaces;
 using _01.Scripts.Outgame.Upgrade;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace _01.Scripts.Ingame.Click
 
         [Header("Dependencies")]
         [SerializeField] private UpgradeManager _upgradeManager;
+        [SerializeField] private HeroAnimator _heroAnimator;
 
         private float ClickDamage => _baseClickDamage + (_upgradeManager != null ? _upgradeManager.TotalClickDamage : 0f);
 
@@ -42,6 +44,12 @@ namespace _01.Scripts.Ingame.Click
 
             clickable.OnClick();
             DealClickDamage(hit.collider, hit.point);
+
+            // 플레이어 공격 애니메이션.
+            if (_heroAnimator != null)
+            {
+                _heroAnimator.PlayAttack();
+            }
         }
 
         private void DealClickDamage(Collider2D target, Vector2 hitPoint)

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 933248ba7ee54c8d89d40e9f00d63b6b, type: 3}
   m_Name: Weapon_WoodHammer
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Outgame.Upgrade.UpgradeData
-  _upgradeName: 
+  _upgradeName: Weapon
   _icon: {fileID: 0}
   _baseCost: 100
   _costMultiplier: 1.15

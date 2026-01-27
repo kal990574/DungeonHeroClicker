@@ -7,8 +7,8 @@ namespace _01.Scripts.Ingame.Monster
 {
     public class MonsterSpawner : MonoBehaviour
     {
-        [Header("Settings")]
-        [SerializeField] private Monster _monsterPrefab;
+        [Header("Monster Prefabs")]
+        [SerializeField] private Monster[] _monsterPrefabs;
         [SerializeField] private Transform _spawnPoint;
         [SerializeField] private float _respawnDelay = 0.5f;
 
@@ -19,33 +19,41 @@ namespace _01.Scripts.Ingame.Monster
         [SerializeField] private AutoClickManager _autoClickManager;
 
         private Monster _currentMonster;
+        private int _currentIndex;
 
         public Monster CurrentMonster => _currentMonster;
+        public int CurrentIndex => _currentIndex;
 
         public event Action<Monster> OnMonsterSpawned;
 
         private void Start()
         {
+            _currentIndex = 0;
             SpawnMonster();
         }
 
         public void SpawnMonster()
         {
+            if (_monsterPrefabs == null || _monsterPrefabs.Length == 0)
+            {
+                Debug.LogError("[MonsterSpawner] No monster prefabs assigned!");
+                return;
+            }
+
             if (_currentMonster != null && !_currentMonster.IsDead)
             {
                 return;
             }
 
-            if (_currentMonster == null)
+            // 이전 몬스터 제거.
+            if (_currentMonster != null)
             {
-                _currentMonster = Instantiate(_monsterPrefab, _spawnPoint.position, Quaternion.identity);
-            }
-            else
-            {
-                _currentMonster.Reset();
-                _currentMonster.transform.position = _spawnPoint.position;
+                Destroy(_currentMonster.gameObject);
             }
 
+            // 현재 인덱스의 프리팹으로 새 몬스터 생성.
+            var prefab = _monsterPrefabs[_currentIndex];
+            _currentMonster = Instantiate(prefab, _spawnPoint.position, Quaternion.identity);
             _currentMonster.OnMonsterDeath += HandleMonsterDeath;
 
             // 체력바 타겟 설정.
@@ -72,6 +80,9 @@ namespace _01.Scripts.Ingame.Monster
             {
                 _autoClickManager.ClearTarget();
             }
+
+            // 다음 몬스터로 인덱스 증가 (순환).
+            _currentIndex = (_currentIndex + 1) % _monsterPrefabs.Length;
 
             Invoke(nameof(SpawnMonster), _respawnDelay);
         }

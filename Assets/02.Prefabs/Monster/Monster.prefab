@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3535245612058147853}
   - component: {fileID: 5479980460858420665}
   - component: {fileID: 2183453537202251411}
+  - component: {fileID: 7282400712543171146}
   m_Layer: 6
   m_Name: Monster
   m_TagString: Untagged
@@ -145,7 +146,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.2804526}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -155,7 +156,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.8948302}
   m_EdgeRadius: 0
 --- !u!114 &3343164502583796823
 MonoBehaviour:
@@ -231,6 +232,22 @@ MonoBehaviour:
   _duration: 0.15
   _vibrato: 1
   _elasticity: 0.5
+--- !u!114 &7282400712543171146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503396494754853213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfd6f9e64fd4d449c9d7164c6b180c90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Monster.MonsterAnimator
+  _spumPrefabs: {fileID: 7904678275047376685}
+  _health: {fileID: 8785416185372858780}
+  _damagedAnimIndex: 0
+  _deathAnimIndex: 0
 --- !u!1001 &1424422573729514755
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -333,3 +350,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2586060623426010381, guid: 828a93675f57e479282db63e1a883aac, type: 3}
   m_PrefabInstance: {fileID: 1424422573729514755}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7904678275047376685 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9112928061120070190, guid: 828a93675f57e479282db63e1a883aac, type: 3}
+  m_PrefabInstance: {fileID: 1424422573729514755}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28ac21711b0ec40a0812d33a586eb7ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

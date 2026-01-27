@@ -27,7 +27,7 @@ namespace _01.Scripts.Outgame.Currency
             }
 
             _currentGold += amount;
-            OnGoldChanged?.Invoke(amount);
+            OnGoldChanged?.Invoke(_currentGold);
         }
 
         public bool CanAfford(int cost)
@@ -43,7 +43,7 @@ namespace _01.Scripts.Outgame.Currency
             }
 
             _currentGold -= amount;
-            OnGoldChanged?.Invoke(amount);
+            OnGoldChanged?.Invoke(_currentGold);
             return true;
         }
     }
