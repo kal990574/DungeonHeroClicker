@@ -10,8 +10,12 @@ namespace _01.Scripts.Ingame.Hero
         [Header("Companions")]
         [SerializeField] private List<Companion> _companions;
 
+        [Header("Visuals")]
+        [SerializeField] private List<CompanionVisual> _companionVisuals;
+
         public float TotalDPS => _companions.Sum(c => c.CurrentDPS);
         public IReadOnlyList<Companion> Companions => _companions;
+        public IReadOnlyList<CompanionVisual> CompanionVisuals => _companionVisuals;
 
         public event Action OnDPSChanged;
 
@@ -36,6 +40,17 @@ namespace _01.Scripts.Ingame.Hero
         {
             OnDPSChanged?.Invoke();
             Debug.Log($"[CompanionManager] Total DPS: {TotalDPS}");
+        }
+
+        public void PlayAllAttackAnimations()
+        {
+            foreach (var visual in _companionVisuals)
+            {
+                if (visual != null && visual.IsSpawned)
+                {
+                    visual.PlayAttackAnimation();
+                }
+            }
         }
     }
 }

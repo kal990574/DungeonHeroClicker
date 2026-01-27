@@ -73,6 +73,7 @@ namespace _01.Scripts.Ingame.Click
             );
 
             _currentTarget.TakeDamage(clickInfo);
+            _companionManager.PlayAllAttackAnimations();
         }
     }
 }

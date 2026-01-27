@@ -11,6 +11,7 @@ namespace _01.Scripts.Core.Audio
         [Header("Clips")] [SerializeField] private AudioClip[] _hitClips;
         [SerializeField] private AudioClip[] _coinClips;
         [SerializeField] private AudioClip[] _uiClips;
+        [SerializeField] private AudioClip[] _deathClips;
         [SerializeField] private AudioClip[] _upgradeClips;
 
         [Header("Settings")] [SerializeField] private float _volume = 1f;
@@ -40,7 +41,7 @@ namespace _01.Scripts.Core.Audio
 
         public void PlayDeath()
         {
-            PlayRandom(_coinClips);
+            PlayRandom(_deathClips);
         }
         public void PlayCoin()
         {

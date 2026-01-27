@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 42817715}
   - component: {fileID: 42817716}
+  - component: {fileID: 42817717}
   m_Layer: 0
   m_Name: Mage
   m_TagString: Untagged
@@ -165,6 +166,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Hero.Companion
   _data: {fileID: 11400000, guid: 20a294c3d68294f58b3952081839d6af, type: 2}
   _goldWallet: {fileID: 1134192878}
+--- !u!114 &42817717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42817714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a6fee8b658f7410cae792bfc83a6f83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Hero.CompanionVisual
+  _companion: {fileID: 42817716}
+  _playerTransform: {fileID: 1012606443}
 --- !u!1 &74189635 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 691500379282035044, guid: 5d69538651aca442a940985ca6cf6b60, type: 3}
@@ -725,6 +740,7 @@ GameObject:
   m_Component:
   - component: {fileID: 291540470}
   - component: {fileID: 291540471}
+  - component: {fileID: 291540472}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Untagged
@@ -761,6 +777,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Hero.Companion
   _data: {fileID: 11400000, guid: 3118ec2d1e4fa409ca04f831e73a453a, type: 2}
   _goldWallet: {fileID: 1134192878}
+--- !u!114 &291540472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291540469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a6fee8b658f7410cae792bfc83a6f83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Hero.CompanionVisual
+  _companion: {fileID: 291540471}
+  _playerTransform: {fileID: 1012606443}
 --- !u!1 &294680717
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,6 +876,7 @@ GameObject:
   m_Component:
   - component: {fileID: 365142164}
   - component: {fileID: 365142165}
+  - component: {fileID: 365142166}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Untagged
@@ -882,6 +913,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Hero.Companion
   _data: {fileID: 11400000, guid: c75e992dec85049b0b84356b6373a938, type: 2}
   _goldWallet: {fileID: 1134192878}
+--- !u!114 &365142166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365142163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a6fee8b658f7410cae792bfc83a6f83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Hero.CompanionVisual
+  _companion: {fileID: 365142165}
+  _playerTransform: {fileID: 1012606443}
 --- !u!1 &374620629 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 691500379282035044, guid: 5d69538651aca442a940985ca6cf6b60, type: 3}
@@ -1169,7 +1214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6932762875453986878, guid: c94ad9f1d88ea49a892364c1cabe414f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -90
+      value: -194.7
       objectReference: {fileID: 0}
     - target: {fileID: 6932762875453986878, guid: c94ad9f1d88ea49a892364c1cabe414f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1780,7 +1825,7 @@ Transform:
   m_GameObject: {fileID: 602247135}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.16199, y: -5.37092, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1805,6 +1850,10 @@ MonoBehaviour:
   - {fileID: 365142165}
   - {fileID: 291540471}
   - {fileID: 42817716}
+  _companionVisuals:
+  - {fileID: 365142166}
+  - {fileID: 291540472}
+  - {fileID: 42817717}
 --- !u!1 &617584071
 GameObject:
   m_ObjectHideFlags: 0
@@ -2166,7 +2215,7 @@ Transform:
   m_GameObject: {fileID: 671891918}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: -0.706, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3795,7 +3844,7 @@ Transform:
   m_GameObject: {fileID: 1012606442}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 0.1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4074,7 +4123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a722ca541ce4132a54f2207fdd990c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Outgame.Currency.GoldWallet
-  _initialGold: 0
+  _initialGold: 1000000
 --- !u!114 &1134192879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5154,7 +5203,7 @@ MonoBehaviour:
   _goldWallet: {fileID: 1134192878}
   _goldText: {fileID: 853050887}
   _countDuration: 0.3
-  _countEase: 6
+  _countEase: 7
 --- !u!114 &1532360598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5170,10 +5219,12 @@ MonoBehaviour:
   _coinPrefab: {fileID: 1724202524270303136, guid: 45a0c3ce0452546eaaa6b917252a683b, type: 3}
   _goldUITarget: {fileID: 853055401}
   _canvas: {fileID: 1509586269}
-  _flyDuration: 0.5
-  _flyEase: 7
   _coinCount: 5
-  _spreadRadius: 50
+  _explosionDuration: 0.2
+  _explosionRadius: 100
+  _explosionEase: 6
+  _flyDuration: 0.5
+  _flyEase: 30
   _delayBetweenCoins: 0.03
   _arcHeight: 100
 --- !u!1 &1611709069
@@ -7039,6 +7090,8 @@ MonoBehaviour:
   _coinClips:
   - {fileID: 8300000, guid: bbeccdff07687416cb13576c47b65e79, type: 3}
   _uiClips: []
+  _deathClips:
+  - {fileID: 8300000, guid: 0304db9aabc01476886567b82ee9a4aa, type: 3}
   _upgradeClips:
   - {fileID: 8300000, guid: 2a0166e9cf3694ca6b7f5e51d7cee95e, type: 3}
   _volume: 0.4
@@ -7467,7 +7520,7 @@ Transform:
   m_GameObject: {fileID: 2122130150}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.383, y: -0.734, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

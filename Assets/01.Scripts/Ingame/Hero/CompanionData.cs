@@ -20,11 +20,25 @@ namespace _01.Scripts.Ingame.Hero
         [SerializeField] private int _baseUpgradeCost = 100;
         [SerializeField] private float _costMultiplier = 1.15f;
 
+        [Header("Visual")]
+        [SerializeField] private GameObject _companionPrefab;
+        [SerializeField] private Vector2 _spawnOffset;
+        [SerializeField] private int _attackAnimIndex;
+
+        [Header("Spawn Effect")]
+        [SerializeField] private GameObject _spawnEffectPrefab;
+        [SerializeField] private float _spawnEffectDuration = 1.5f;
+
         public string CompanionName => _companionName;
         public Sprite Icon => _icon;
         public int PurchaseCost => _purchaseCost;
         public float BaseDPS => _baseDPS;
         public float DPSPerLevel => _dpsPerLevel;
+        public GameObject CompanionPrefab => _companionPrefab;
+        public Vector2 SpawnOffset => _spawnOffset;
+        public int AttackAnimIndex => _attackAnimIndex;
+        public GameObject SpawnEffectPrefab => _spawnEffectPrefab;
+        public float SpawnEffectDuration => _spawnEffectDuration;
 
         public int GetUpgradeCost(int level)
         {
