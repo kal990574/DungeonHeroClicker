@@ -1,3 +1,4 @@
+using _01.Scripts.Core.Utils;
 using DG.Tweening;
 using Lean.Pool;
 using TMPro;
@@ -52,7 +53,7 @@ namespace _01.Scripts.Ingame.Feedback
                 return;
             }
 
-            text.text = FormatDamage(value);
+            text.text = NumberFormatter.Format(value);
             text.color = _normalColor;
             text.alpha = 1f;
 
@@ -77,7 +78,7 @@ namespace _01.Scripts.Ingame.Feedback
                 return;
             }
 
-            text.text = FormatDamage(value);
+            text.text = NumberFormatter.Format(value);
             text.color = _criticalColor;
             text.alpha = 1f;
 
@@ -92,13 +93,6 @@ namespace _01.Scripts.Ingame.Feedback
             sequence.Append(popup.transform.DOMove(targetPos, _duration).SetEase(_moveEase));
             sequence.Join(text.DOFade(0f, _duration).SetEase(_fadeEase));
             sequence.OnComplete(() => LeanPool.Despawn(popup));
-        }
-
-        private string FormatDamage(float damage)
-        {
-            if (damage >= 1000000f) return $"{damage / 1000000f:F1}M";
-            if (damage >= 1000f) return $"{damage / 1000f:F1}K";
-            return Mathf.RoundToInt(damage).ToString();
         }
 
         public void Stop()

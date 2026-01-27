@@ -1,3 +1,4 @@
+using _01.Scripts.Core.Utils;
 using DG.Tweening;
 using Lean.Pool;
 using TMPro;
@@ -33,7 +34,7 @@ namespace _01.Scripts.Ingame.Click
             transform.position = position + new Vector3(randomX, 0f, 0f);
 
             // 텍스트 설정.
-            _damageText.text = FormatDamage(damage);
+            _damageText.text = NumberFormatter.Format(damage);
             _damageText.alpha = 1f;
             transform.localScale = _initialScale;
 
@@ -55,13 +56,6 @@ namespace _01.Scripts.Ingame.Click
 
             // 완료 후 풀로 반환.
             _sequence.OnComplete(() => LeanPool.Despawn(gameObject));
-        }
-
-        private string FormatDamage(float damage)
-        {
-            if (damage >= 1000000f) return $"{damage / 1000000f:F1}M";
-            if (damage >= 1000f) return $"{damage / 1000f:F1}K";
-            return Mathf.RoundToInt(damage).ToString();
         }
 
         private void OnDisable()

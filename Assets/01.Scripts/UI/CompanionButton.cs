@@ -1,9 +1,10 @@
+using _01.Scripts.Core.Audio;
+using _01.Scripts.Core.Utils;
 using _01.Scripts.Ingame.Hero;
 using _01.Scripts.Outgame.Currency;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using _01.Scripts.Core.Audio;
 
 namespace _01.Scripts.UI
 {
@@ -37,6 +38,8 @@ namespace _01.Scripts.UI
             {
                 _goldWallet.OnGoldChanged += HandleGoldChanged;
             }
+
+            UpdateUI();
         }
 
         private void OnDisable()
@@ -79,14 +82,14 @@ namespace _01.Scripts.UI
             if (!_companion.IsPurchased)
             {
                 _nameText.text = $"{_companion.Data.CompanionName} [Lock]";
-                _costText.text = $"{_companion.Data.PurchaseCost:N0} G";
-                _dpsText.text = $"DPS +{_companion.Data.BaseDPS:F0}";
+                _costText.text = $"{NumberFormatter.Format(_companion.Data.PurchaseCost)} G";
+                _dpsText.text = $"DPS +{NumberFormatter.Format(_companion.Data.BaseDPS)}";
             }
             else
             {
                 _nameText.text = $"{_companion.Data.CompanionName} Lv.{_companion.CurrentLevel}";
-                _costText.text = $"{_companion.UpgradeCost:N0} G";
-                _dpsText.text = $"DPS {_companion.CurrentDPS:F1}";
+                _costText.text = $"{NumberFormatter.Format(_companion.UpgradeCost)} G";
+                _dpsText.text = $"DPS {NumberFormatter.Format(_companion.CurrentDPS)}";
             }
 
             UpdateInteractable();

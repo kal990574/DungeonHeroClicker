@@ -1,9 +1,10 @@
+using _01.Scripts.Core.Audio;
+using _01.Scripts.Core.Utils;
 using _01.Scripts.Outgame.Currency;
 using _01.Scripts.Outgame.Upgrade;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using _01.Scripts.Core.Audio;
 
 namespace _01.Scripts.UI
 {
@@ -36,6 +37,8 @@ namespace _01.Scripts.UI
             {
                 _goldWallet.OnGoldChanged += HandleGoldChanged;
             }
+
+            UpdateUI();
         }
 
         private void OnDisable()
@@ -67,8 +70,8 @@ namespace _01.Scripts.UI
         private void UpdateUI()
         {
             _nameText.text = $"{_upgrade.Data.UpgradeName} Lv.{_upgrade.CurrentLevel}";
-            _costText.text = $"{_upgrade.UpgradeCost:N0} G";
-            _effectText.text = $"DMG +{_upgrade.CurrentEffect:F0}";
+            _costText.text = $"{NumberFormatter.Format(_upgrade.UpgradeCost)} G";
+            _effectText.text = $"DMG +{NumberFormatter.Format(_upgrade.CurrentEffect)}";
             _button.interactable = _upgrade.CanUpgrade;
         }
     }

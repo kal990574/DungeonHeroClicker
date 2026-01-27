@@ -1,3 +1,4 @@
+using _01.Scripts.Core.Utils;
 using _01.Scripts.Ingame.Hero;
 using TMPro;
 using UnityEngine;
@@ -9,9 +10,6 @@ namespace _01.Scripts.UI
         [Header("References")]
         [SerializeField] private CompanionManager _companionManager;
         [SerializeField] private TMP_Text _dpsText;
-
-        [Header("Format")]
-        [SerializeField] private string _format = "{0:F1}";
 
         private void OnEnable()
         {
@@ -26,7 +24,7 @@ namespace _01.Scripts.UI
 
         private void UpdateDisplay()
         {
-            _dpsText.text = string.Format(_format, _companionManager.TotalDPS);
+            _dpsText.text = NumberFormatter.Format(_companionManager.TotalDPS);
         }
     }
 }
