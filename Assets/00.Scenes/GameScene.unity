@@ -7094,6 +7094,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0304db9aabc01476886567b82ee9a4aa, type: 3}
   _upgradeClips:
   - {fileID: 8300000, guid: 2a0166e9cf3694ca6b7f5e51d7cee95e, type: 3}
+  _tierUpClips: []
   _volume: 0.4
 --- !u!114 &1961287056
 MonoBehaviour:
@@ -7504,6 +7505,10 @@ GameObject:
   - component: {fileID: 2122130152}
   - component: {fileID: 2122130153}
   - component: {fileID: 2122130154}
+  - component: {fileID: 2122130158}
+  - component: {fileID: 2122130157}
+  - component: {fileID: 2122130156}
+  - component: {fileID: 2122130155}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -7570,6 +7575,76 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Hero.HeroAnimator
   _attackAnimIndex: 0
+--- !u!114 &2122130155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122130150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b78e7464503e4355b1669f4c91e9a2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Feedback.TierUpTextFeedback
+  _textPrefab: {fileID: 0}
+  _floatDistance: 3
+  _duration: 1.5
+  _scaleMultiplier: 1.5
+  _moveEase: 6
+  _fadeEase: 5
+  _textColor: {r: 1, g: 0.84, b: 0, a: 1}
+--- !u!114 &2122130156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122130150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac3ea5a9206b84799a4c1b9b0bc8299c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Feedback.TierUpScaleFeedback
+  _target: {fileID: 2122130151}
+  _expandScale: 1.3
+  _shrinkScale: 0.9
+  _expandDuration: 0.2
+  _shrinkDuration: 0.1
+  _restoreDuration: 0.15
+--- !u!114 &2122130157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122130150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdf88181a3a8b4e7d972e65a5552f9b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Feedback.TierUpParticleFeedback
+  _burstParticle: {fileID: 1623298396792479162, guid: dd1d88ec0386448cd9f9e008bebff9a4, type: 3}
+  _auraParticle: {fileID: 0}
+  _riseParticle: {fileID: 0}
+--- !u!114 &2122130158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122130150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6431accbea1954e31950a401a09189d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Feedback.HeroTierUpFeedbackPlayer
+  _heroVisual: {fileID: 0}
+  _particleFeedback: {fileID: 2122130157}
+  _scaleFeedback: {fileID: 2122130156}
+  _textFeedback: {fileID: 2122130155}
+  _useCameraShake: 1
+  _textOffset: {x: 0, y: 1, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

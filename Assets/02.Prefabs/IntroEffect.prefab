@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1623298396792479162}
   - component: {fileID: 4652279233575634131}
   m_Layer: 0
-  m_Name: VFX_ImpactToon_1.1.0 1
+  m_Name: IntroEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

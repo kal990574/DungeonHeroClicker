@@ -13,6 +13,7 @@ namespace _01.Scripts.Core.Audio
         [SerializeField] private AudioClip[] _uiClips;
         [SerializeField] private AudioClip[] _deathClips;
         [SerializeField] private AudioClip[] _upgradeClips;
+        [SerializeField] private AudioClip[] _tierUpClips;
 
         [Header("Settings")] [SerializeField] private float _volume = 1f;
 
@@ -56,6 +57,11 @@ namespace _01.Scripts.Core.Audio
         public void PlayUpgrade()
         {
             PlayRandom(_upgradeClips);
+        }
+
+        public void PlayTierUp()
+        {
+            PlayRandom(_tierUpClips);
         }
 
         public void SetVolume(float volume)

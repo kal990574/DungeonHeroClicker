@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace _01.Scripts.Ingame.Hero
@@ -14,7 +15,10 @@ namespace _01.Scripts.Ingame.Hero
         [SerializeField] private HeroAnimator _heroAnimator;
 
         private int _currentTierIndex = -1;
+        private string _currentTierName;
         private GameObject _currentHero;
+
+        public event Action<TierChangeInfo> OnTierChanged;
 
         public GameObject CurrentHero => _currentHero;
 
@@ -43,7 +47,9 @@ namespace _01.Scripts.Ingame.Hero
                 return;
             }
 
+            var previousTierName = _currentTierName;
             _currentTierIndex = newTierIndex;
+            _currentTierName = tier.TierName;
 
             // 기존 프리팹 제거.
             if (_currentHero != null)
@@ -65,6 +71,12 @@ namespace _01.Scripts.Ingame.Hero
                 {
                     _heroAnimator.Initialize(spumPrefabs);
                 }
+            }
+
+            // 티어 변경 이벤트 발행 (첫 초기화가 아닌 경우에만).
+            if (!string.IsNullOrEmpty(previousTierName))
+            {
+                OnTierChanged?.Invoke(new TierChangeInfo(previousTierName, tier.TierName, tier.MinLevel));
             }
 
             Debug.Log($"[HeroVisual] Tier Changed: {tier.TierName}");

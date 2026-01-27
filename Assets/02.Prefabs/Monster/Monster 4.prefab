@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: -4000981429870364250}
   - component: {fileID: 6152178386009961589}
   - component: {fileID: 1529688313031502683}
+  - component: {fileID: 5406389542638505818}
   m_Layer: 6
   m_Name: Monster 4
   m_TagString: Untagged
@@ -176,6 +177,7 @@ MonoBehaviour:
   _health: {fileID: 8785416185372858780}
   _clickTarget: {fileID: 1891330598892319291}
   _feedbackPlayer: {fileID: 5479980460858420665}
+  _deathParticleFeedback: {fileID: 0}
 --- !u!114 &8785416185372858780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,6 +303,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Feedback.ParticleFeedback
   _particlePrefab: {fileID: 4739264407584629229, guid: dbca4d9b3808745ec9991e0e741ff05b, type: 3}
   _usePooling: 1
+--- !u!114 &5406389542638505818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503396494754853213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd7e5577314db4632b698314e955c33e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Feedback.DeathParticleFeedback
+  _particlePrefab: {fileID: 1623298396792479162, guid: dd1d88ec0386448cd9f9e008bebff9a4, type: 3}
 --- !u!1001 &5351117046452883294
 PrefabInstance:
   m_ObjectHideFlags: 0

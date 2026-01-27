@@ -12,6 +12,7 @@ namespace _01.Scripts.Ingame.Monster
         [SerializeField] private MonsterHealth _health;
         [SerializeField] private ClickTarget _clickTarget;
         [SerializeField] private FeedbackPlayer _feedbackPlayer;
+        [SerializeField] private DeathParticleFeedback _deathParticleFeedback;
 
         public float CurrentHealth => _health.CurrentHealth;
         public float MaxHealth => _health.MaxHealth;
@@ -68,6 +69,7 @@ namespace _01.Scripts.Ingame.Monster
         private void HandleDeath()
         {
             _clickTarget?.SetClickable(false);
+            _deathParticleFeedback?.Play(transform.position);
             OnMonsterDeath?.Invoke();
             gameObject.SetActive(false);
             Debug.Log("Monster Dead!");
