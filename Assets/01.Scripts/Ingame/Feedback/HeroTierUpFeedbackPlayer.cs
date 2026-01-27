@@ -16,7 +16,8 @@ namespace _01.Scripts.Ingame.Feedback
 
         [Header("Options")]
         [SerializeField] private bool _useCameraShake = true;
-        [SerializeField] private Vector3 _textOffset = new Vector3(0f, 1f, 0f);
+        [SerializeField] private bool _useScreenCenter = true;
+        [SerializeField] private Vector3 _textOffset = new Vector3(0f, 0f, 0f);
 
         private void OnEnable()
         {
@@ -50,7 +51,8 @@ namespace _01.Scripts.Ingame.Feedback
             if (_textFeedback != null)
             {
                 _textFeedback.SetTierName(info.NewTierName);
-                _textFeedback.Play(position + _textOffset);
+                var textPosition = _useScreenCenter ? GetScreenCenterWorld() : position;
+                _textFeedback.Play(textPosition + _textOffset);
             }
 
             if (_useCameraShake)
@@ -66,6 +68,15 @@ namespace _01.Scripts.Ingame.Feedback
             _particleFeedback?.Stop();
             _scaleFeedback?.Stop();
             _textFeedback?.Stop();
+        }
+
+        private Vector3 GetScreenCenterWorld()
+        {
+            var cam = Camera.main;
+            if (cam == null) return transform.position;
+
+            var screenCenter = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 10f);
+            return cam.ScreenToWorldPoint(screenCenter);
         }
     }
 }

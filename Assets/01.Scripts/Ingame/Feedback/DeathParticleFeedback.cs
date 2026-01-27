@@ -3,9 +3,6 @@ using UnityEngine;
 
 namespace _01.Scripts.Ingame.Feedback
 {
-    /// <summary>
-    /// 몬스터 사망 시 파티클 이펙트를 스폰하는 피드백.
-    /// </summary>
     public class DeathParticleFeedback : MonoBehaviour
     {
         [Header("Settings")]

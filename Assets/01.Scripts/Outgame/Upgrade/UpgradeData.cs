@@ -15,14 +15,14 @@ namespace _01.Scripts.Outgame.Upgrade
 
         [Header("Effect")]
         [SerializeField] private float _baseEffect = 5f;
-        [SerializeField] private float _effectPerLevel = 5f;
+        [SerializeField] private float _effectMultiplier = 1.15f;
 
         public string UpgradeName => _upgradeName;
         public Sprite Icon => _icon;
         public int BaseCost => _baseCost;
         public float CostMultiplier => _costMultiplier;
         public float BaseEffect => _baseEffect;
-        public float EffectPerLevel => _effectPerLevel;
+        public float EffectMultiplier => _effectMultiplier;
 
         public int GetCost(int level)
         {
@@ -31,7 +31,7 @@ namespace _01.Scripts.Outgame.Upgrade
 
         public float GetEffect(int level)
         {
-            return _baseEffect + (_effectPerLevel * level);
+            return _baseEffect * Mathf.Pow(_effectMultiplier, level);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace _01.Scripts.Ingame.Hero
 
         [Header("DPS")]
         [SerializeField] private float _baseDPS = 1f;
-        [SerializeField] private float _dpsPerLevel = 1f;
+        [SerializeField] private float _dpsMultiplier = 1.12f;
 
         [Header("Upgrade Cost")]
         [SerializeField] private int _baseUpgradeCost = 100;
@@ -33,7 +33,7 @@ namespace _01.Scripts.Ingame.Hero
         public Sprite Icon => _icon;
         public int PurchaseCost => _purchaseCost;
         public float BaseDPS => _baseDPS;
-        public float DPSPerLevel => _dpsPerLevel;
+        public float DPSMultiplier => _dpsMultiplier;
         public GameObject CompanionPrefab => _companionPrefab;
         public Vector2 SpawnOffset => _spawnOffset;
         public int AttackAnimIndex => _attackAnimIndex;
@@ -47,7 +47,7 @@ namespace _01.Scripts.Ingame.Hero
 
         public float GetDPS(int level)
         {
-            return _baseDPS + (_dpsPerLevel * level);
+            return _baseDPS * Mathf.Pow(_dpsMultiplier, level);
         }
         
     }

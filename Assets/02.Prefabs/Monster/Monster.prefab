@@ -39,7 +39,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3469769147072428046}
@@ -177,7 +177,7 @@ MonoBehaviour:
   _health: {fileID: 8785416185372858780}
   _clickTarget: {fileID: 1891330598892319291}
   _feedbackPlayer: {fileID: 5479980460858420665}
-  _deathParticleFeedback: {fileID: 0}
+  _deathParticleFeedback: {fileID: 5242259845249964790}
 --- !u!114 &8785416185372858780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c37f0b1ebb149bba78c060eca7b3dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Monster.MonsterHealth
-  _maxHealth: 100
+  _maxHealth: 600
 --- !u!114 &3535245612058147853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd7e5577314db4632b698314e955c33e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Feedback.DeathParticleFeedback
-  _particlePrefab: {fileID: 1623298396792479162, guid: dd1d88ec0386448cd9f9e008bebff9a4, type: 3}
+  _particlePrefab: {fileID: 4914495526166002796, guid: 1da46edb62236432b931f82d2530d71e, type: 3}
 --- !u!1001 &1424422573729514755
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -386,11 +386,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2586060623426010381, guid: 828a93675f57e479282db63e1a883aac, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 0.03909
       objectReference: {fileID: 0}
     - target: {fileID: 2586060623426010381, guid: 828a93675f57e479282db63e1a883aac, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2586060623426010381, guid: 828a93675f57e479282db63e1a883aac, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

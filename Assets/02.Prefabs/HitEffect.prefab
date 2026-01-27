@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3784655927528670662}
   - component: {fileID: 703365348172998417}
   - component: {fileID: 2832911379259569850}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: Particle System (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4905,7 +4905,7 @@ GameObject:
   - component: {fileID: 608833437507470808}
   - component: {fileID: 4739264407584629229}
   - component: {fileID: 7408070339463963709}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: HitEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4921,7 +4921,7 @@ Transform:
   m_GameObject: {fileID: 3042519775331041172}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9811,7 +9811,7 @@ GameObject:
   - component: {fileID: 1102942108520617817}
   - component: {fileID: 8652649409356581435}
   - component: {fileID: 3928252767126861634}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: Particle System (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14705,7 +14705,7 @@ GameObject:
   - component: {fileID: 500354545589689077}
   - component: {fileID: 1497875385595541932}
   - component: {fileID: 3327261861371187082}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: Particle System (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

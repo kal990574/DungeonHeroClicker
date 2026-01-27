@@ -866,6 +866,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 294680717}
   m_CullTransparentMesh: 0
+--- !u!1 &358302138
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 358302139}
+  - component: {fileID: 358302140}
+  m_Layer: 0
+  m_Name: FloatingTextSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &358302139
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358302138}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1009.48785, y: -2242.2898, z: 0}
+  m_LocalScale: {x: 0.8308654, y: 0.8308654, z: 0.8308654}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 718553761}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &358302140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358302138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d206ed674c3d14dabb14418c90e7064b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.UI.Effects.FloatingTextSpawner
+  _floatingTextPrefab: {fileID: 6625579634796976098, guid: 7ad4bcc7cd47f455b8c293afd29c224e, type: 3}
+  _targetCanvas: {fileID: 1509586269}
+  _floatDistance: 50
+  _duration: 0.8
+  _moveEase: 6
+  _fadeEase: 5
+  _initialPoolSize: 5
 --- !u!1 &365142163
 GameObject:
   m_ObjectHideFlags: 0
@@ -2215,7 +2266,7 @@ Transform:
   m_GameObject: {fileID: 671891918}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: -0.706, z: 0}
+  m_LocalPosition: {x: 0.9, y: -0.806, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2233,8 +2284,9 @@ GameObject:
   - component: {fileID: 718553763}
   - component: {fileID: 718553762}
   - component: {fileID: 718553764}
+  - component: {fileID: 718553765}
   m_Layer: 5
-  m_Name: DPS
+  m_Name: DPSPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2254,6 +2306,7 @@ RectTransform:
   m_Children:
   - {fileID: 896911230}
   - {fileID: 784551502}
+  - {fileID: 358302139}
   m_Father: {fileID: 1727039731}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
@@ -2315,6 +2368,82 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.UI.DPSDisplay
   _companionManager: {fileID: 602247137}
   _dpsText: {fileID: 784551503}
+  _textFeedback: {fileID: 718553765}
+  _floatingTextSpawner: {fileID: 358302140}
+  _floatingTextColor: {r: 0.4, g: 1, b: 0.4, a: 1}
+  _countDuration: 0.3
+  _countEase: 6
+--- !u!114 &718553765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718553760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d691760492cd74f1dbbcc012b82754c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.UI.Effects.UITextFeedback
+  _scaleTarget: {fileID: 718553761}
+  _colorTarget: {fileID: 784551503}
+  _punchScale: 0.2
+  _punchDuration: 0.3
+  _vibrato: 5
+  _elasticity: 0.5
+  _flashColor: {r: 0, g: 0.53333336, b: 0.8784314, a: 1}
+  _flashDuration: 0.3
+--- !u!1 &750590888
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 750590890}
+  - component: {fileID: 750590889}
+  m_Layer: 0
+  m_Name: FloatingTextSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &750590889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750590888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d206ed674c3d14dabb14418c90e7064b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.UI.Effects.FloatingTextSpawner
+  _floatingTextPrefab: {fileID: 6625579634796976098, guid: 7ad4bcc7cd47f455b8c293afd29c224e, type: 3}
+  _targetCanvas: {fileID: 1509586269}
+  _floatDistance: 50
+  _duration: 0.8
+  _moveEase: 6
+  _fadeEase: 5
+  _initialPoolSize: 5
+--- !u!4 &750590890
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750590888}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.26409444, y: -1737.146, z: 0}
+  m_LocalScale: {x: 0.6391272, y: 0.6391272, z: 0.6391272}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1532360593}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &752061909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4123,7 +4252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a722ca541ce4132a54f2207fdd990c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Outgame.Currency.GoldWallet
-  _initialGold: 1000000
+  _initialGold: 50
 --- !u!114 &1134192879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5063,7 +5192,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -3592637681365677520, guid: 0855976f6a0b94164bc391c7e23ef8fd, type: 3}
+  m_Sprite: {fileID: 6591253284891334195, guid: 3c0d5ccabf5f6406eb2cbee04fcbe283, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5095,8 +5224,9 @@ GameObject:
   - component: {fileID: 1532360594}
   - component: {fileID: 1532360597}
   - component: {fileID: 1532360598}
+  - component: {fileID: 1532360599}
   m_Layer: 5
-  m_Name: Coin
+  m_Name: CoinPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5117,6 +5247,7 @@ RectTransform:
   - {fileID: 853055401}
   - {fileID: 853050885}
   - {fileID: 536916160}
+  - {fileID: 750590890}
   m_Father: {fileID: 1727039731}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -5202,8 +5333,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.UI.GoldDisplay
   _goldWallet: {fileID: 1134192878}
   _goldText: {fileID: 853050887}
+  _textFeedback: {fileID: 1532360599}
+  _floatingTextSpawner: {fileID: 750590889}
+  _floatingTextColor: {r: 1, g: 0.85, b: 0, a: 1}
+  _floatingTextOffset: {x: -80, y: -50}
   _countDuration: 0.3
   _countEase: 7
+  _effectCooldownDuration: 0.2
 --- !u!114 &1532360598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5219,14 +5355,34 @@ MonoBehaviour:
   _coinPrefab: {fileID: 1724202524270303136, guid: 45a0c3ce0452546eaaa6b917252a683b, type: 3}
   _goldUITarget: {fileID: 853055401}
   _canvas: {fileID: 1509586269}
-  _coinCount: 5
-  _explosionDuration: 0.2
+  _coinCount: 3
+  _explosionDuration: 0.3
   _explosionRadius: 100
   _explosionEase: 6
-  _flyDuration: 0.5
-  _flyEase: 30
+  _flyDuration: 0.7
+  _flyEase: 5
   _delayBetweenCoins: 0.03
   _arcHeight: 100
+--- !u!114 &1532360599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532360592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d691760492cd74f1dbbcc012b82754c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.UI.Effects.UITextFeedback
+  _scaleTarget: {fileID: 1532360593}
+  _colorTarget: {fileID: 853050887}
+  _punchScale: 0.2
+  _punchDuration: 0.3
+  _vibrato: 5
+  _elasticity: 0.5
+  _flashColor: {r: 0, g: 0.53333336, b: 0.8784314, a: 1}
+  _flashDuration: 0.3
 --- !u!1 &1611709069
 GameObject:
   m_ObjectHideFlags: 0
@@ -6171,7 +6327,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5595933747791594275, guid: 71f1b61ec541e4117a2cb47b584e4c4a, type: 3}
+  m_Sprite: {fileID: -6604720734775675085, guid: 98e2a5b5c2a2b4f5c90f516de34f01b4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6746,7 +6902,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5195670914413489380, guid: 403f839bf7c024d3ea95030c2f3f927a, type: 3}
+  m_Sprite: {fileID: -835976690432028135, guid: af3155879a34d4d2e9f66915d216f42b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7094,7 +7250,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0304db9aabc01476886567b82ee9a4aa, type: 3}
   _upgradeClips:
   - {fileID: 8300000, guid: 2a0166e9cf3694ca6b7f5e51d7cee95e, type: 3}
-  _tierUpClips: []
+  _tierUpClips:
+  - {fileID: 8300000, guid: 21ba4f1a293a2487587068d7bbe15106, type: 3}
   _volume: 0.4
 --- !u!114 &1961287056
 MonoBehaviour:
@@ -7587,10 +7744,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b78e7464503e4355b1669f4c91e9a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Feedback.TierUpTextFeedback
-  _textPrefab: {fileID: 0}
-  _floatDistance: 3
-  _duration: 1.5
-  _scaleMultiplier: 1.5
+  _textPrefab: {fileID: 7591307400215509596, guid: de9b7fc6fc3ba4bbd8d977d438d3f06a, type: 3}
+  _floatDistance: 1
+  _duration: 1
+  _scaleMultiplier: 1.4
   _moveEase: 6
   _fadeEase: 5
   _textColor: {r: 1, g: 0.84, b: 0, a: 1}
@@ -7606,12 +7763,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac3ea5a9206b84799a4c1b9b0bc8299c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Feedback.TierUpScaleFeedback
-  _target: {fileID: 2122130151}
+  _target: {fileID: 1012606443}
   _expandScale: 1.3
   _shrinkScale: 0.9
-  _expandDuration: 0.2
-  _shrinkDuration: 0.1
-  _restoreDuration: 0.15
+  _expandDuration: 0.3
+  _shrinkDuration: 0.2
+  _restoreDuration: 0.2
 --- !u!114 &2122130157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7624,9 +7781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdf88181a3a8b4e7d972e65a5552f9b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Feedback.TierUpParticleFeedback
-  _burstParticle: {fileID: 1623298396792479162, guid: dd1d88ec0386448cd9f9e008bebff9a4, type: 3}
-  _auraParticle: {fileID: 0}
-  _riseParticle: {fileID: 0}
+  _burstParticlePrefab: {fileID: 1623298396792479162, guid: b70da53a78152407c9c00a1b5e5f9823, type: 3}
 --- !u!114 &2122130158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7639,12 +7794,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6431accbea1954e31950a401a09189d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Feedback.HeroTierUpFeedbackPlayer
-  _heroVisual: {fileID: 0}
+  _heroVisual: {fileID: 2122130152}
   _particleFeedback: {fileID: 2122130157}
   _scaleFeedback: {fileID: 2122130156}
   _textFeedback: {fileID: 2122130155}
   _useCameraShake: 1
-  _textOffset: {x: 0, y: 1, z: 0}
+  _useScreenCenter: 1
+  _textOffset: {x: 0, y: 1.5, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
