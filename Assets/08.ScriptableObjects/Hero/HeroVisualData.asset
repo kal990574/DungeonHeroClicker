@@ -22,6 +22,6 @@ MonoBehaviour:
   - MinLevel: 20
     TierName: Level 20
     HeroPrefab: {fileID: 9158057216099380184, guid: 43a3ad3178ef94145a77b9cac73c12ff, type: 3}
-  - MinLevel: 30
+  - MinLevel: 35
     TierName: Level 35
     HeroPrefab: {fileID: 2149905676695037308, guid: c43f99fca62da43099fb51a26acdfab3, type: 3}
