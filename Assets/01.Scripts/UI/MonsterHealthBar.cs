@@ -12,12 +12,22 @@ namespace _01.Scripts.UI
 
         private void OnEnable()
         {
+            if (_monsterHealth == null)
+            {
+                return;
+            }
+
             _monsterHealth.OnDamaged += HandleDamaged;
             UpdateBar();
         }
 
         private void OnDisable()
         {
+            if (_monsterHealth == null)
+            {
+                return;
+            }
+
             _monsterHealth.OnDamaged -= HandleDamaged;
         }
 
@@ -28,6 +38,11 @@ namespace _01.Scripts.UI
 
         private void UpdateBar()
         {
+            if (_monsterHealth == null)
+            {
+                return;
+            }
+
             _fillImage.fillAmount = _monsterHealth.CurrentHealth / _monsterHealth.MaxHealth;
         }
 
@@ -39,8 +54,12 @@ namespace _01.Scripts.UI
             }
 
             _monsterHealth = target;
-            _monsterHealth.OnDamaged += HandleDamaged;
-            UpdateBar();
+
+            if (_monsterHealth != null)
+            {
+                _monsterHealth.OnDamaged += HandleDamaged;
+                UpdateBar();
+            }
         }
     }
 }

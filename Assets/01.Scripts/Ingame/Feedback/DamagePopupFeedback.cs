@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Lean.Pool;
 using TMPro;
 using UnityEngine;
 
@@ -10,58 +11,75 @@ namespace _01.Scripts.Ingame.Feedback
         [SerializeField] private GameObject _popupPrefab;
 
         [Header("Animation")]
-        [SerializeField] private float _floatDistance = 1f;
+        [SerializeField] private float _floatDistance = 2f;
         [SerializeField] private float _duration = 0.8f;
         [SerializeField] private Ease _moveEase = Ease.OutQuad;
         [SerializeField] private Ease _fadeEase = Ease.InQuad;
+
+        [Header("Random Offset")]
+        [SerializeField] private float _randomOffsetX = 0.3f;
 
         [Header("Style")]
         [SerializeField] private Color _normalColor = Color.white;
         [SerializeField] private Color _criticalColor = Color.yellow;
         [SerializeField] private float _criticalScale = 1.5f;
 
+        private Vector3 _defaultScale;
+
+        private void Awake()
+        {
+            if (_popupPrefab != null)
+            {
+                _defaultScale = _popupPrefab.transform.localScale;
+            }
+        }
+
         public void Play(Vector3 position, float value)
         {
-            if (_popupPrefab == null)
-            {
-                return;
-            }
+            if (_popupPrefab == null) return;
 
-            var popup = Instantiate(_popupPrefab, position, Quaternion.identity);
+            // 랜덤 X 오프셋 적용.
+            float randomX = Random.Range(-_randomOffsetX, _randomOffsetX);
+            var spawnPos = position + new Vector3(randomX, 0f, 0f);
+
+            var popup = LeanPool.Spawn(_popupPrefab, spawnPos, Quaternion.identity);
+            popup.transform.localScale = _defaultScale;
+
             var text = popup.GetComponentInChildren<TMP_Text>();
-
             if (text == null)
             {
-                Destroy(popup);
+                LeanPool.Despawn(popup);
                 return;
             }
 
-            text.text = Mathf.RoundToInt(value).ToString();
+            text.text = FormatDamage(value);
             text.color = _normalColor;
+            text.alpha = 1f;
 
             AnimatePopup(popup, text);
         }
 
         public void PlayCritical(Vector3 position, float value)
         {
-            if (_popupPrefab == null)
-            {
-                return;
-            }
+            if (_popupPrefab == null) return;
 
-            var popup = Instantiate(_popupPrefab, position, Quaternion.identity);
-            popup.transform.localScale *= _criticalScale;
+            // 랜덤 X 오프셋 적용.
+            float randomX = Random.Range(-_randomOffsetX, _randomOffsetX);
+            var spawnPos = position + new Vector3(randomX, 0f, 0f);
+
+            var popup = LeanPool.Spawn(_popupPrefab, spawnPos, Quaternion.identity);
+            popup.transform.localScale = _defaultScale * _criticalScale;
 
             var text = popup.GetComponentInChildren<TMP_Text>();
-
             if (text == null)
             {
-                Destroy(popup);
+                LeanPool.Despawn(popup);
                 return;
             }
 
-            text.text = Mathf.RoundToInt(value).ToString();
+            text.text = FormatDamage(value);
             text.color = _criticalColor;
+            text.alpha = 1f;
 
             AnimatePopup(popup, text);
         }
@@ -73,12 +91,19 @@ namespace _01.Scripts.Ingame.Feedback
             var sequence = DOTween.Sequence();
             sequence.Append(popup.transform.DOMove(targetPos, _duration).SetEase(_moveEase));
             sequence.Join(text.DOFade(0f, _duration).SetEase(_fadeEase));
-            sequence.OnComplete(() => Destroy(popup));
+            sequence.OnComplete(() => LeanPool.Despawn(popup));
+        }
+
+        private string FormatDamage(float damage)
+        {
+            if (damage >= 1000000f) return $"{damage / 1000000f:F1}M";
+            if (damage >= 1000f) return $"{damage / 1000f:F1}K";
+            return Mathf.RoundToInt(damage).ToString();
         }
 
         public void Stop()
         {
-            // 팝업은 자동 소멸
+            // 풀링으로 관리되므로 별도 처리 불필요.
         }
     }
 }

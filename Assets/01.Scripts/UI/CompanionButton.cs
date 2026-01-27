@@ -75,7 +75,7 @@ namespace _01.Scripts.UI
         {
             if (!_companion.IsPurchased)
             {
-                _nameText.text = $"{_companion.Data.CompanionName} [잠금]";
+                _nameText.text = $"{_companion.Data.CompanionName} [Lock]";
                 _costText.text = $"{_companion.Data.PurchaseCost:N0} G";
                 _dpsText.text = $"DPS +{_companion.Data.BaseDPS:F0}";
             }

@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5479980460858420665}
   - component: {fileID: 2183453537202251411}
   - component: {fileID: 6765366139336689564}
+  - component: {fileID: -5376946774053228799}
   m_Layer: 6
   m_Name: Monster 5
   m_TagString: Untagged
@@ -214,7 +215,7 @@ MonoBehaviour:
   _scaleFeedback: {fileID: 2183453537202251411}
   _soundFeedback: {fileID: 0}
   _particleFeedback: {fileID: 0}
-  _damagePopupFeedback: {fileID: 0}
+  _damagePopupFeedback: {fileID: -5376946774053228799}
 --- !u!114 &2183453537202251411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,6 +249,27 @@ MonoBehaviour:
   _health: {fileID: 8785416185372858780}
   _damagedAnimIndex: 0
   _deathAnimIndex: 0
+--- !u!114 &-5376946774053228799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503396494754853213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2ad5a7167c884d41b182ad817a4a968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Feedback.DamagePopupFeedback
+  _popupPrefab: {fileID: 7591307400215509596, guid: d2452d8ca425e41f293a6561c6526162, type: 3}
+  _floatDistance: 2
+  _duration: 0.8
+  _moveEase: 6
+  _fadeEase: 5
+  _randomOffsetX: 0.3
+  _normalColor: {r: 1, g: 1, b: 1, a: 1}
+  _criticalColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _criticalScale: 1.5
 --- !u!1001 &4405035383322427602
 PrefabInstance:
   m_ObjectHideFlags: 0

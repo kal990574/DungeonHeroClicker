@@ -11,7 +11,7 @@ namespace _01.Scripts.UI
         [SerializeField] private TMP_Text _dpsText;
 
         [Header("Format")]
-        [SerializeField] private string _format = "DPS: {0:F1}";
+        [SerializeField] private string _format = "{0:F1}";
 
         private void OnEnable()
         {

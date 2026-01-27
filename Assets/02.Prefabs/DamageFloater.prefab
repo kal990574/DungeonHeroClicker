@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1820788894370058597}
   - component: {fileID: 2266643874169656432}
   - component: {fileID: 1451380369353429337}
-  - component: {fileID: 3414765445382549404}
   m_Layer: 0
   m_Name: DamageFloater
   m_TagString: Untagged
@@ -84,7 +83,7 @@ MeshRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1451380369353429337
@@ -182,16 +181,3 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 2266643874169656432}
   m_maskType: 0
---- !u!114 &3414765445382549404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7591307400215509596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 772203e00bb74bd4bf9e460f72c51905, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Click.DamageFloater
-  _damageText: {fileID: 0}
