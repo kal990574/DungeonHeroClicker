@@ -7,7 +7,11 @@ namespace _01.Scripts.Ingame.Click
     public class AutoClickManager : MonoBehaviour
     {
         [Header("Settings")]
-        [SerializeField] private float _tickInterval = 0.1f;
+        [SerializeField] private float _tickInterval = 1f;
+
+        [Header("Critical")]
+        [SerializeField] private float _criticalChance = 0.5f;
+        [SerializeField] private float _criticalMultiplier = 2f;
 
         [Header("Dependencies")]
         [SerializeField] private CompanionManager _companionManager;
@@ -57,11 +61,15 @@ namespace _01.Scripts.Ingame.Click
                 ? _targetTransform.position
                 : Vector3.zero;
 
-            var damage = TotalDPS * _tickInterval;
+            bool isCritical = Random.value < _criticalChance;
+            float baseDamage = TotalDPS * _tickInterval;
+            float damage = isCritical ? baseDamage * _criticalMultiplier : baseDamage;
+
             var clickInfo = new ClickInfo(
                 damage: damage,
                 clickType: EClickType.Auto,
-                position: targetPosition
+                position: targetPosition,
+                isCritical: isCritical
             );
 
             _currentTarget.TakeDamage(clickInfo);

@@ -1,5 +1,6 @@
-using _01.Scripts.Ingame.Monster;
 using _01.Scripts.Core.Audio;
+using _01.Scripts.Ingame.Monster;
+using _01.Scripts.UI.Effects;
 using UnityEngine;
 
 namespace _01.Scripts.Outgame.Currency
@@ -8,6 +9,7 @@ namespace _01.Scripts.Outgame.Currency
     {
         [Header("Components")]
         [SerializeField] private GoldWallet _goldWallet;
+        [SerializeField] private GoldFlyEffect _goldFlyEffect;
 
         private void OnEnable()
         {
@@ -19,11 +21,11 @@ namespace _01.Scripts.Outgame.Currency
             MonsterReward.OnGoldDropped -= HandleGoldDropped;
         }
 
-        private void HandleGoldDropped(int amount)
+        private void HandleGoldDropped(int amount, Vector3 worldPosition)
         {
             _goldWallet.Add(amount);
             SFXManager.Instance?.PlayCoin();
-            Debug.Log($"[CurrencyManager] Gold +{amount}, Total: {_goldWallet.CurrentGold}");
+            _goldFlyEffect?.Play(worldPosition, amount);
         }
     }
 }

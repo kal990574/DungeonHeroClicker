@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: StageScalingData
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Stage.StageScalingData
   _baseHealth: 100
-  _baseGold: 10
-  _healthGrowthRate: 0.1
-  _goldGrowthRate: 0.1
+  _baseGold: 5
+  _healthGrowthRate: 1.5
+  _goldGrowthRate: 1

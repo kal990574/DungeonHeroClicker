@@ -12,7 +12,7 @@ namespace _01.Scripts.Ingame.Monster
 
         public int GoldAmount => _goldAmount;
 
-        public static event Action<int> OnGoldDropped;
+        public static event Action<int, Vector3> OnGoldDropped;
 
         private void Awake()
         {
@@ -37,7 +37,7 @@ namespace _01.Scripts.Ingame.Monster
 
         private void DropReward()
         {
-            OnGoldDropped?.Invoke(_goldAmount);
+            OnGoldDropped?.Invoke(_goldAmount, transform.position);
         }
         
         public void SetGoldAmount(int amount)

@@ -9,12 +9,14 @@ namespace _01.Scripts.Ingame.Feedback
         [SerializeField] private ScaleFeedback _scaleFeedback;
         [SerializeField] private ParticleFeedback _particleFeedback;
         [SerializeField] private DamagePopupFeedback _damagePopupFeedback;
+        [SerializeField] private ColorFlashFeedback _colorFlashFeedback;
 
         public void Play(Vector3 position)
         {
             _scaleFeedback?.Play(position);
             SFXManager.Instance.PlayHit();
             _particleFeedback?.Play(position);
+            _colorFlashFeedback?.Play(position);
         }
 
         public void PlayWithDamage(Vector3 position, float damage, bool isCritical = false)
@@ -29,6 +31,7 @@ namespace _01.Scripts.Ingame.Feedback
             if (isCritical)
             {
                 _damagePopupFeedback.PlayCritical(position, damage);
+                CameraShakeFeedback.Shake();
             }
             else
             {
@@ -41,6 +44,7 @@ namespace _01.Scripts.Ingame.Feedback
             _scaleFeedback?.Stop();
             _particleFeedback?.Stop();
             _damagePopupFeedback?.Stop();
+            _colorFlashFeedback?.Stop();
         }
     }
 }

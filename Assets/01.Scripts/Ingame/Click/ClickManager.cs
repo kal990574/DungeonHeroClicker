@@ -12,6 +12,10 @@ namespace _01.Scripts.Ingame.Click
         [SerializeField] private LayerMask _clickableLayer;
         [SerializeField] private float _baseClickDamage = 1f;
 
+        [Header("Critical")]
+        [SerializeField] private float _criticalChance = 0.5f;
+        [SerializeField] private float _criticalMultiplier = 2f;
+
         [Header("Dependencies")]
         [SerializeField] private UpgradeManager _upgradeManager;
         [SerializeField] private HeroAnimator _heroAnimator;
@@ -60,10 +64,14 @@ namespace _01.Scripts.Ingame.Click
                 return;
             }
 
+            bool isCritical = Random.value < _criticalChance;
+            float damage = isCritical ? ClickDamage * _criticalMultiplier : ClickDamage;
+
             var clickInfo = new ClickInfo(
-                damage: ClickDamage,
+                damage: damage,
                 clickType: EClickType.Manual,
-                position: hitPoint
+                position: hitPoint,
+                isCritical: isCritical
             );
 
             damageable.TakeDamage(clickInfo);
