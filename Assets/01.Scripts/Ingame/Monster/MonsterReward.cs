@@ -40,7 +40,7 @@ namespace _01.Scripts.Ingame.Monster
             OnGoldDropped?.Invoke(_goldAmount);
         }
         
-        private void SetGoldAmount(int amount)
+        public void SetGoldAmount(int amount)
         {
             _goldAmount = amount;
         }

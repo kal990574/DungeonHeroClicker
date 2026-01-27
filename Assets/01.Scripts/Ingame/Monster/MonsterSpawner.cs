@@ -1,5 +1,6 @@
 using System;
 using _01.Scripts.Ingame.Click;
+using _01.Scripts.Ingame.Stage;
 using _01.Scripts.UI;
 using UnityEngine;
 
@@ -17,6 +18,9 @@ namespace _01.Scripts.Ingame.Monster
 
         [Header("Auto Click")]
         [SerializeField] private AutoClickManager _autoClickManager;
+
+        [Header("Stage System")]
+        [SerializeField] private StageManager _stageManager;
 
         private Monster _currentMonster;
         private int _currentIndex;
@@ -56,6 +60,9 @@ namespace _01.Scripts.Ingame.Monster
             _currentMonster = Instantiate(prefab, _spawnPoint.position, Quaternion.identity);
             _currentMonster.OnMonsterDeath += HandleMonsterDeath;
 
+            // 스테이지 기반 스탯 적용.
+            ConfigureMonsterStats(_currentMonster);
+
             // 체력바 타겟 설정.
             var health = _currentMonster.GetComponent<MonsterHealth>();
             if (_healthBar != null && health != null)
@@ -81,10 +88,43 @@ namespace _01.Scripts.Ingame.Monster
                 _autoClickManager.ClearTarget();
             }
 
+            // 스테이지 매니저에 처치 알림.
+            if (_stageManager != null)
+            {
+                _stageManager.OnMonsterKilled();
+            }
+
             // 다음 몬스터로 인덱스 증가 (순환).
             _currentIndex = (_currentIndex + 1) % _monsterPrefabs.Length;
 
             Invoke(nameof(SpawnMonster), _respawnDelay);
+        }
+
+        private void ConfigureMonsterStats(Monster monster)
+        {
+            if (_stageManager == null)
+            {
+                return;
+            }
+
+            var health = monster.GetComponent<MonsterHealth>();
+            var reward = monster.GetComponent<MonsterReward>();
+            var calculator = _stageManager.StatCalculator;
+
+            bool isBoss = _stageManager.IsBossStage;
+            int stage = _stageManager.CurrentStage;
+
+            if (health != null && calculator != null)
+            {
+                float scaledHealth = calculator.CalculateHealth(health.MaxHealth, stage, isBoss);
+                health.SetMaxHealth(scaledHealth);
+            }
+
+            if (reward != null && calculator != null)
+            {
+                int scaledGold = calculator.CalculateGold(reward.GoldAmount, stage, isBoss);
+                reward.SetGoldAmount(scaledGold);
+            }
         }
     }
 }
