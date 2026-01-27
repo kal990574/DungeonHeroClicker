@@ -1,6 +1,7 @@
 using System;
 using _01.Scripts.Outgame.Currency;
 using UnityEngine;
+using _01.Scripts.Core.Audio;
 
 namespace _01.Scripts.Ingame.Hero
 {
@@ -36,6 +37,8 @@ namespace _01.Scripts.Ingame.Hero
             _goldWallet.Spend(_data.PurchaseCost);
             _isPurchased = true;
             _currentLevel = 1;
+            SFXManager.Instance?.PlayUpgrade();
+            
             OnPurchased?.Invoke(this);
             Debug.Log($"[Companion] {_data.CompanionName} Purchased! DPS: {CurrentDPS}");
         }
@@ -49,6 +52,8 @@ namespace _01.Scripts.Ingame.Hero
             
             _goldWallet.Spend(UpgradeCost);
             _currentLevel++;
+            SFXManager.Instance?.PlayUpgrade();
+            
             OnUpgraded?.Invoke(this);
             Debug.Log($"[Companion] {_data.CompanionName} Lv.{_currentLevel}, DPS: {CurrentDPS}");
         }

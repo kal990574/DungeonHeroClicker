@@ -3,6 +3,7 @@ using _01.Scripts.Outgame.Upgrade;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using _01.Scripts.Core.Audio;
 
 namespace _01.Scripts.UI
 {
@@ -50,6 +51,7 @@ namespace _01.Scripts.UI
         private void OnButtonClick()
         {
             _upgrade.DoUpgrade();
+            SFXManager.Instance.PlayUI();
         }
 
         private void HandleUpgraded(Upgrade upgrade)

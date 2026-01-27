@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using _01.Scripts.Core.Audio;
 namespace _01.Scripts.Ingame.Monster
 {
     public class MonsterHealth : MonoBehaviour
@@ -36,6 +37,7 @@ namespace _01.Scripts.Ingame.Monster
 
             if (IsDead)
             {
+                SFXManager.Instance?.PlayDeath();
                 OnDeath?.Invoke();
             }
         }

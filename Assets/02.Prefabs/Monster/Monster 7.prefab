@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f26df2d1ac044a09bcd185e733669afc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Monster.MonsterReward
-  _goldAmount: 10
+  _goldAmount: 10000
 --- !u!114 &5479980460858420665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,7 +213,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Feedback.FeedbackPlayer
   _scaleFeedback: {fileID: 2183453537202251411}
-  _soundFeedback: {fileID: 0}
   _particleFeedback: {fileID: 0}
   _damagePopupFeedback: {fileID: 2810476766375503189}
 --- !u!114 &2183453537202251411

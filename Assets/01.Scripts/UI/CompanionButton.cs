@@ -3,6 +3,7 @@ using _01.Scripts.Outgame.Currency;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using _01.Scripts.Core.Audio;
 
 namespace _01.Scripts.UI
 {
@@ -54,10 +55,12 @@ namespace _01.Scripts.UI
             if (!_companion.IsPurchased)
             {
                 _companion.Purchase();
+                SFXManager.Instance.PlayUI();
             }
             else
             {
                 _companion.DoUpgrade();
+                SFXManager.Instance.PlayUI();
             }
         }
 

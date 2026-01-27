@@ -1,3 +1,4 @@
+using _01.Scripts.Core.Audio;
 using UnityEngine;
 
 namespace _01.Scripts.Ingame.Feedback
@@ -6,14 +7,13 @@ namespace _01.Scripts.Ingame.Feedback
     {
         [Header("Feedbacks")]
         [SerializeField] private ScaleFeedback _scaleFeedback;
-        [SerializeField] private SoundFeedback _soundFeedback;
         [SerializeField] private ParticleFeedback _particleFeedback;
         [SerializeField] private DamagePopupFeedback _damagePopupFeedback;
 
         public void Play(Vector3 position)
         {
             _scaleFeedback?.Play(position);
-            _soundFeedback?.Play(position);
+            SFXManager.Instance.PlayHit();
             _particleFeedback?.Play(position);
         }
 
@@ -39,7 +39,6 @@ namespace _01.Scripts.Ingame.Feedback
         public void StopAll()
         {
             _scaleFeedback?.Stop();
-            _soundFeedback?.Stop();
             _particleFeedback?.Stop();
             _damagePopupFeedback?.Stop();
         }

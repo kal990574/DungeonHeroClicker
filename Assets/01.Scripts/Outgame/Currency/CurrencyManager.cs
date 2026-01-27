@@ -1,4 +1,5 @@
 using _01.Scripts.Ingame.Monster;
+using _01.Scripts.Core.Audio;
 using UnityEngine;
 
 namespace _01.Scripts.Outgame.Currency
@@ -21,6 +22,7 @@ namespace _01.Scripts.Outgame.Currency
         private void HandleGoldDropped(int amount)
         {
             _goldWallet.Add(amount);
+            SFXManager.Instance?.PlayCoin();
             Debug.Log($"[CurrencyManager] Gold +{amount}, Total: {_goldWallet.CurrentGold}");
         }
     }

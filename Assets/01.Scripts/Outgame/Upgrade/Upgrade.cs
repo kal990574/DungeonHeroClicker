@@ -1,6 +1,7 @@
 using System;
 using _01.Scripts.Interfaces;
 using _01.Scripts.Outgame.Currency;
+using _01.Scripts.Core.Audio;
 using UnityEngine;
 
 namespace _01.Scripts.Outgame.Upgrade
@@ -32,6 +33,7 @@ namespace _01.Scripts.Outgame.Upgrade
             
             _goldWallet.Spend(UpgradeCost);
             _currentLevel++;
+            SFXManager.Instance?.PlayUpgrade();
             OnUpgraded?.Invoke(this);
             
             Debug.Log($"[Upgrade] {_data.UpgradeName} Lv.{_currentLevel}, Effect: {CurrentEffect}");
