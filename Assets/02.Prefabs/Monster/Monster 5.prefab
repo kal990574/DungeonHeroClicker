@@ -178,6 +178,8 @@ MonoBehaviour:
   _clickTarget: {fileID: 1891330598892319291}
   _feedbackPlayer: {fileID: 5479980460858420665}
   _deathParticleFeedback: {fileID: 2829062790993299420}
+  _healthMultiplier: 1.5
+  _goldMultiplier: 1.5
 --- !u!114 &8785416185372858780
 MonoBehaviour:
   m_ObjectHideFlags: 0

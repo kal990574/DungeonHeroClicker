@@ -5,23 +5,18 @@ namespace _01.Scripts.Ingame.Monster
 {
     public class MonsterHealth : MonoBehaviour
     {
-        [Header("Stats")]
-        [SerializeField] private float _maxHealth = 100f;
+        [Header("Debug (Runtime Only)")]
+        [SerializeField] private float _currentHealth;
 
-        private float _currentHealth;
+        private float _maxHealth;
 
         public float CurrentHealth => _currentHealth;
         public float MaxHealth => _maxHealth;
         public bool IsDead => _currentHealth <= 0f;
-        public float HealthRatio => _currentHealth / _maxHealth;
+        public float HealthRatio => _maxHealth > 0f ? _currentHealth / _maxHealth : 0f;
 
         public event Action<float> OnDamaged;
         public event Action OnDeath;
-
-        private void Awake()
-        {
-            _currentHealth = _maxHealth;
-        }
 
         public void TakeDamage(float damage)
         {

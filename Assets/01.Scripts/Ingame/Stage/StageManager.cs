@@ -17,13 +17,12 @@ namespace _01.Scripts.Ingame.Stage
         public int CurrentStage => _currentStage;
         public int CurrentKillCount => _currentKillCount;
         public int RequiredKillCount => _stageData.MonstersPerStage;
-        public bool IsBossStage => _stageData.IsBossStage(_currentStage);
+        public bool IsNextMonsterBoss => _currentKillCount + 1 >= RequiredKillCount;
 
         public IMonsterStatModifier StatCalculator => _statCalculator;
 
         public event Action<int> OnStageChanged;
         public event Action<int, int> OnKillCountChanged;
-        public event Action OnBossSpawned;
 
         private void Awake()
         {
@@ -54,11 +53,6 @@ namespace _01.Scripts.Ingame.Stage
 
             OnStageChanged?.Invoke(_currentStage);
             OnKillCountChanged?.Invoke(_currentKillCount, RequiredKillCount);
-
-            if (IsBossStage)
-            {
-                OnBossSpawned?.Invoke();
-            }
         }
     }
 }

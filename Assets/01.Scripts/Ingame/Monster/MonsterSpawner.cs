@@ -111,18 +111,20 @@ namespace _01.Scripts.Ingame.Monster
             var reward = monster.GetComponent<MonsterReward>();
             var calculator = _stageManager.StatCalculator;
 
-            bool isBoss = _stageManager.IsBossStage;
+            bool isBoss = _stageManager.IsNextMonsterBoss;
             int stage = _stageManager.CurrentStage;
 
             if (health != null && calculator != null)
             {
-                float scaledHealth = calculator.CalculateHealth(health.MaxHealth, stage, isBoss);
+                float baseHealth = calculator.BaseHealth * monster.HealthMultiplier;
+                float scaledHealth = calculator.CalculateHealth(baseHealth, stage, isBoss);
                 health.SetMaxHealth(scaledHealth);
             }
 
             if (reward != null && calculator != null)
             {
-                int scaledGold = calculator.CalculateGold(reward.GoldAmount, stage, isBoss);
+                int baseGold = Mathf.RoundToInt(calculator.BaseGold * monster.GoldMultiplier);
+                int scaledGold = calculator.CalculateGold(baseGold, stage, isBoss);
                 reward.SetGoldAmount(scaledGold);
             }
         }

@@ -14,6 +14,12 @@ namespace _01.Scripts.Ingame.Monster
         [SerializeField] private FeedbackPlayer _feedbackPlayer;
         [SerializeField] private DeathParticleFeedback _deathParticleFeedback;
 
+        [Header("Stat Multipliers")]
+        [SerializeField] private float _healthMultiplier = 1f;
+        [SerializeField] private float _goldMultiplier = 1f;
+
+        public float HealthMultiplier => _healthMultiplier;
+        public float GoldMultiplier => _goldMultiplier;
         public float CurrentHealth => _health.CurrentHealth;
         public float MaxHealth => _health.MaxHealth;
         public bool IsDead => _health.IsDead;

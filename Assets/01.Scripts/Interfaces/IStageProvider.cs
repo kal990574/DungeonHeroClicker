@@ -5,6 +5,6 @@ namespace _01.Scripts.Interfaces
         int CurrentStage { get; }
         int CurrentKillCount { get; }
         int RequiredKillCount { get; }
-        bool IsBossStage { get; }
+        bool IsNextMonsterBoss { get; }
     }
 }

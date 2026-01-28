@@ -8,6 +8,9 @@ namespace _01.Scripts.Ingame.Stage
         private readonly StageScalingData _scalingData;
         private readonly StageData _stageData;
 
+        public float BaseHealth => _scalingData.BaseHealth;
+        public int BaseGold => _scalingData.BaseGold;
+
         public StageStatCalculator(StageScalingData scalingData, StageData stageData)
         {
             _scalingData = scalingData;
