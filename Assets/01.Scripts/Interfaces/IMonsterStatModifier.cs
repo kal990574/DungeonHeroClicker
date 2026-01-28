@@ -6,7 +6,7 @@ namespace _01.Scripts.Interfaces
     {
         float BaseHealth { get; }
         long BaseGold { get; }
-        float CalculateHealth(float baseHealth, int stage, bool isBoss);
+        BigNumber CalculateHealth(float baseHealth, int stage, bool isBoss);
         BigNumber CalculateGold(long baseGold, int stage, bool isBoss);
     }
 }

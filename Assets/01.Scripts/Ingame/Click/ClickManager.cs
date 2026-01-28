@@ -1,3 +1,4 @@
+using _01.Scripts.Core.Utils;
 using _01.Scripts.Ingame.Hero;
 using _01.Scripts.Interfaces;
 using _01.Scripts.Outgame.Upgrade;
@@ -20,7 +21,7 @@ namespace _01.Scripts.Ingame.Click
         [SerializeField] private UpgradeManager _upgradeManager;
         [SerializeField] private HeroAnimator _heroAnimator;
 
-        private float ClickDamage => _baseClickDamage + (_upgradeManager != null ? _upgradeManager.TotalClickDamage : 0f);
+        private BigNumber ClickDamage => _baseClickDamage + (_upgradeManager != null ? _upgradeManager.TotalClickDamage : BigNumber.Zero);
 
         private void Update()
         {
@@ -65,7 +66,7 @@ namespace _01.Scripts.Ingame.Click
             }
 
             bool isCritical = Random.value < _criticalChance;
-            float damage = isCritical ? ClickDamage * _criticalMultiplier : ClickDamage;
+            BigNumber damage = isCritical ? ClickDamage * _criticalMultiplier : ClickDamage;
 
             var clickInfo = new ClickInfo(
                 damage: damage,

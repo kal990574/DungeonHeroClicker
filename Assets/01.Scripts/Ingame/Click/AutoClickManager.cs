@@ -1,3 +1,4 @@
+using _01.Scripts.Core.Utils;
 using _01.Scripts.Ingame.Hero;
 using _01.Scripts.Interfaces;
 using UnityEngine;
@@ -20,7 +21,7 @@ namespace _01.Scripts.Ingame.Click
         private Transform _targetTransform;
         private float _timer;
 
-        private float TotalDPS => _companionManager != null ? _companionManager.TotalDPS : 0f;
+        private BigNumber TotalDPS => _companionManager != null ? _companionManager.TotalDPS : BigNumber.Zero;
 
         public void SetTarget(IDamageable target, Transform targetTransform)
         {
@@ -41,7 +42,7 @@ namespace _01.Scripts.Ingame.Click
                 return;
             }
 
-            if (TotalDPS <= 0f)
+            if (TotalDPS <= BigNumber.Zero)
             {
                 return;
             }
@@ -62,8 +63,8 @@ namespace _01.Scripts.Ingame.Click
                 : Vector3.zero;
 
             bool isCritical = Random.value < _criticalChance;
-            float baseDamage = TotalDPS * _tickInterval;
-            float damage = isCritical ? baseDamage * _criticalMultiplier : baseDamage;
+            BigNumber baseDamage = TotalDPS * _tickInterval;
+            BigNumber damage = isCritical ? baseDamage * _criticalMultiplier : baseDamage;
 
             var clickInfo = new ClickInfo(
                 damage: damage,

@@ -20,7 +20,7 @@ namespace _01.Scripts.Ingame.Hero
         public CompanionData Data => _data;
         public bool IsPurchased => _isPurchased;
         public int CurrentLevel => _currentLevel;
-        public float CurrentDPS => _isPurchased ? _data.GetDPS(_currentLevel) : 0f;
+        public BigNumber CurrentDPS => _isPurchased ? _data.GetDPS(_currentLevel) : BigNumber.Zero;
         public BigNumber UpgradeCost => _data.GetUpgradeCost(_currentLevel);
         public bool CanPurchase => !_isPurchased && _goldWallet.CanAfford(_data.PurchaseCost);
         public bool CanUpgrade => _isPurchased && _goldWallet.CanAfford(UpgradeCost);

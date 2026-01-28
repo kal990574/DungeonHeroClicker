@@ -35,7 +35,7 @@ namespace _01.Scripts.Ingame.Feedback
             }
         }
 
-        public void Play(Vector3 position, float value)
+        public void Play(Vector3 position, BigNumber value)
         {
             if (_popupPrefab == null) return;
 
@@ -60,7 +60,7 @@ namespace _01.Scripts.Ingame.Feedback
             AnimatePopup(popup, text);
         }
 
-        public void PlayCritical(Vector3 position, float value)
+        public void PlayCritical(Vector3 position, BigNumber value)
         {
             if (_popupPrefab == null) return;
 

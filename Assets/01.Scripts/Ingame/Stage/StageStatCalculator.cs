@@ -18,16 +18,16 @@ namespace _01.Scripts.Ingame.Stage
             _stageData = stageData;
         }
 
-        public float CalculateHealth(float baseHealth, int stage, bool isBoss)
+        public BigNumber CalculateHealth(float baseHealth, int stage, bool isBoss)
         {
-            float scaledHealth = baseHealth * Mathf.Pow(_scalingData.HealthGrowthRate, stage - 1);
+            double scaledHealth = baseHealth * System.Math.Pow(_scalingData.HealthGrowthRate, stage - 1);
 
             if (isBoss)
             {
                 scaledHealth *= _stageData.BossHealthMultiplier;
             }
 
-            return Mathf.Round(scaledHealth);
+            return new BigNumber(System.Math.Round(scaledHealth));
         }
 
         public BigNumber CalculateGold(long baseGold, int stage, bool isBoss)

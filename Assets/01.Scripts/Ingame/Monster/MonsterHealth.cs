@@ -1,33 +1,36 @@
 using System;
 using UnityEngine;
 using _01.Scripts.Core.Audio;
+using _01.Scripts.Core.Utils;
+
 namespace _01.Scripts.Ingame.Monster
 {
     public class MonsterHealth : MonoBehaviour
     {
-        [Header("Debug (Runtime Only)")]
-        [SerializeField] private float _currentHealth;
+        private BigNumber _currentHealth;
+        private BigNumber _maxHealth;
 
-        private float _maxHealth;
+        public BigNumber CurrentHealth => _currentHealth;
+        public BigNumber MaxHealth => _maxHealth;
+        public bool IsDead => _currentHealth <= BigNumber.Zero;
+        public double HealthRatio => _maxHealth > BigNumber.Zero ? _currentHealth.ToDouble() / _maxHealth.ToDouble() : 0.0;
 
-        public float CurrentHealth => _currentHealth;
-        public float MaxHealth => _maxHealth;
-        public bool IsDead => _currentHealth <= 0f;
-        public float HealthRatio => _maxHealth > 0f ? _currentHealth / _maxHealth : 0f;
-
-        public event Action<float> OnDamaged;
+        public event Action<BigNumber> OnDamaged;
         public event Action OnDeath;
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(BigNumber damage)
         {
             if (IsDead)
             {
                 return;
             }
-            
+
             _currentHealth -= damage;
-            _currentHealth = Mathf.Max(0f, _currentHealth);
-            
+            if (_currentHealth < BigNumber.Zero)
+            {
+                _currentHealth = BigNumber.Zero;
+            }
+
             OnDamaged?.Invoke(damage);
 
             if (IsDead)
@@ -36,8 +39,8 @@ namespace _01.Scripts.Ingame.Monster
                 OnDeath?.Invoke();
             }
         }
-        
-        public void SetMaxHealth(float maxHealth)
+
+        public void SetMaxHealth(BigNumber maxHealth)
         {
             _maxHealth = maxHealth;
             _currentHealth = _maxHealth;

@@ -15,10 +15,10 @@ MonoBehaviour:
   _companionName: Archer
   _icon: {fileID: 0}
   _purchaseCost: 500
-  _baseDPS: 25
-  _dpsMultiplier: 1.55
+  _baseDPS: 15
+  _dpsMultiplier: 1.75
   _baseUpgradeCost: 75
-  _costMultiplier: 1.55
+  _costMultiplier: 1.65
   _companionPrefab: {fileID: 3058112922541205296, guid: 51a7320eec9784208b6ff54f0f424af9, type: 3}
   _spawnOffset: {x: -0.7, y: 0.2}
   _attackAnimIndex: 0

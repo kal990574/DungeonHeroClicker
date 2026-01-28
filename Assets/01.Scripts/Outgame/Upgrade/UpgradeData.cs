@@ -31,9 +31,10 @@ namespace _01.Scripts.Outgame.Upgrade
             return new BigNumber(System.Math.Round(cost));
         }
 
-        public float GetEffect(int level)
+        public BigNumber GetEffect(int level)
         {
-            return _baseEffect * Mathf.Pow(_effectMultiplier, level);
+            double effect = _baseEffect * System.Math.Pow(_effectMultiplier, level);
+            return new BigNumber(effect);
         }
     }
 }

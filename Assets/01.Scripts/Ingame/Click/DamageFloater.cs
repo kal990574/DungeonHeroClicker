@@ -27,7 +27,7 @@ namespace _01.Scripts.Ingame.Click
             _initialScale = transform.localScale;
         }
 
-        public void Show(float damage, Vector3 position)
+        public void Show(BigNumber damage, Vector3 position)
         {
             // 위치 설정 (랜덤 X 오프셋).
             float randomX = Random.Range(-_randomOffsetX, _randomOffsetX);

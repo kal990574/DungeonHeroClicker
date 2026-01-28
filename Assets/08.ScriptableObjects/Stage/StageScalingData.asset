@@ -15,4 +15,4 @@ MonoBehaviour:
   _baseHealth: 100
   _baseGold: 15
   _healthGrowthRate: 2
-  _goldGrowthRate: 1.88
+  _goldGrowthRate: 1.95

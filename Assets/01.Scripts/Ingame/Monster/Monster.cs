@@ -1,4 +1,5 @@
 using System;
+using _01.Scripts.Core.Utils;
 using _01.Scripts.Ingame.Click;
 using _01.Scripts.Ingame.Feedback;
 using _01.Scripts.Interfaces;
@@ -20,8 +21,8 @@ namespace _01.Scripts.Ingame.Monster
 
         public float HealthMultiplier => _healthMultiplier;
         public float GoldMultiplier => _goldMultiplier;
-        public float CurrentHealth => _health.CurrentHealth;
-        public float MaxHealth => _health.MaxHealth;
+        public BigNumber CurrentHealth => _health.CurrentHealth;
+        public BigNumber MaxHealth => _health.MaxHealth;
         public bool IsDead => _health.IsDead;
         public bool IsClickable => !IsDead;
 

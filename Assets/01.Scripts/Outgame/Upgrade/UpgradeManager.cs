@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using _01.Scripts.Core.Utils;
 using UnityEngine;
 
 namespace _01.Scripts.Outgame.Upgrade
@@ -10,7 +10,18 @@ namespace _01.Scripts.Outgame.Upgrade
         [Header("Upgrades")]
         [SerializeField] private List<Upgrade> _weaponUpgrades;
 
-        public float TotalClickDamage => _weaponUpgrades.Sum(u => u.CurrentEffect);
+        public BigNumber TotalClickDamage
+        {
+            get
+            {
+                BigNumber total = BigNumber.Zero;
+                foreach (var upgrade in _weaponUpgrades)
+                {
+                    total += upgrade.CurrentEffect;
+                }
+                return total;
+            }
+        }
 
         public event Action OnStatsChanged;
 

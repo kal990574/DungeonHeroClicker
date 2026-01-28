@@ -22,8 +22,8 @@ namespace _01.Scripts.UI
         [SerializeField] private float _countDuration = 0.3f;
         [SerializeField] private Ease _countEase = Ease.OutQuad;
 
-        private float _displayedDPS;
-        private float _previousDPS;
+        private BigNumber _displayedDPS;
+        private BigNumber _previousDPS;
         private Tweener _countTweener;
 
         private void OnEnable()
@@ -41,36 +41,39 @@ namespace _01.Scripts.UI
 
         private void HandleDPSChanged()
         {
-            float targetDPS = _companionManager.TotalDPS;
-            float delta = targetDPS - _previousDPS;
+            BigNumber targetDPS = _companionManager.TotalDPS;
+            BigNumber delta = targetDPS - _previousDPS;
             _previousDPS = targetDPS;
 
             UpdateDisplay(targetDPS);
 
             // DPS 증가 시에만 효과 재생.
-            if (delta > 0)
+            if (delta > BigNumber.Zero)
             {
                 PlayEffects(delta);
             }
         }
 
-        private void UpdateDisplay(float targetDPS)
+        private void UpdateDisplay(BigNumber targetDPS)
         {
             _countTweener?.Kill();
 
+            double startValue = _displayedDPS.ToDouble();
+            double endValue = targetDPS.ToDouble();
+
             _countTweener = DOTween.To(
-                () => _displayedDPS,
+                () => startValue,
                 x =>
                 {
-                    _displayedDPS = x;
+                    _displayedDPS = new BigNumber(x);
                     _dpsText.text = NumberFormatter.Format(_displayedDPS);
                 },
-                targetDPS,
+                endValue,
                 _countDuration
             ).SetEase(_countEase);
         }
 
-        private void PlayEffects(float gainedAmount)
+        private void PlayEffects(BigNumber gainedAmount)
         {
             if (_textFeedback != null)
             {

@@ -1,4 +1,5 @@
 using _01.Scripts.Core.Audio;
+using _01.Scripts.Core.Utils;
 using UnityEngine;
 
 namespace _01.Scripts.Ingame.Feedback
@@ -19,7 +20,7 @@ namespace _01.Scripts.Ingame.Feedback
             _colorFlashFeedback?.Play(position);
         }
 
-        public void PlayWithDamage(Vector3 position, float damage, bool isCritical = false)
+        public void PlayWithDamage(Vector3 position, BigNumber damage, bool isCritical = false)
         {
             Play(position);
 

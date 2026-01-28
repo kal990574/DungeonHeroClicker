@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using _01.Scripts.Core.Utils;
 using UnityEngine;
 
 namespace _01.Scripts.Ingame.Hero
@@ -13,7 +13,18 @@ namespace _01.Scripts.Ingame.Hero
         [Header("Visuals")]
         [SerializeField] private List<CompanionVisual> _companionVisuals;
 
-        public float TotalDPS => _companions.Sum(c => c.CurrentDPS);
+        public BigNumber TotalDPS
+        {
+            get
+            {
+                BigNumber total = BigNumber.Zero;
+                foreach (var companion in _companions)
+                {
+                    total += companion.CurrentDPS;
+                }
+                return total;
+            }
+        }
         public IReadOnlyList<Companion> Companions => _companions;
         public IReadOnlyList<CompanionVisual> CompanionVisuals => _companionVisuals;
 

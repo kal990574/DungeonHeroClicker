@@ -20,7 +20,7 @@ namespace _01.Scripts.Outgame.Upgrade
         public UpgradeData Data => _data;
         public int CurrentLevel => _currentLevel;
         public BigNumber UpgradeCost => _data.GetCost(_currentLevel);
-        public float CurrentEffect => _data.GetEffect(_currentLevel);
+        public BigNumber CurrentEffect => _data.GetEffect(_currentLevel);
         public bool CanUpgrade => _goldWallet.CanAfford(UpgradeCost);
 
         public event Action<Upgrade> OnUpgraded;

@@ -1,8 +1,10 @@
+using _01.Scripts.Core.Utils;
+
 namespace _01.Scripts.Interfaces
 {
     public interface IDamageDealer
     {
-        public float Damage { get; set; }
+        public BigNumber Damage { get; set; }
         void DealDamage(IDamageable target);
     }
 }

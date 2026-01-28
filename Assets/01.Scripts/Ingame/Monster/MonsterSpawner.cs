@@ -117,7 +117,7 @@ namespace _01.Scripts.Ingame.Monster
             if (health != null && calculator != null)
             {
                 float baseHealth = calculator.BaseHealth * monster.HealthMultiplier;
-                float scaledHealth = calculator.CalculateHealth(baseHealth, stage, isBoss);
+                var scaledHealth = calculator.CalculateHealth(baseHealth, stage, isBoss);
                 health.SetMaxHealth(scaledHealth);
             }
 

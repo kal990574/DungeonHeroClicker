@@ -1,3 +1,4 @@
+using _01.Scripts.Core.Utils;
 using UnityEngine;
 
 namespace _01.Scripts.Ingame.Monster
@@ -67,7 +68,7 @@ namespace _01.Scripts.Ingame.Monster
             _isInitialized = true;
         }
 
-        private void HandleDamaged(float damage)
+        private void HandleDamaged(BigNumber damage)
         {
             PlayDamaged();
         }

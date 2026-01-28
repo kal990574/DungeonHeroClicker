@@ -47,9 +47,10 @@ namespace _01.Scripts.Ingame.Hero
             return new BigNumber(System.Math.Round(cost));
         }
 
-        public float GetDPS(int level)
+        public BigNumber GetDPS(int level)
         {
-            return _baseDPS * Mathf.Pow(_dpsMultiplier, level);
+            double dps = _baseDPS * System.Math.Pow(_dpsMultiplier, level);
+            return new BigNumber(dps);
         }
     }
 }

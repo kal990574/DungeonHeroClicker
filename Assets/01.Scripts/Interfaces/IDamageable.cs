@@ -1,13 +1,14 @@
+using _01.Scripts.Core.Utils;
 using _01.Scripts.Ingame.Click;
 
 namespace _01.Scripts.Interfaces
 {
     public interface IDamageable
     {
-        public float CurrentHealth { get; }
-        public float MaxHealth { get; }
+        public BigNumber CurrentHealth { get; }
+        public BigNumber MaxHealth { get; }
         public bool IsDead { get; }
-        
+
         void TakeDamage(ClickInfo clickInfo);
     }
 }

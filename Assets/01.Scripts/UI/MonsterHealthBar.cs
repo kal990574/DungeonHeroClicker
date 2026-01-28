@@ -1,3 +1,4 @@
+using _01.Scripts.Core.Utils;
 using _01.Scripts.Ingame.Monster;
 using UnityEngine;
 using UnityEngine.UI;
@@ -31,7 +32,7 @@ namespace _01.Scripts.UI
             _monsterHealth.OnDamaged -= HandleDamaged;
         }
 
-        private void HandleDamaged(float damage)
+        private void HandleDamaged(BigNumber damage)
         {
             UpdateBar();
         }
@@ -43,7 +44,7 @@ namespace _01.Scripts.UI
                 return;
             }
 
-            _fillImage.fillAmount = _monsterHealth.CurrentHealth / _monsterHealth.MaxHealth;
+            _fillImage.fillAmount = (float)_monsterHealth.HealthRatio;
         }
 
         public void SetTarget(MonsterHealth target)
