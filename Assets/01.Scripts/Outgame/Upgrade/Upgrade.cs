@@ -1,4 +1,5 @@
 using System;
+using _01.Scripts.Core.Utils;
 using _01.Scripts.Interfaces;
 using _01.Scripts.Outgame.Currency;
 using _01.Scripts.Core.Audio;
@@ -18,7 +19,7 @@ namespace _01.Scripts.Outgame.Upgrade
 
         public UpgradeData Data => _data;
         public int CurrentLevel => _currentLevel;
-        public int UpgradeCost => _data.GetCost(_currentLevel);
+        public BigNumber UpgradeCost => _data.GetCost(_currentLevel);
         public float CurrentEffect => _data.GetEffect(_currentLevel);
         public bool CanUpgrade => _goldWallet.CanAfford(UpgradeCost);
 
@@ -30,12 +31,12 @@ namespace _01.Scripts.Outgame.Upgrade
             {
                 return;
             }
-            
+
             _goldWallet.Spend(UpgradeCost);
             _currentLevel++;
             SFXManager.Instance?.PlayUpgrade();
             OnUpgraded?.Invoke(this);
-            
+
             Debug.Log($"[Upgrade] {_data.UpgradeName} Lv.{_currentLevel}, Effect: {CurrentEffect}");
         }
     }

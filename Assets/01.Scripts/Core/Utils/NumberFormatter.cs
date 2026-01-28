@@ -7,6 +7,41 @@ namespace _01.Scripts.Core.Utils
     {
         private static readonly string[] BaseUnits = { "", "K", "M", "B", "T" };
 
+        public static string Format(BigNumber value)
+        {
+            if (value.IsZero)
+            {
+                return "0";
+            }
+
+            // 지수 기반으로 단위 계산 (3자리마다 단위 변경).
+            long unitIndex = value.Exponent / 3;
+            long remainder = value.Exponent % 3;
+
+            // 표시할 숫자 계산.
+            double displayValue = value.Mantissa * System.Math.Pow(10, remainder);
+
+            if (unitIndex < 0)
+            {
+                return displayValue.ToString("F0");
+            }
+
+            if (unitIndex < BaseUnits.Length)
+            {
+                if (unitIndex == 0)
+                {
+                    return displayValue.ToString("F0");
+                }
+
+                return $"{displayValue:F1}{BaseUnits[unitIndex]}";
+            }
+
+            // T 이후: 알파벳 순환.
+            int alphabetIndex = (int)(unitIndex - BaseUnits.Length + 1);
+            string suffix = GetAlphabetSuffix(alphabetIndex);
+            return $"{displayValue:F1}{suffix}";
+        }
+
         public static string Format(double value)
         {
             if (value < 1000)

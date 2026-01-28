@@ -178,8 +178,8 @@ MonoBehaviour:
   _clickTarget: {fileID: 1891330598892319291}
   _feedbackPlayer: {fileID: 5479980460858420665}
   _deathParticleFeedback: {fileID: -2018662737380306893}
-  _healthMultiplier: 1.1
-  _goldMultiplier: 1.1
+  _healthMultiplier: 1.02
+  _goldMultiplier: 1.02
 --- !u!114 &8785416185372858780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c37f0b1ebb149bba78c060eca7b3dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Monster.MonsterHealth
-  _maxHealth: 600
+  _currentHealth: 0
 --- !u!114 &3535245612058147853
 MonoBehaviour:
   m_ObjectHideFlags: 0

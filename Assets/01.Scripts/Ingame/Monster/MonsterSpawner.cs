@@ -123,8 +123,8 @@ namespace _01.Scripts.Ingame.Monster
 
             if (reward != null && calculator != null)
             {
-                int baseGold = Mathf.RoundToInt(calculator.BaseGold * monster.GoldMultiplier);
-                int scaledGold = calculator.CalculateGold(baseGold, stage, isBoss);
+                long baseGold = (long)(calculator.BaseGold * monster.GoldMultiplier);
+                var scaledGold = calculator.CalculateGold(baseGold, stage, isBoss);
                 reward.SetGoldAmount(scaledGold);
             }
         }

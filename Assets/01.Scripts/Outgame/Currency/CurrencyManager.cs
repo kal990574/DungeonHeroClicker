@@ -1,4 +1,5 @@
 using _01.Scripts.Core.Audio;
+using _01.Scripts.Core.Utils;
 using _01.Scripts.Ingame.Monster;
 using _01.Scripts.UI.Effects;
 using UnityEngine;
@@ -21,22 +22,20 @@ namespace _01.Scripts.Outgame.Currency
             MonsterReward.OnGoldDropped -= HandleGoldDropped;
         }
 
-        private void HandleGoldDropped(int amount, Vector3 worldPosition)
+        private void HandleGoldDropped(BigNumber amount, Vector3 worldPosition)
         {
             if (_goldFlyEffect != null)
             {
-                // 코인이 도착할 때마다 골드 추가 및 사운드 재생.
                 _goldFlyEffect.Play(worldPosition, amount, OnCoinArrived);
             }
             else
             {
-                // GoldFlyEffect가 없으면 즉시 골드 추가.
                 _goldWallet.Add(amount);
                 SFXManager.Instance?.PlayCoin();
             }
         }
 
-        private void OnCoinArrived(int goldValue)
+        private void OnCoinArrived(BigNumber goldValue)
         {
             _goldWallet.Add(goldValue);
             SFXManager.Instance?.PlayCoin();

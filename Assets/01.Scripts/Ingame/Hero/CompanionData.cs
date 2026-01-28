@@ -1,4 +1,5 @@
 using UnityEngine;
+using _01.Scripts.Core.Utils;
 
 namespace _01.Scripts.Ingame.Hero
 {
@@ -10,14 +11,14 @@ namespace _01.Scripts.Ingame.Hero
         [SerializeField] private Sprite _icon;
 
         [Header("Purchase")]
-        [SerializeField] private int _purchaseCost;
+        [SerializeField] private long _purchaseCost;
 
         [Header("DPS")]
         [SerializeField] private float _baseDPS = 1f;
         [SerializeField] private float _dpsMultiplier = 1.12f;
 
         [Header("Upgrade Cost")]
-        [SerializeField] private int _baseUpgradeCost = 100;
+        [SerializeField] private long _baseUpgradeCost = 100;
         [SerializeField] private float _costMultiplier = 1.15f;
 
         [Header("Visual")]
@@ -31,7 +32,7 @@ namespace _01.Scripts.Ingame.Hero
 
         public string CompanionName => _companionName;
         public Sprite Icon => _icon;
-        public int PurchaseCost => _purchaseCost;
+        public BigNumber PurchaseCost => new BigNumber(_purchaseCost);
         public float BaseDPS => _baseDPS;
         public float DPSMultiplier => _dpsMultiplier;
         public GameObject CompanionPrefab => _companionPrefab;
@@ -40,15 +41,15 @@ namespace _01.Scripts.Ingame.Hero
         public GameObject SpawnEffectPrefab => _spawnEffectPrefab;
         public float SpawnEffectDuration => _spawnEffectDuration;
 
-        public int GetUpgradeCost(int level)
+        public BigNumber GetUpgradeCost(int level)
         {
-            return Mathf.RoundToInt(_baseUpgradeCost * Mathf.Pow(_costMultiplier, level));
+            double cost = _baseUpgradeCost * System.Math.Pow(_costMultiplier, level);
+            return new BigNumber(System.Math.Round(cost));
         }
 
         public float GetDPS(int level)
         {
             return _baseDPS * Mathf.Pow(_dpsMultiplier, level);
         }
-        
     }
 }

@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Hero.CompanionData
   _companionName: Mage
   _icon: {fileID: 0}
-  _purchaseCost: 1000
-  _baseDPS: 2000
-  _dpsMultiplier: 1.12
-  _baseUpgradeCost: 100
-  _costMultiplier: 1.08
+  _purchaseCost: 5000
+  _baseDPS: 150
+  _dpsMultiplier: 1.55
+  _baseUpgradeCost: 500
+  _costMultiplier: 1.55
   _companionPrefab: {fileID: 1225375777973710630, guid: b65b7cc87d2dc4ed3ae1482b446ff755, type: 3}
   _spawnOffset: {x: -1.4, y: -0.2}
   _attackAnimIndex: 0

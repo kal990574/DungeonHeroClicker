@@ -1,10 +1,12 @@
+using _01.Scripts.Core.Utils;
+
 namespace _01.Scripts.Interfaces
 {
     public interface IMonsterStatModifier
     {
         float BaseHealth { get; }
-        int BaseGold { get; }
+        long BaseGold { get; }
         float CalculateHealth(float baseHealth, int stage, bool isBoss);
-        int CalculateGold(int baseGold, int stage, bool isBoss);
+        BigNumber CalculateGold(long baseGold, int stage, bool isBoss);
     }
 }

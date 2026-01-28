@@ -1,4 +1,5 @@
 using UnityEngine;
+using _01.Scripts.Core.Utils;
 
 namespace _01.Scripts.Outgame.Upgrade
 {
@@ -10,7 +11,7 @@ namespace _01.Scripts.Outgame.Upgrade
         [SerializeField] private Sprite _icon;
 
         [Header("Cost")]
-        [SerializeField] private int _baseCost = 100;
+        [SerializeField] private long _baseCost = 100;
         [SerializeField] private float _costMultiplier = 1.15f;
 
         [Header("Effect")]
@@ -19,14 +20,15 @@ namespace _01.Scripts.Outgame.Upgrade
 
         public string UpgradeName => _upgradeName;
         public Sprite Icon => _icon;
-        public int BaseCost => _baseCost;
+        public long BaseCost => _baseCost;
         public float CostMultiplier => _costMultiplier;
         public float BaseEffect => _baseEffect;
         public float EffectMultiplier => _effectMultiplier;
 
-        public int GetCost(int level)
+        public BigNumber GetCost(int level)
         {
-            return Mathf.RoundToInt(_baseCost * Mathf.Pow(_costMultiplier, level));
+            double cost = _baseCost * System.Math.Pow(_costMultiplier, level);
+            return new BigNumber(System.Math.Round(cost));
         }
 
         public float GetEffect(int level)

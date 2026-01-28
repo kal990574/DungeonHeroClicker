@@ -1,27 +1,28 @@
 using UnityEngine;
 using System;
+using _01.Scripts.Core.Utils;
 
 namespace _01.Scripts.Outgame.Currency
 {
     public class GoldWallet : MonoBehaviour
     {
         [Header("Settings")]
-        [SerializeField] private int _initialGold;
+        [SerializeField] private long _initialGold;
 
-        private int _currentGold;
+        private BigNumber _currentGold;
 
-        public int CurrentGold => _currentGold;
+        public BigNumber CurrentGold => _currentGold;
 
-        public event Action<int> OnGoldChanged;
+        public event Action<BigNumber> OnGoldChanged;
 
         private void Awake()
         {
-            _currentGold = _initialGold;
+            _currentGold = new BigNumber(_initialGold);
         }
 
-        public void Add(int amount)
+        public void Add(BigNumber amount)
         {
-            if (amount <= 0)
+            if (amount <= BigNumber.Zero)
             {
                 return;
             }
@@ -30,12 +31,12 @@ namespace _01.Scripts.Outgame.Currency
             OnGoldChanged?.Invoke(_currentGold);
         }
 
-        public bool CanAfford(int cost)
+        public bool CanAfford(BigNumber cost)
         {
             return _currentGold >= cost;
         }
 
-        public bool Spend(int amount)
+        public bool Spend(BigNumber amount)
         {
             if (!CanAfford(amount))
             {

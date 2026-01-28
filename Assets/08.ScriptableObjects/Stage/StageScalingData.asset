@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1e7521220237411da4b62b300234e20, type: 3}
   m_Name: StageScalingData
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Stage.StageScalingData
-  _baseHealth: 500
-  _baseGold: 50
-  _healthGrowthRate: 3.3
-  _goldGrowthRate: 2.2
+  _baseHealth: 100
+  _baseGold: 15
+  _healthGrowthRate: 2
+  _goldGrowthRate: 1.88

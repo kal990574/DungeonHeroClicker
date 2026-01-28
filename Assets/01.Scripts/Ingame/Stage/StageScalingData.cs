@@ -7,15 +7,15 @@ namespace _01.Scripts.Ingame.Stage
     {
         [Header("Base Values")]
         [SerializeField] private float _baseHealth = 100f;
-        [SerializeField] private int _baseGold = 10;
+        [SerializeField] private long _baseGold = 10;
 
-        [Header("Growth Rates")]
-        [Tooltip("10% = 0.1")]
-        [SerializeField] private float _healthGrowthRate = 0.1f;
-        [SerializeField] private float _goldGrowthRate = 0.1f;
+        [Header("Growth Multipliers")]
+        [Tooltip("15% 증가 = 1.15, 공식: base × rate^(stage-1)")]
+        [SerializeField] private float _healthGrowthRate = 1.15f;
+        [SerializeField] private float _goldGrowthRate = 1.15f;
 
         public float BaseHealth => _baseHealth;
-        public int BaseGold => _baseGold;
+        public long BaseGold => _baseGold;
         public float HealthGrowthRate => _healthGrowthRate;
         public float GoldGrowthRate => _goldGrowthRate;
     }

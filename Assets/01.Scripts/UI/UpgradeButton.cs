@@ -62,7 +62,7 @@ namespace _01.Scripts.UI
             UpdateUI();
         }
 
-        private void HandleGoldChanged(int gold)
+        private void HandleGoldChanged(BigNumber gold)
         {
             _button.interactable = _upgrade.CanUpgrade;
         }

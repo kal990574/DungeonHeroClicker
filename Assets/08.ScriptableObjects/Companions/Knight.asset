@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Hero.CompanionData
   _companionName: Knight
   _icon: {fileID: 0}
-  _purchaseCost: 100
-  _baseDPS: 20
-  _dpsMultiplier: 1.12
-  _baseUpgradeCost: 5
-  _costMultiplier: 1.08
+  _purchaseCost: 50
+  _baseDPS: 5
+  _dpsMultiplier: 1.55
+  _baseUpgradeCost: 15
+  _costMultiplier: 1.55
   _companionPrefab: {fileID: 4109105202263456952, guid: be8c82a0121424c44a7ce92f66468de9, type: 3}
   _spawnOffset: {x: -0.7, y: -0.5}
   _attackAnimIndex: 0

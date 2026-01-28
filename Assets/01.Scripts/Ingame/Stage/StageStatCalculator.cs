@@ -1,4 +1,5 @@
 using UnityEngine;
+using _01.Scripts.Core.Utils;
 using _01.Scripts.Interfaces;
 
 namespace _01.Scripts.Ingame.Stage
@@ -9,7 +10,7 @@ namespace _01.Scripts.Ingame.Stage
         private readonly StageData _stageData;
 
         public float BaseHealth => _scalingData.BaseHealth;
-        public int BaseGold => _scalingData.BaseGold;
+        public long BaseGold => _scalingData.BaseGold;
 
         public StageStatCalculator(StageScalingData scalingData, StageData stageData)
         {
@@ -19,7 +20,7 @@ namespace _01.Scripts.Ingame.Stage
 
         public float CalculateHealth(float baseHealth, int stage, bool isBoss)
         {
-            float scaledHealth = baseHealth * Mathf.Pow(1f + _scalingData.HealthGrowthRate, stage - 1);
+            float scaledHealth = baseHealth * Mathf.Pow(_scalingData.HealthGrowthRate, stage - 1);
 
             if (isBoss)
             {
@@ -29,16 +30,16 @@ namespace _01.Scripts.Ingame.Stage
             return Mathf.Round(scaledHealth);
         }
 
-        public int CalculateGold(int baseGold, int stage, bool isBoss)
+        public BigNumber CalculateGold(long baseGold, int stage, bool isBoss)
         {
-            float scaledGold = baseGold * Mathf.Pow(1f + _scalingData.GoldGrowthRate, stage - 1);
+            double scaledGold = baseGold * System.Math.Pow(_scalingData.GoldGrowthRate, stage - 1);
 
             if (isBoss)
             {
                 scaledGold *= _stageData.BossGoldMultiplier;
             }
 
-            return Mathf.RoundToInt(scaledGold);
+            return new BigNumber(System.Math.Round(scaledGold));
         }
     }
 }

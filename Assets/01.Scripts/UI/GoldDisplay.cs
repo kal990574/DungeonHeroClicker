@@ -26,11 +26,11 @@ namespace _01.Scripts.UI
         [Header("Effect Accumulation")]
         [SerializeField] private float _effectCooldownDuration = 0.5f;
 
-        private int _displayedGold;
-        private int _previousGold;
+        private BigNumber _displayedGold;
+        private BigNumber _previousGold;
         private Tweener _countTweener;
 
-        private int _pendingGoldAmount;
+        private BigNumber _pendingGoldAmount;
         private float _effectCooldown;
 
         private void OnEnable()
@@ -55,32 +55,30 @@ namespace _01.Scripts.UI
 
             _effectCooldown -= Time.deltaTime;
 
-            if (_effectCooldown <= 0f && _pendingGoldAmount > 0)
+            if (_effectCooldown <= 0f && _pendingGoldAmount > BigNumber.Zero)
             {
                 ShowFloatingText(_pendingGoldAmount);
-                _pendingGoldAmount = 0;
+                _pendingGoldAmount = BigNumber.Zero;
             }
         }
 
-        private void HandleGoldChanged(int targetGold)
+        private void HandleGoldChanged(BigNumber targetGold)
         {
-            int delta = targetGold - _previousGold;
+            BigNumber delta = targetGold - _previousGold;
             _previousGold = targetGold;
 
             UpdateDisplay(targetGold);
 
-            // 골드 획득 시에만 효과 재생 (소비 시 제외).
-            if (delta > 0)
+            if (delta > BigNumber.Zero)
             {
                 AccumulateGold(delta);
             }
         }
 
-        private void AccumulateGold(int amount)
+        private void AccumulateGold(BigNumber amount)
         {
             _pendingGoldAmount += amount;
 
-            // 첫 획득 시 즉시 피드백 재생, 타이머 시작.
             if (_effectCooldown <= 0f)
             {
                 if (_textFeedback != null)
@@ -92,23 +90,27 @@ namespace _01.Scripts.UI
             }
         }
 
-        private void UpdateDisplay(int targetGold)
+        private void UpdateDisplay(BigNumber targetGold)
         {
             _countTweener?.Kill();
 
+            // BigNumber는 DOTween 직접 지원 안하므로 double로 변환하여 애니메이션.
+            double startValue = _displayedGold.ToDouble();
+            double endValue = targetGold.ToDouble();
+
             _countTweener = DOTween.To(
-                () => _displayedGold,
+                () => startValue,
                 x =>
                 {
-                    _displayedGold = x;
+                    _displayedGold = new BigNumber(x);
                     _goldText.text = NumberFormatter.Format(_displayedGold);
                 },
-                targetGold,
+                endValue,
                 _countDuration
             ).SetEase(_countEase);
         }
 
-        private void ShowFloatingText(int totalAmount)
+        private void ShowFloatingText(BigNumber totalAmount)
         {
             if (_floatingTextSpawner == null)
             {

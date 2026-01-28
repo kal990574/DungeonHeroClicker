@@ -1,4 +1,5 @@
 using System;
+using _01.Scripts.Core.Utils;
 using DG.Tweening;
 using Lean.Pool;
 using UnityEngine;
@@ -45,7 +46,7 @@ namespace _01.Scripts.UI.Effects
             }
         }
 
-        public void Play(Vector3 worldPosition, int goldAmount, Action<int> onCoinArrived = null)
+        public void Play(Vector3 worldPosition, BigNumber goldAmount, Action<BigNumber> onCoinArrived = null)
         {
             if (_coinPrefab == null || _goldUITarget == null || _canvas == null)
             {
@@ -62,18 +63,18 @@ namespace _01.Scripts.UI.Effects
             );
 
             // 코인당 골드 계산.
-            int goldPerCoin = goldAmount / _coinCount;
-            int remainder = goldAmount % _coinCount;
+            BigNumber goldPerCoin = goldAmount / _coinCount;
+            BigNumber remainder = goldAmount - (goldPerCoin * (_coinCount - 1));
 
             for (int i = 0; i < _coinCount; i++)
             {
                 float delay = i * _delayBetweenCoins;
-                int coinGold = goldPerCoin + (i == 0 ? remainder : 0);
+                BigNumber coinGold = (i == 0) ? remainder : goldPerCoin;
                 SpawnAndAnimateCoin(startPos, delay, coinGold, onCoinArrived);
             }
         }
 
-        private void SpawnAndAnimateCoin(Vector2 startPos, float delay, int goldValue, Action<int> onArrived)
+        private void SpawnAndAnimateCoin(Vector2 startPos, float delay, BigNumber goldValue, Action<BigNumber> onArrived)
         {
             // 코인 스폰.
             var coin = LeanPool.Spawn(_coinPrefab, _canvas.transform);

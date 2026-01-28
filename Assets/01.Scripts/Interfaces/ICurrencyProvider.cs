@@ -1,9 +1,11 @@
+using _01.Scripts.Core.Utils;
+
 namespace _01.Scripts.Interfaces
 {
     public interface ICurrencyProvider
     {
-        public int GoldAmount { get; }
-        
+        public BigNumber GoldAmount { get; }
+
         void DropCurrency();
     }
 }

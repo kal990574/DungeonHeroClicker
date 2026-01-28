@@ -1,22 +1,25 @@
 using UnityEngine;
 using System;
+using _01.Scripts.Core.Utils;
 
 namespace _01.Scripts.Ingame.Monster
 {
     public class MonsterReward : MonoBehaviour
     {
         [Header("Reward")]
-        [SerializeField] private int _goldAmount = 10;
+        [SerializeField] private long _goldAmount = 10;
 
         private MonsterHealth _health;
+        private BigNumber _calculatedGoldAmount;
 
-        public int GoldAmount => _goldAmount;
+        public BigNumber GoldAmount => _calculatedGoldAmount;
 
-        public static event Action<int, Vector3> OnGoldDropped;
+        public static event Action<BigNumber, Vector3> OnGoldDropped;
 
         private void Awake()
         {
             _health = GetComponent<MonsterHealth>();
+            _calculatedGoldAmount = new BigNumber(_goldAmount);
         }
 
         private void OnEnable()
@@ -37,13 +40,12 @@ namespace _01.Scripts.Ingame.Monster
 
         private void DropReward()
         {
-            OnGoldDropped?.Invoke(_goldAmount, transform.position);
-        }
-        
-        public void SetGoldAmount(int amount)
-        {
-            _goldAmount = amount;
+            OnGoldDropped?.Invoke(_calculatedGoldAmount, transform.position);
         }
 
+        public void SetGoldAmount(BigNumber amount)
+        {
+            _calculatedGoldAmount = amount;
+        }
     }
 }
