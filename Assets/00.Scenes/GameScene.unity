@@ -7252,7 +7252,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2a0166e9cf3694ca6b7f5e51d7cee95e, type: 3}
   _tierUpClips:
   - {fileID: 8300000, guid: 21ba4f1a293a2487587068d7bbe15106, type: 3}
-  _volume: 0.25
+  _volume: 0.2
 --- !u!114 &1961287056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7267,7 +7267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Core.Audio.BGMManager
   _audioSource: {fileID: 0}
   _bgmClip: {fileID: 8300000, guid: b6891bf38a3df44b29d9271a7acfea03, type: 3}
-  _volume: 0.5
+  _volume: 0.6
   _playOnAwake: 1
   _fadeDuration: 1
 --- !u!1 &1967768008

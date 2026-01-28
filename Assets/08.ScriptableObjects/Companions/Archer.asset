@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Hero.CompanionData
   _companionName: Archer
   _icon: {fileID: 0}
-  _purchaseCost: 2000
+  _purchaseCost: 500
   _baseDPS: 200
   _dpsMultiplier: 1.12
   _baseUpgradeCost: 20

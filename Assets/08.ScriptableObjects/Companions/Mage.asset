@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Hero.CompanionData
   _companionName: Mage
   _icon: {fileID: 0}
-  _purchaseCost: 5000
+  _purchaseCost: 1000
   _baseDPS: 2000
   _dpsMultiplier: 1.12
   _baseUpgradeCost: 100

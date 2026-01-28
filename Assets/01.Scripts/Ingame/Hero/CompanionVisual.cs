@@ -1,3 +1,4 @@
+using _01.Scripts.Core.Audio;
 using UnityEngine;
 
 namespace _01.Scripts.Ingame.Hero
@@ -71,6 +72,8 @@ namespace _01.Scripts.Ingame.Hero
 
         private void PlaySpawnEffect(Vector3 position, CompanionData data)
         {
+            PlaySpawnSound();
+
             if (data.SpawnEffectPrefab == null)
             {
                 return;
@@ -78,6 +81,14 @@ namespace _01.Scripts.Ingame.Hero
 
             GameObject effect = Instantiate(data.SpawnEffectPrefab, position, Quaternion.identity);
             Destroy(effect, data.SpawnEffectDuration);
+        }
+
+        private void PlaySpawnSound()
+        {
+            if (SFXManager.Instance != null)
+            {
+                SFXManager.Instance.PlayTierUp();
+            }
         }
 
         private void CreateVisualInstance(Vector3 position, CompanionData data)

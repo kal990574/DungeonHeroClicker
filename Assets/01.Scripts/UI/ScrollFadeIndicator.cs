@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,8 +21,14 @@ namespace _01.Scripts.UI
             if (_scrollRect != null)
             {
                 _scrollRect.onValueChanged.AddListener(OnScrollValueChanged);
-                UpdateFadeTargets(_scrollRect.normalizedPosition);
+                StartCoroutine(InitializeAfterLayout());
             }
+        }
+
+        private IEnumerator InitializeAfterLayout()
+        {
+            yield return null;
+            UpdateFadeTargets(_scrollRect.normalizedPosition);
         }
 
         private void OnDestroy()
