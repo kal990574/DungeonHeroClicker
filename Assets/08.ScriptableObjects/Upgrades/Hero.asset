@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 933248ba7ee54c8d89d40e9f00d63b6b, type: 3}
-  m_Name: Weapon
+  m_Name: Hero
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Outgame.Upgrade.UpgradeData
-  _upgradeName: Weapon
+  _upgradeName: Hero
   _icon: {fileID: 0}
   _baseCost: 15
   _costMultiplier: 1.7
