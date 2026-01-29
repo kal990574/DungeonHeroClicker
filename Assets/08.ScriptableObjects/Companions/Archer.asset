@@ -21,6 +21,6 @@ MonoBehaviour:
   _costMultiplier: 1.65
   _companionPrefab: {fileID: 3058112922541205296, guid: 51a7320eec9784208b6ff54f0f424af9, type: 3}
   _spawnOffset: {x: -0.7, y: 0.2}
-  _attackAnimIndex: 0
+  _attackAnimIndex: 2
   _spawnEffectPrefab: {fileID: 271054424957760564, guid: dd1d88ec0386448cd9f9e008bebff9a4, type: 3}
   _spawnEffectDuration: 1.5
