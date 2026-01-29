@@ -23,7 +23,6 @@ namespace _01.Scripts.Outgame.Upgrade
             }
         }
 
-        public event Action OnStatsChanged;
 
         private void OnEnable()
         {
@@ -43,7 +42,6 @@ namespace _01.Scripts.Outgame.Upgrade
         
         private void HandleUpgraded(Upgrade upgrade)
         {
-            OnStatsChanged?.Invoke();
             Debug.Log($"[UpgradeManager] ClickDmg: {TotalClickDamage}");
         }
     }
