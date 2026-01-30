@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace _01.Scripts.Ingame.Companion
 {
-    public class CompanionViewController : MonoBehaviour, ICompanionVisualController
+    public class CompanionVisualManager : MonoBehaviour, ICompanionVisualManager
     {
         [Header("Dependencies")]
         [SerializeField] private UpgradeManager _upgradeManager;
@@ -64,7 +64,7 @@ namespace _01.Scripts.Ingame.Companion
             var config = _companionConfigs.Find(c => c.Id == companionId);
             if (config == null || config.CompanionPrefab == null)
             {
-                Debug.LogWarning($"[CompanionViewController] Config not found for {companionId}");
+                Debug.LogWarning($"[CompanionVisualManager] Config not found for {companionId}");
                 return;
             }
 
@@ -74,7 +74,7 @@ namespace _01.Scripts.Ingame.Companion
             var instance = CreateVisualInstance(spawnPosition, config);
             _visuals[companionId] = instance;
 
-            Debug.Log($"[CompanionViewController] {config.DisplayName} spawned at {spawnPosition}");
+            Debug.Log($"[CompanionVisualManager] {config.DisplayName} spawned at {spawnPosition}");
         }
 
         public void PlayAllAttackAnimations()

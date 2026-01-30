@@ -1,6 +1,6 @@
 namespace _01.Scripts.Interfaces
 {
-    public interface ICompanionVisualController
+    public interface ICompanionVisualManager
     {
         void SpawnCompanion(string companionId);
         void PlayAllAttackAnimations();

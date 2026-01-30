@@ -18,6 +18,7 @@ namespace _01.Scripts.Outgame.Upgrade.Domain
 
         public int CurrentLevel => _currentLevel;
         public bool IsPurchased => _isPurchased;
+        public bool RequiresPurchase => _config.Type == EUpgradeType.Companion;
 
         public BigNumber UpgradeCost
         {
@@ -36,8 +37,6 @@ namespace _01.Scripts.Outgame.Upgrade.Domain
                 return new BigNumber(effect);
             }
         }
-
-        public bool RequiresPurchase => _config.Type == EUpgradeType.Companion;
 
         public BigNumber PurchaseCost
         {
@@ -91,7 +90,7 @@ namespace _01.Scripts.Outgame.Upgrade.Domain
 
             _config = config;
             _currentLevel = level;
-            _isPurchased = isPurchased;
+            _isPurchased = isPurchased || !RequiresPurchase;
         }
 
         public bool CanUpgrade()

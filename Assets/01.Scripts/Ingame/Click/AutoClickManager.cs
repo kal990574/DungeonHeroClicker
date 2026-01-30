@@ -17,7 +17,7 @@ namespace _01.Scripts.Ingame.Click
 
         [Header("Dependencies")]
         [SerializeField] private UpgradeManager _upgradeManager;
-        [SerializeField] private CompanionViewController _companionViewController;
+        [SerializeField] private CompanionVisualManager _companionVisualManager;
 
         private IDamageable _currentTarget;
         private Transform _targetTransform;
@@ -76,7 +76,7 @@ namespace _01.Scripts.Ingame.Click
             );
 
             _currentTarget.TakeDamage(clickInfo);
-            _companionViewController.PlayAllAttackAnimations();
+            _companionVisualManager.PlayAllAttackAnimations();
         }
     }
 }

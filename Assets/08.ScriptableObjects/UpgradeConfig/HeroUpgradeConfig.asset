@@ -9,11 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 933248ba7ee54c8d89d40e9f00d63b6b, type: 3}
-  m_Name: Hero
-  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Outgame.Upgrade.UpgradeData
-  _upgradeName: Hero
+  m_Script: {fileID: 11500000, guid: 55ae1a241a70d4a88a2c1f7d4f0e6d9d, type: 3}
+  m_Name: HeroUpgradeConfig
+  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Outgame.Upgrade.Config.HeroUpgradeConfig
+  _id: Hero
+  _displayName: Hero
   _icon: {fileID: 0}
+  _type: 0
   _baseCost: 15
   _costMultiplier: 1.7
   _baseEffect: 3

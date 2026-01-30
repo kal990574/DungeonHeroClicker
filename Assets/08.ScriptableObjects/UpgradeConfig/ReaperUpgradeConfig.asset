@@ -9,18 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 230e631ae5eb463cb3525fcfd641308c, type: 3}
-  m_Name: Reaper
-  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Hero.CompanionData
-  _companionName: Reaper
+  m_Script: {fileID: 11500000, guid: 9bc71895d394141b7a23b221abaa2ded, type: 3}
+  m_Name: ReaperUpgradeConfig
+  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Outgame.Upgrade.Config.CompanionUpgradeConfig
+  _id: Reaper
+  _displayName: Reaper
   _icon: {fileID: 0}
-  _purchaseCost: 10000
-  _baseDPS: 300
-  _dpsMultiplier: 1.75
-  _baseUpgradeCost: 1000
-  _costMultiplier: 1.65
+  _type: 1
+  _baseCost: 50000
+  _costMultiplier: 1.15
+  _baseEffect: 100
+  _effectMultiplier: 1.15
+  _purchaseCost: 50000
   _companionPrefab: {fileID: 3113264277421205178, guid: 93f7d3099aba544f18d9650f45d3e76b, type: 3}
-  _spawnOffset: {x: -1.4, y: 0.5}
+  _spawnOffset: {x: -1, y: 1.4}
   _attackAnimIndex: 1
   _spawnEffectPrefab: {fileID: 271054424957760564, guid: dd1d88ec0386448cd9f9e008bebff9a4, type: 3}
   _spawnEffectDuration: 1.5

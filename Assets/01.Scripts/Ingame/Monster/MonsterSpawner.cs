@@ -25,11 +25,6 @@ namespace _01.Scripts.Ingame.Monster
         private Monster _currentMonster;
         private int _currentIndex;
 
-        public Monster CurrentMonster => _currentMonster;
-        public int CurrentIndex => _currentIndex;
-
-        public event Action<Monster> OnMonsterSpawned;
-
         private void Start()
         {
             _currentIndex = 0;
@@ -49,34 +44,32 @@ namespace _01.Scripts.Ingame.Monster
                 return;
             }
 
-            // 이전 몬스터 제거.
+            // 이전 몬스터 제거
             if (_currentMonster != null)
             {
                 Destroy(_currentMonster.gameObject);
             }
 
-            // 현재 인덱스의 프리팹으로 새 몬스터 생성.
+            // 현재 인덱스의 프리팹으로 새 몬스터 생성
             var prefab = _monsterPrefabs[_currentIndex];
             _currentMonster = Instantiate(prefab, _spawnPoint.position, Quaternion.identity);
             _currentMonster.OnMonsterDeath += HandleMonsterDeath;
 
-            // 스테이지 기반 스탯 적용.
+            // 스테이지 기반 스탯 적용
             ConfigureMonsterStats(_currentMonster);
 
-            // 체력바 타겟 설정.
+            // 체력바 타겟 설정
             var health = _currentMonster.GetComponent<MonsterHealth>();
             if (_healthBar != null && health != null)
             {
                 _healthBar.SetTarget(health);
             }
 
-            // 자동 공격 타겟 설정.
+            // 자동 공격 타겟 설정
             if (_autoClickManager != null)
             {
                 _autoClickManager.SetTarget(_currentMonster, _currentMonster.transform);
             }
-
-            OnMonsterSpawned?.Invoke(_currentMonster);
         }
 
         private void HandleMonsterDeath()
@@ -88,13 +81,13 @@ namespace _01.Scripts.Ingame.Monster
                 _autoClickManager.ClearTarget();
             }
 
-            // 스테이지 매니저에 처치 알림.
+            // 스테이지 매니저에 처치 알림
             if (_stageManager != null)
             {
                 _stageManager.OnMonsterKilled();
             }
 
-            // 다음 몬스터로 인덱스 증가 (순환).
+            // 다음 몬스터로 인덱스 증가
             _currentIndex = (_currentIndex + 1) % _monsterPrefabs.Length;
 
             Invoke(nameof(SpawnMonster), _respawnDelay);

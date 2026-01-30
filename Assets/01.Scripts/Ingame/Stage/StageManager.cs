@@ -1,6 +1,6 @@
 using System;
-using UnityEngine;
 using _01.Scripts.Interfaces;
+using UnityEngine;
 
 namespace _01.Scripts.Ingame.Stage
 {
@@ -10,6 +10,10 @@ namespace _01.Scripts.Ingame.Stage
         [SerializeField] private StageData _stageData;
         [SerializeField] private StageScalingData _scalingData;
 
+        [Header("Dependencies")]
+        [SerializeField] private StageRepositoryBridge _repositoryBridge;
+
+        private IStageRepository _repository;
         private int _currentStage = 1;
         private int _currentKillCount;
         private StageStatCalculator _statCalculator;
@@ -27,6 +31,16 @@ namespace _01.Scripts.Ingame.Stage
         private void Awake()
         {
             _statCalculator = new StageStatCalculator(_scalingData, _stageData);
+            _repository = _repositoryBridge.Repository;
+
+            LoadOrDefault();
+
+            _repositoryBridge.OnSaveRequested += HandleSaveRequested;
+        }
+
+        private void OnDestroy()
+        {
+            _repositoryBridge.OnSaveRequested -= HandleSaveRequested;
         }
 
         private void Start()
@@ -44,6 +58,10 @@ namespace _01.Scripts.Ingame.Stage
             {
                 OnStageCleared();
             }
+            else
+            {
+                PersistState();
+            }
         }
 
         public void OnStageCleared()
@@ -51,8 +69,42 @@ namespace _01.Scripts.Ingame.Stage
             _currentStage++;
             _currentKillCount = 0;
 
+            PersistState();
+
             OnStageChanged?.Invoke(_currentStage);
             OnKillCountChanged?.Invoke(_currentKillCount, RequiredKillCount);
+        }
+
+        // --- Private ---
+
+        private void LoadOrDefault()
+        {
+            var data = _repository.Load();
+
+            if (data != null)
+            {
+                _currentStage = data.CurrentStage;
+                _currentKillCount = data.CurrentKillCount;
+            }
+        }
+
+        private void PersistState()
+        {
+            _repository.Save(CreateSaveData());
+        }
+
+        private StageSaveData CreateSaveData()
+        {
+            return new StageSaveData
+            {
+                CurrentStage = _currentStage,
+                CurrentKillCount = _currentKillCount
+            };
+        }
+
+        private void HandleSaveRequested()
+        {
+            PersistState();
         }
     }
 }
