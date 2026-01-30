@@ -1,4 +1,5 @@
 using _01.Scripts.Outgame.Upgrade;
+using _01.Scripts.Outgame.Upgrade.Domain;
 using UnityEngine;
 
 namespace _01.Scripts.Ingame.Hero
@@ -6,37 +7,42 @@ namespace _01.Scripts.Ingame.Hero
     public class HeroUpgradeConnector : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private Upgrade _weaponUpgrade;
+        [SerializeField] private UpgradeManager _upgradeManager;
         [SerializeField] private HeroVisual _heroVisual;
+
+        [Header("Config")]
+        [SerializeField] private string _weaponItemId;
 
         private void OnEnable()
         {
-            if (_weaponUpgrade != null)
-            {
-                _weaponUpgrade.OnUpgraded += HandleWeaponUpgraded;
-            }
-
+            _upgradeManager.OnItemUpgraded += HandleItemUpgraded;
             UpdateVisual();
         }
 
         private void OnDisable()
         {
-            if (_weaponUpgrade != null)
-            {
-                _weaponUpgrade.OnUpgraded -= HandleWeaponUpgraded;
-            }
+            _upgradeManager.OnItemUpgraded -= HandleItemUpgraded;
         }
 
-        private void HandleWeaponUpgraded(Upgrade upgrade)
+        private void HandleItemUpgraded(UpgradeItem item)
         {
-            UpdateVisual();
+            if (item.Id == _weaponItemId)
+            {
+                UpdateVisual();
+            }
         }
 
         private void UpdateVisual()
         {
-            if (_heroVisual != null && _weaponUpgrade != null)
+            if (_heroVisual == null)
             {
-                _heroVisual.UpdateVisual(_weaponUpgrade.CurrentLevel);
+                return;
+            }
+
+            var item = _upgradeManager.GetItem(_weaponItemId);
+            if (item != null)
+            {
+                _heroVisual.UpdateVisual(item.CurrentLevel);
             }
         }
     }

@@ -1,5 +1,6 @@
 using _01.Scripts.Core.Utils;
 using _01.Scripts.Outgame.Currency;
+using _01.Scripts.Outgame.Currency.Domain;
 using _01.Scripts.UI.Effects;
 using DG.Tweening;
 using TMPro;
@@ -10,7 +11,7 @@ namespace _01.Scripts.UI
     public class GoldDisplay : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private GoldWallet _goldWallet;
+        [SerializeField] private CurrencyManager _currencyManager;
         [SerializeField] private TMP_Text _goldText;
 
         [Header("Effects")]
@@ -35,15 +36,15 @@ namespace _01.Scripts.UI
 
         private void OnEnable()
         {
-            _goldWallet.OnGoldChanged += HandleGoldChanged;
-            _previousGold = _goldWallet.CurrentGold;
+            _currencyManager.OnCurrencyChanged += HandleCurrencyChanged;
+            _previousGold = _currencyManager.Gold.Value;
             _displayedGold = _previousGold;
             _goldText.text = NumberFormatter.Format(_displayedGold);
         }
 
         private void OnDisable()
         {
-            _goldWallet.OnGoldChanged -= HandleGoldChanged;
+            _currencyManager.OnCurrencyChanged -= HandleCurrencyChanged;
         }
 
         private void Update()
@@ -62,8 +63,14 @@ namespace _01.Scripts.UI
             }
         }
 
-        private void HandleGoldChanged(BigNumber targetGold)
+        private void HandleCurrencyChanged(ECurrencyType type)
         {
+            if (type != ECurrencyType.Gold)
+            {
+                return;
+            }
+
+            BigNumber targetGold = _currencyManager.Gold.Value;
             BigNumber delta = targetGold - _previousGold;
             _previousGold = targetGold;
 

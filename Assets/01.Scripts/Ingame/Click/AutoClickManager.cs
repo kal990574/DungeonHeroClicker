@@ -1,6 +1,7 @@
 using _01.Scripts.Core.Utils;
-using _01.Scripts.Ingame.Hero;
+using _01.Scripts.Ingame.Companion;
 using _01.Scripts.Interfaces;
+using _01.Scripts.Outgame.Upgrade;
 using UnityEngine;
 
 namespace _01.Scripts.Ingame.Click
@@ -15,13 +16,14 @@ namespace _01.Scripts.Ingame.Click
         [SerializeField] private float _criticalMultiplier = 2f;
 
         [Header("Dependencies")]
-        [SerializeField] private CompanionManager _companionManager;
+        [SerializeField] private UpgradeManager _upgradeManager;
+        [SerializeField] private CompanionViewController _companionViewController;
 
         private IDamageable _currentTarget;
         private Transform _targetTransform;
         private float _timer;
 
-        private BigNumber TotalDPS => _companionManager != null ? _companionManager.TotalDPS : BigNumber.Zero;
+        private BigNumber TotalDPS => _upgradeManager != null ? _upgradeManager.TotalDPS : BigNumber.Zero;
 
         public void SetTarget(IDamageable target, Transform targetTransform)
         {
@@ -74,7 +76,7 @@ namespace _01.Scripts.Ingame.Click
             );
 
             _currentTarget.TakeDamage(clickInfo);
-            _companionManager.PlayAllAttackAnimations();
+            _companionViewController.PlayAllAttackAnimations();
         }
     }
 }

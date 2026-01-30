@@ -1,5 +1,5 @@
 using _01.Scripts.Core.Utils;
-using _01.Scripts.Ingame.Hero;
+using _01.Scripts.Outgame.Upgrade;
 using _01.Scripts.UI.Effects;
 using DG.Tweening;
 using TMPro;
@@ -10,7 +10,7 @@ namespace _01.Scripts.UI
     public class DPSDisplay : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private CompanionManager _companionManager;
+        [SerializeField] private UpgradeManager _upgradeManager;
         [SerializeField] private TMP_Text _dpsText;
 
         [Header("Effects")]
@@ -28,20 +28,20 @@ namespace _01.Scripts.UI
 
         private void OnEnable()
         {
-            _companionManager.OnDPSChanged += HandleDPSChanged;
-            _previousDPS = _companionManager.TotalDPS;
+            _upgradeManager.OnTotalDPSChanged += HandleDPSChanged;
+            _previousDPS = _upgradeManager.TotalDPS;
             _displayedDPS = _previousDPS;
             _dpsText.text = NumberFormatter.Format(_displayedDPS);
         }
 
         private void OnDisable()
         {
-            _companionManager.OnDPSChanged -= HandleDPSChanged;
+            _upgradeManager.OnTotalDPSChanged -= HandleDPSChanged;
         }
 
         private void HandleDPSChanged()
         {
-            BigNumber targetDPS = _companionManager.TotalDPS;
+            BigNumber targetDPS = _upgradeManager.TotalDPS;
             BigNumber delta = targetDPS - _previousDPS;
             _previousDPS = targetDPS;
 
