@@ -43,11 +43,5 @@ namespace _01.Scripts.Ingame.Hero
             if (_spumPrefabs == null || !_isInitialized) return;
             _spumPrefabs.PlayAnimation(PlayerState.ATTACK, _attackAnimIndex);
         }
-
-        public void PlayIdle()
-        {
-            if (_spumPrefabs == null || !_isInitialized) return;
-            _spumPrefabs.PlayAnimation(PlayerState.IDLE, 0);
-        }
     }
 }

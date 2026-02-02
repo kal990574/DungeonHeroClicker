@@ -6,7 +6,6 @@ namespace _01.Scripts.Ingame.Feedback
     {
         [Header("Settings")]
         [SerializeField] private ParticleSystem _particlePrefab;
-        [SerializeField] private bool _usePooling;
 
         public void Play(Vector3 position)
         {

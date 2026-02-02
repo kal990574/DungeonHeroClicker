@@ -27,7 +27,6 @@ namespace _01.Scripts.Outgame.Upgrade
         // Events.
         public event Action<UpgradeItem> OnItemUpgraded;
         public event Action<UpgradeItem> OnItemPurchased;
-        public event Action OnTotalDamageChanged;
         public event Action OnTotalDPSChanged;
 
         private void Awake()
@@ -188,14 +187,9 @@ namespace _01.Scripts.Outgame.Upgrade
 
         private void NotifyTypeChanged(EUpgradeType type)
         {
-            switch (type)
+            if (type == EUpgradeType.Companion)
             {
-                case EUpgradeType.Hero:
-                    OnTotalDamageChanged?.Invoke();
-                    break;
-                case EUpgradeType.Companion:
-                    OnTotalDPSChanged?.Invoke();
-                    break;
+                OnTotalDPSChanged?.Invoke();
             }
         }
 

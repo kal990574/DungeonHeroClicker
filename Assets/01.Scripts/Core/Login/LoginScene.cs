@@ -1,5 +1,7 @@
+using _01.Scripts.Interfaces.Account;
+using _01.Scripts.Outgame.Account.Domain;
+using _01.Scripts.Outgame.Account.Manager;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,8 +10,6 @@ namespace _01.Scripts.Core.Login
 {
     public class LoginScene : MonoBehaviour
     {
-        // 로그인씬 (로그인/회원가입) -> 게임씬
-
         private enum SceneMode
         {
             Login,
@@ -18,18 +18,30 @@ namespace _01.Scripts.Core.Login
 
         private SceneMode _mode = SceneMode.Login;
 
-        // 비밀번호 확인 오브젝트
-        [SerializeField] private GameObject _passwordCofirmObject;
+        [Header("Account")]
+        [SerializeField] private AccountManager _accountManager;
+
+        [Header("UI - Buttons")]
         [SerializeField] private Button _gotoRegisterButton;
         [SerializeField] private Button _loginButton;
         [SerializeField] private Button _gotoLoginButton;
         [SerializeField] private Button _registerButton;
 
-        [SerializeField] private TextMeshProUGUI _messageTextUI;
-
+        [Header("UI - Input Fields")]
         [SerializeField] private TMP_InputField _idInputField;
         [SerializeField] private TMP_InputField _passwordInputField;
         [SerializeField] private TMP_InputField _passwordConfirmInputField;
+
+        [Header("UI - Message")]
+        [SerializeField] private GameObject _passwordConfirmObject;
+        [SerializeField] private TextMeshProUGUI _messageTextUI;
+
+        private IAccountService _accountService;
+
+        private void Awake()
+        {
+            _accountService = _accountManager;
+        }
 
         private void Start()
         {
@@ -47,90 +59,44 @@ namespace _01.Scripts.Core.Login
 
         private void Refresh()
         {
-            // 2차 비밀번호 오브젝트는 회원가입 모드일때만 노출
-            _passwordCofirmObject.SetActive(_mode == SceneMode.Register);
+            _passwordConfirmObject.SetActive(_mode == SceneMode.Register);
             _gotoRegisterButton.gameObject.SetActive(_mode == SceneMode.Login);
             _loginButton.gameObject.SetActive(_mode == SceneMode.Login);
             _gotoLoginButton.gameObject.SetActive(_mode == SceneMode.Register);
             _registerButton.gameObject.SetActive(_mode == SceneMode.Register);
+            _messageTextUI.text = string.Empty;
         }
 
         private void Login()
         {
-            // 로그인
-            // 1. 아이디 입력을 확인한다.
-            string id = _idInputField.text;
-            if (string.IsNullOrEmpty(id))
+            AuthResult result = _accountService.TryLogin(
+                _idInputField.text,
+                _passwordInputField.text);
+
+            if (!result.Success)
             {
-                _messageTextUI.text = "아이디를 입력해주세요.";
+                _messageTextUI.text = result.ErrorMessage;
                 return;
             }
 
-            // 2. 비밀번호 입력을 확인한다.
-            string password = _passwordInputField.text;
-            if (string.IsNullOrEmpty(password))
-            {
-                _messageTextUI.text = "패스워드를 입력해주세요.";
-                return;
-            }
-
-            // 3. 실제 저장된 아이디-비밀번호 계정이 있는지 확인한다.
-            // 3-1. 아이디가 있는지 확인한다.
-            if (!PlayerPrefs.HasKey(id))
-            {
-                _messageTextUI.text = "아이디/비밀번호를 확인해주세요.";
-                return;
-            }
-
-            string myPassword = PlayerPrefs.GetString(id);
-            if (myPassword != password)
-            {
-                _messageTextUI.text = "아이디/비밀번호를 확인해주세요.";
-                return;
-            }
-
-            // 4. 있다면 씬 이동
-            SceneManager.LoadScene("LoadingScene");
+            SceneManager.LoadScene("GameScene");
         }
 
         private void Register()
         {
-            // 로그인
-            // 1. 아이디 입력을 확인한다.
-            string id = _idInputField.text;
-            if (string.IsNullOrEmpty(id))
+            AuthResult result = _accountService.TryRegister(
+                _idInputField.text,
+                _passwordInputField.text,
+                _passwordConfirmInputField.text);
+
+            if (!result.Success)
             {
-                _messageTextUI.text = "아이디를 입력해주세요.";
+                _messageTextUI.text = result.ErrorMessage;
                 return;
             }
-
-            // 2. 비밀번호 입력을 확인한다.
-            string password = _passwordInputField.text;
-            if (string.IsNullOrEmpty(password))
-            {
-                _messageTextUI.text = "패스워드를 입력해주세요.";
-                return;
-            }
-
-            // 2. 2ck 비밀번호 입력을 확인한다.
-            string password2 = _passwordInputField.text;
-            if (string.IsNullOrEmpty(password2) || password != password2)
-            {
-                _messageTextUI.text = "패스워드를 확인해주세요.";
-                return;
-            }
-
-            // 4. 실제 저장된 아이디-비밀번호 계정이 있는지 확인한다.
-            // 4-1. 아이디가 있는지 확인한다.
-            if (PlayerPrefs.HasKey(id))
-            {
-                _messageTextUI.text = "중복된 아이디입니다.";
-                return;
-            }
-
-            PlayerPrefs.SetString(id, password);
 
             GotoLogin();
+            _messageTextUI.text = "Registration successful! Please log in.";
         }
 
         private void GotoLogin()

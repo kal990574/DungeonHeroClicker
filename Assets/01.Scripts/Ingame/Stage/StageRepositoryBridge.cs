@@ -1,5 +1,6 @@
 using System;
 using _01.Scripts.Interfaces;
+using _01.Scripts.Outgame.Account.Manager;
 using UnityEngine;
 
 namespace _01.Scripts.Ingame.Stage
@@ -8,14 +9,28 @@ namespace _01.Scripts.Ingame.Stage
     {
         private StageRepository _repository;
 
-        public IStageRepository Repository => _repository;
+        public IStageRepository Repository
+        {
+            get
+            {
+                if (_repository == null)
+                {
+                    string accountId = AccountManager.Instance.CurrentAccountId;
+
+                    if (string.IsNullOrEmpty(accountId))
+                    {
+                        Debug.LogError("[StageRepositoryBridge] AccountId is empty. Not logged in?");
+                        return null;
+                    }
+
+                    _repository = new StageRepository(accountId);
+                }
+
+                return _repository;
+            }
+        }
 
         public event Action OnSaveRequested;
-
-        private void Awake()
-        {
-            _repository = new StageRepository();
-        }
 
         private void OnApplicationPause(bool pauseStatus)
         {

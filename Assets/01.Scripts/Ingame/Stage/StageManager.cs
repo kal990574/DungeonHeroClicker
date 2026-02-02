@@ -75,8 +75,6 @@ namespace _01.Scripts.Ingame.Stage
             OnKillCountChanged?.Invoke(_currentKillCount, RequiredKillCount);
         }
 
-        // --- Private ---
-
         private void LoadOrDefault()
         {
             var data = _repository.Load();

@@ -8,9 +8,11 @@ namespace _01.Scripts.Outgame.Upgrade.Repo
     {
         private readonly string _savePath;
 
-        public UpgradeRepository()
+        public UpgradeRepository(string accountId)
         {
-            _savePath = Path.Combine(Application.persistentDataPath, "upgrade_data.json");
+            string directory = Path.Combine(Application.persistentDataPath, accountId);
+            Directory.CreateDirectory(directory);
+            _savePath = Path.Combine(directory, "upgrade_data.json");
         }
 
         public void Save(UpgradeSaveData data)

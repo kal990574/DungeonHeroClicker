@@ -8,9 +8,11 @@ namespace _01.Scripts.Outgame.Currency.Repo
     {
         private readonly string _savePath;
 
-        public CurrencyRepository()
+        public CurrencyRepository(string accountId)
         {
-            _savePath = Path.Combine(Application.persistentDataPath, "currency_data.json");
+            string directory = Path.Combine(Application.persistentDataPath, accountId);
+            Directory.CreateDirectory(directory);
+            _savePath = Path.Combine(directory, "currency_data.json");
         }
 
         public void Save(CurrencySaveData data)

@@ -86,12 +86,5 @@ namespace _01.Scripts.Ingame.Monster
             if (_spumPrefabs == null || !_isInitialized) return;
             _spumPrefabs.PlayAnimation(PlayerState.DEATH, _deathAnimIndex);
         }
-
-        public void PlayIdle()
-        {
-            if (!_isInitialized) InitializeAnimator();
-            if (_spumPrefabs == null || !_isInitialized) return;
-            _spumPrefabs.PlayAnimation(PlayerState.IDLE, 0);
-        }
     }
 }

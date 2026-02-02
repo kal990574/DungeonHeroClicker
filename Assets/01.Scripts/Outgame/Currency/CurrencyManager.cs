@@ -25,11 +25,9 @@ namespace _01.Scripts.Outgame.Currency
         private ICurrencyRepository _repository;
         private Domain.Currency[] _currencies;
 
-        // --- Events ---
 
         public event Action<ECurrencyType> OnCurrencyChanged;
 
-        // --- Query API ---
 
         public Domain.Currency Gold => _currencies[(int)ECurrencyType.Gold];
 
@@ -42,8 +40,6 @@ namespace _01.Scripts.Outgame.Currency
         {
             return _currencies[(int)type].Value >= cost;
         }
-
-        // --- Gold 편의 메서드 ---
 
         public bool CanAffordGold(BigNumber cost)
         {
@@ -59,8 +55,6 @@ namespace _01.Scripts.Outgame.Currency
         {
             return TrySpend(ECurrencyType.Gold, cost);
         }
-
-        // --- Command API ---
 
         public void Add(ECurrencyType type, BigNumber amount)
         {
@@ -89,8 +83,6 @@ namespace _01.Scripts.Outgame.Currency
             return true;
         }
 
-        // --- Lifecycle ---
-
         private void Awake()
         {
             _repository = _repositoryBridge.Repository;
@@ -115,8 +107,6 @@ namespace _01.Scripts.Outgame.Currency
         {
             _repositoryBridge.OnSaveRequested -= HandleSaveRequested;
         }
-
-        // --- Private ---
 
         private void LoadOrDefault()
         {

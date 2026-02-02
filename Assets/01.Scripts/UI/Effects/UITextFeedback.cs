@@ -74,11 +74,6 @@ namespace _01.Scripts.UI.Effects
                 .SetEase(Ease.OutQuad);
         }
 
-        public void SetFlashColor(Color color)
-        {
-            _flashColor = color;
-        }
-
         private void OnDestroy()
         {
             _scaleTweener?.Kill();

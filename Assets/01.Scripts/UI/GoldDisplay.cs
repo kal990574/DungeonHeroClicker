@@ -37,6 +37,10 @@ namespace _01.Scripts.UI
         private void OnEnable()
         {
             _currencyManager.OnCurrencyChanged += HandleCurrencyChanged;
+        }
+
+        private void Start()
+        {
             _previousGold = _currencyManager.Gold.Value;
             _displayedGold = _previousGold;
             _goldText.text = NumberFormatter.Format(_displayedGold);

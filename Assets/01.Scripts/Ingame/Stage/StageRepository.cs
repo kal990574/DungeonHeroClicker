@@ -8,9 +8,11 @@ namespace _01.Scripts.Ingame.Stage
     {
         private readonly string _savePath;
 
-        public StageRepository()
+        public StageRepository(string accountId)
         {
-            _savePath = Path.Combine(Application.persistentDataPath, "stage_data.json");
+            string directory = Path.Combine(Application.persistentDataPath, accountId);
+            Directory.CreateDirectory(directory);
+            _savePath = Path.Combine(directory, "stage_data.json");
         }
 
         public void Save(StageSaveData data)
