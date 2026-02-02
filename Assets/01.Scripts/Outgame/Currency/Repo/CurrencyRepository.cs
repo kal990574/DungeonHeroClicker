@@ -1,4 +1,5 @@
 using System.IO;
+using _01.Scripts.Core.Utils;
 using _01.Scripts.Interfaces.Currency;
 using UnityEngine;
 
@@ -19,6 +20,7 @@ namespace _01.Scripts.Outgame.Currency.Repo
         {
             string json = JsonUtility.ToJson(data, true);
             File.WriteAllText(_savePath, json);
+            WebGLFileSync.Sync();
         }
 
         public CurrencySaveData Load()

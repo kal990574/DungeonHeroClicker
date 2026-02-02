@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using _01.Scripts.Core.Utils;
 using _01.Scripts.Interfaces.Account;
 using UnityEngine;
 
@@ -65,6 +66,7 @@ namespace _01.Scripts.Outgame.Account.Repo
 
             string json = JsonUtility.ToJson(collection, true);
             File.WriteAllText(_savePath, json);
+            WebGLFileSync.Sync();
         }
     }
 }

@@ -17,9 +17,9 @@ MonoBehaviour:
   _icon: {fileID: 0}
   _type: 1
   _baseCost: 40
-  _costMultiplier: 1.25
+  _costMultiplier: 1.24
   _baseEffect: 8
-  _effectMultiplier: 1.2
+  _effectMultiplier: 1.3
   _purchaseCost: 150
   _companionPrefab: {fileID: 4109105202263456952, guid: be8c82a0121424c44a7ce92f66468de9, type: 3}
   _spawnOffset: {x: -1, y: -0.7}

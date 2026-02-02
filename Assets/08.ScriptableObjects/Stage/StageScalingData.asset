@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Stage.StageScalingData
   _baseHealth: 10
   _baseGold: 5
-  _healthGrowthRate: 1.65
-  _goldGrowthRate: 1.6
+  _healthGrowthRate: 1.75
+  _goldGrowthRate: 1.9

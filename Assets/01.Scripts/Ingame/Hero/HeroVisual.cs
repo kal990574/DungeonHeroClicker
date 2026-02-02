@@ -22,7 +22,7 @@ namespace _01.Scripts.Ingame.Hero
 
         public GameObject CurrentHero => _currentHero;
 
-        private void Start()
+        private void Awake()
         {
             if (_spawnPoint == null)
             {
@@ -33,8 +33,6 @@ namespace _01.Scripts.Ingame.Hero
             {
                 _heroAnimator = GetComponent<HeroAnimator>();
             }
-
-            UpdateVisual(1);
         }
 
         public void UpdateVisual(int level)

@@ -7745,6 +7745,14 @@ function dbg(text) {
   		Module.WebPlayer.PlayerIsInitialized();
   	}
 
+  function _SyncFileSystem() {
+          FS.syncfs(false, function (err) {
+              if (err) {
+                  console.error("IndexedDB sync error: " + err);
+              }
+          });
+      }
+
   function ___assert_fail(condition, filename, line, func) {
       abort(`Assertion failed: ${UTF8ToString(condition)}, at: ` + [filename ? UTF8ToString(filename) : 'unknown filename', line, func ? UTF8ToString(func) : 'unknown function']);
     }
@@ -16415,6 +16423,7 @@ var wasmImports = {
   "JS_WebGPU_SetCommandEncoder": _JS_WebGPU_SetCommandEncoder,
   "JS_WebGPU_Setup": _JS_WebGPU_Setup,
   "JS_WebPlayer_FinishInitialization": _JS_WebPlayer_FinishInitialization,
+  "SyncFileSystem": _SyncFileSystem,
   "__assert_fail": ___assert_fail,
   "__dlsym": ___dlsym,
   "__syscall__newselect": ___syscall__newselect,
