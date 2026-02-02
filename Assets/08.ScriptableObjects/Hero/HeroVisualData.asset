@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b8be6a0168f4df19b55e6f5c0b1c677, type: 3}
+  m_Name: HeroVisualData
+  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Hero.HeroVisualData
+  _tiers:
+  - MinLevel: 1
+    TierName: Level 1
+    HeroPrefab: {fileID: 5549921429187701031, guid: 06f8834667ee04046b37466820a6456e, type: 3}
+  - MinLevel: 15
+    TierName: Level 15
+    HeroPrefab: {fileID: 5401386700102643926, guid: a901c893fb5134dd89b1e2bea3ad2270, type: 3}
+  - MinLevel: 30
+    TierName: Level 30
+    HeroPrefab: {fileID: 9158057216099380184, guid: 43a3ad3178ef94145a77b9cac73c12ff, type: 3}
+  - MinLevel: 50
+    TierName: Level 50
+    HeroPrefab: {fileID: 2149905676695037308, guid: c43f99fca62da43099fb51a26acdfab3, type: 3}

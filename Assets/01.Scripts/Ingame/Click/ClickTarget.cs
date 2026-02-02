@@ -1,16 +1,25 @@
+using _01.Scripts.Interfaces;
 using UnityEngine;
 
-public class ClickTarget : MonoBehaviour
+namespace _01.Scripts.Ingame.Click
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class ClickTarget : MonoBehaviour, IClickable
     {
-        
-    }
+        private bool _isClickable = true;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public bool IsClickable => _isClickable;
+
+        public void OnClick()
+        {
+            if (!_isClickable)
+            {
+                return;
+            }
+        }
+
+        public void SetClickable(bool value)
+        {
+            _isClickable = value;
+        }
     }
 }
