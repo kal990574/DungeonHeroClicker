@@ -16,10 +16,10 @@ MonoBehaviour:
   _displayName: Archer
   _icon: {fileID: 0}
   _type: 1
-  _baseCost: 400
-  _costMultiplier: 1.15
-  _baseEffect: 5
-  _effectMultiplier: 1.15
+  _baseCost: 500
+  _costMultiplier: 1.25
+  _baseEffect: 20
+  _effectMultiplier: 1.21
   _purchaseCost: 2000
   _companionPrefab: {fileID: 3058112922541205296, guid: 51a7320eec9784208b6ff54f0f424af9, type: 3}
   _spawnOffset: {x: -1, y: 0}
