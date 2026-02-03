@@ -69,16 +69,6 @@ namespace _01.Scripts.Outgame.Upgrade
             return _items.TryGetValue(id, out var item) ? item : null;
         }
 
-        public IReadOnlyList<UpgradeItem> GetAllItems()
-        {
-            return _items.Values.ToList();
-        }
-
-        public IReadOnlyList<UpgradeItem> GetItemsByType(EUpgradeType type)
-        {
-            return _items.Values.Where(i => i.Type == type).ToList();
-        }
-
         public BigNumber TotalClickDamage
         {
             get

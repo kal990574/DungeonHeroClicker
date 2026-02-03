@@ -29,6 +29,10 @@ namespace _01.Scripts.UI
         private void OnEnable()
         {
             _upgradeManager.OnTotalDPSChanged += HandleDPSChanged;
+        }
+
+        private void Start()
+        {
             _previousDPS = _upgradeManager.TotalDPS;
             _displayedDPS = _previousDPS;
             _dpsText.text = NumberFormatter.Format(_displayedDPS);
