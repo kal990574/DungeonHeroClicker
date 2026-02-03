@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace _01.Scripts.Ingame.Stage
 {
-    public class StageRepositoryBridge : MonoBehaviour
+    public class StageRepositoryBridge : MonoBehaviour, IStageRepository
     {
         private StageRepository _repository;
 
-        public IStageRepository Repository
+        private StageRepository Repository
         {
             get
             {
@@ -29,6 +29,10 @@ namespace _01.Scripts.Ingame.Stage
                 return _repository;
             }
         }
+
+        public void Save(StageSaveData data) => Repository?.Save(data);
+
+        public StageSaveData Load() => Repository?.Load();
 
         public event Action OnSaveRequested;
 

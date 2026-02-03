@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using _01.Scripts.Core.Audio;
 using _01.Scripts.Core.Utils;
-using _01.Scripts.Interfaces.Upgrade;
 using _01.Scripts.Outgame.Currency;
 using _01.Scripts.Outgame.Upgrade.Config;
 using _01.Scripts.Outgame.Upgrade.Domain;
@@ -21,7 +20,6 @@ namespace _01.Scripts.Outgame.Upgrade
         [SerializeField] private UpgradeRepositoryBridge _repositoryBridge;
         [SerializeField] private CurrencyManager _currencyManager;
 
-        private IUpgradeRepository _repository;
         private readonly Dictionary<string, UpgradeItem> _items = new();
 
         // Events.
@@ -31,8 +29,6 @@ namespace _01.Scripts.Outgame.Upgrade
 
         private void Awake()
         {
-            _repository = _repositoryBridge.Repository;
-
             InitializeItems();
 
             _repositoryBridge.OnSaveRequested += HandleSaveRequested;
@@ -45,7 +41,7 @@ namespace _01.Scripts.Outgame.Upgrade
 
         private void InitializeItems()
         {
-            var saveData = _repository.Load();
+            var saveData = _repositoryBridge.Load();
             var savedEntries = new Dictionary<string, UpgradeStateEntry>();
 
             if (saveData?.Entries != null)
@@ -195,7 +191,7 @@ namespace _01.Scripts.Outgame.Upgrade
 
         private void PersistState()
         {
-            _repository.Save(CreateSaveData());
+            _repositoryBridge.Save(CreateSaveData());
         }
 
         private UpgradeSaveData CreateSaveData()

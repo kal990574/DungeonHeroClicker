@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace _01.Scripts.Outgame.Currency.Repo
 {
-    public class CurrencyRepository : ICurrencyRepository
+    public class CurrencyRepository
     {
         private readonly string _savePath;
 

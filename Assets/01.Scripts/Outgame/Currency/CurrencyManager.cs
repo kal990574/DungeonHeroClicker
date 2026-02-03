@@ -2,7 +2,6 @@ using System;
 using _01.Scripts.Core.Audio;
 using _01.Scripts.Core.Utils;
 using _01.Scripts.Ingame.Monster;
-using _01.Scripts.Interfaces.Currency;
 using _01.Scripts.Outgame.Currency.Config;
 using _01.Scripts.Outgame.Currency.Domain;
 using _01.Scripts.Outgame.Currency.Repo;
@@ -22,7 +21,6 @@ namespace _01.Scripts.Outgame.Currency
         [Header("Effects")]
         [SerializeField] private GoldFlyEffect _goldFlyEffect;
 
-        private ICurrencyRepository _repository;
         private Domain.Currency[] _currencies;
 
 
@@ -30,11 +28,6 @@ namespace _01.Scripts.Outgame.Currency
 
 
         public Domain.Currency Gold => _currencies[(int)ECurrencyType.Gold];
-
-        public Domain.Currency Get(ECurrencyType type)
-        {
-            return _currencies[(int)type];
-        }
 
         public bool CanAfford(ECurrencyType type, BigNumber cost)
         {
@@ -85,7 +78,6 @@ namespace _01.Scripts.Outgame.Currency
 
         private void Awake()
         {
-            _repository = _repositoryBridge.Repository;
             _currencies = new Domain.Currency[(int)ECurrencyType.Count];
 
             LoadOrDefault();
@@ -110,7 +102,7 @@ namespace _01.Scripts.Outgame.Currency
 
         private void LoadOrDefault()
         {
-            var data = _repository.Load();
+            var data = _repositoryBridge.Load();
 
             if (data != null)
             {
@@ -135,7 +127,7 @@ namespace _01.Scripts.Outgame.Currency
 
         private void PersistState()
         {
-            _repository.Save(CreateSaveData());
+            _repositoryBridge.Save(CreateSaveData());
         }
 
         private CurrencySaveData CreateSaveData()

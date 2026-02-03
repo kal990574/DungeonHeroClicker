@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace _01.Scripts.Outgame.Currency.Repo
 {
-    public class CurrencyRepositoryBridge : MonoBehaviour
+    public class CurrencyRepositoryBridge : MonoBehaviour, ICurrencyRepository
     {
         private CurrencyRepository _repository;
 
-        public ICurrencyRepository Repository
+        private CurrencyRepository Repository
         {
             get
             {
@@ -29,6 +29,10 @@ namespace _01.Scripts.Outgame.Currency.Repo
                 return _repository;
             }
         }
+
+        public void Save(CurrencySaveData data) => Repository?.Save(data);
+
+        public CurrencySaveData Load() => Repository?.Load();
 
         public event Action OnSaveRequested;
 

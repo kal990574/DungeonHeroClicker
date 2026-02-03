@@ -12,7 +12,6 @@ namespace _01.Scripts.Outgame.Account.Manager
 
         [SerializeField] private AccountRepositoryBridge _repositoryBridge;
 
-        private IAccountRepository _repository;
         private Domain.Account _currentAccount;
 
         public bool IsLoggedIn => _currentAccount != null;
@@ -31,8 +30,6 @@ namespace _01.Scripts.Outgame.Account.Manager
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
-
-            _repository = _repositoryBridge.Repository;
         }
 
         public AuthResult TryLogin(string id, string password)
@@ -49,12 +46,12 @@ namespace _01.Scripts.Outgame.Account.Manager
                 return passwordResult;
             }
 
-            if (!_repository.Exists(id))
+            if (!_repositoryBridge.Exists(id))
             {
                 return AuthResult.Fail("Invalid ID or password.");
             }
 
-            AccountSaveData savedData = _repository.Load(id);
+            AccountSaveData savedData = _repositoryBridge.Load(id);
             if (savedData.Password != password)
             {
                 return AuthResult.Fail("Invalid ID or password.");
@@ -86,7 +83,7 @@ namespace _01.Scripts.Outgame.Account.Manager
                 return confirmResult;
             }
 
-            if (_repository.Exists(id))
+            if (_repositoryBridge.Exists(id))
             {
                 return AuthResult.Fail("This ID is already taken.");
             }
@@ -97,7 +94,7 @@ namespace _01.Scripts.Outgame.Account.Manager
                 Password = password
             };
 
-            _repository.Save(saveData);
+            _repositoryBridge.Save(saveData);
 
             return AuthResult.Ok();
         }

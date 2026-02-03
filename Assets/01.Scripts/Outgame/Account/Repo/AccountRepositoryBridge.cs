@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace _01.Scripts.Outgame.Account.Repo
 {
-    public class AccountRepositoryBridge : MonoBehaviour
+    public class AccountRepositoryBridge : MonoBehaviour, IAccountRepository
     {
         private AccountRepository _repository;
 
-        public IAccountRepository Repository
+        private AccountRepository Repository
         {
             get
             {
@@ -15,5 +15,11 @@ namespace _01.Scripts.Outgame.Account.Repo
                 return _repository;
             }
         }
+
+        public bool Exists(string accountId) => Repository.Exists(accountId);
+
+        public AccountSaveData Load(string accountId) => Repository.Load(accountId);
+
+        public void Save(AccountSaveData data) => Repository.Save(data);
     }
 }

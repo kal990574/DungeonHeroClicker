@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace _01.Scripts.Outgame.Upgrade.Repo
 {
-    public class UpgradeRepositoryBridge : MonoBehaviour
+    public class UpgradeRepositoryBridge : MonoBehaviour, IUpgradeRepository
     {
         private UpgradeRepository _repository;
 
-        public IUpgradeRepository Repository
+        private UpgradeRepository Repository
         {
             get
             {
@@ -29,6 +29,10 @@ namespace _01.Scripts.Outgame.Upgrade.Repo
                 return _repository;
             }
         }
+
+        public void Save(UpgradeSaveData data) => Repository?.Save(data);
+
+        public UpgradeSaveData Load() => Repository?.Load();
 
         public event Action OnSaveRequested;
 

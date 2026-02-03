@@ -13,7 +13,6 @@ namespace _01.Scripts.Ingame.Stage
         [Header("Dependencies")]
         [SerializeField] private StageRepositoryBridge _repositoryBridge;
 
-        private IStageRepository _repository;
         private int _currentStage = 1;
         private int _currentKillCount;
         private StageStatCalculator _statCalculator;
@@ -31,7 +30,6 @@ namespace _01.Scripts.Ingame.Stage
         private void Awake()
         {
             _statCalculator = new StageStatCalculator(_scalingData, _stageData);
-            _repository = _repositoryBridge.Repository;
 
             LoadOrDefault();
 
@@ -77,7 +75,7 @@ namespace _01.Scripts.Ingame.Stage
 
         private void LoadOrDefault()
         {
-            var data = _repository.Load();
+            var data = _repositoryBridge.Load();
 
             if (data != null)
             {
@@ -88,7 +86,7 @@ namespace _01.Scripts.Ingame.Stage
 
         private void PersistState()
         {
-            _repository.Save(CreateSaveData());
+            _repositoryBridge.Save(CreateSaveData());
         }
 
         private StageSaveData CreateSaveData()
