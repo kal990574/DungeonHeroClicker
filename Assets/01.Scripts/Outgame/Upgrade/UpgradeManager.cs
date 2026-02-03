@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using _01.Scripts.Core.Audio;
 using _01.Scripts.Core.Utils;
+using _01.Scripts.Interfaces.Upgrade;
+using _01.Scripts.Outgame.Account.Manager;
 using _01.Scripts.Outgame.Currency;
 using _01.Scripts.Outgame.Upgrade.Config;
 using _01.Scripts.Outgame.Upgrade.Domain;
@@ -17,31 +19,25 @@ namespace _01.Scripts.Outgame.Upgrade
         [SerializeField] private List<UpgradeConfigBase> _upgradeConfigs;
 
         [Header("Dependencies")]
-        [SerializeField] private UpgradeRepositoryBridge _repositoryBridge;
         [SerializeField] private CurrencyManager _currencyManager;
+
+        private IUpgradeRepository _repository;
 
         private readonly Dictionary<string, UpgradeItem> _items = new();
 
-        // Events.
         public event Action<UpgradeItem> OnItemUpgraded;
         public event Action<UpgradeItem> OnItemPurchased;
         public event Action OnTotalDPSChanged;
 
         private void Awake()
         {
+            _repository = new UpgradeRepository(AccountManager.Instance.CurrentAccountId);
             InitializeItems();
-
-            _repositoryBridge.OnSaveRequested += HandleSaveRequested;
-        }
-
-        private void OnDestroy()
-        {
-            _repositoryBridge.OnSaveRequested -= HandleSaveRequested;
         }
 
         private void InitializeItems()
         {
-            var saveData = _repositoryBridge.Load();
+            var saveData = _repository.Load();
             var savedEntries = new Dictionary<string, UpgradeStateEntry>();
 
             if (saveData?.Entries != null)
@@ -67,8 +63,6 @@ namespace _01.Scripts.Outgame.Upgrade
                 _items[config.Id] = item;
             }
         }
-
-        // --- Query API ---
 
         public UpgradeItem GetItem(string id)
         {
@@ -116,8 +110,6 @@ namespace _01.Scripts.Outgame.Upgrade
                 return total;
             }
         }
-
-        // --- Command API ---
 
         public bool TryUpgrade(string itemId)
         {
@@ -179,8 +171,6 @@ namespace _01.Scripts.Outgame.Upgrade
             return true;
         }
 
-        // --- Private ---
-
         private void NotifyTypeChanged(EUpgradeType type)
         {
             if (type == EUpgradeType.Companion)
@@ -191,7 +181,7 @@ namespace _01.Scripts.Outgame.Upgrade
 
         private void PersistState()
         {
-            _repositoryBridge.Save(CreateSaveData());
+            _repository.Save(CreateSaveData());
         }
 
         private UpgradeSaveData CreateSaveData()
@@ -212,9 +202,5 @@ namespace _01.Scripts.Outgame.Upgrade
             return data;
         }
 
-        private void HandleSaveRequested()
-        {
-            PersistState();
-        }
     }
 }

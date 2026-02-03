@@ -1,5 +1,6 @@
 using System;
 using _01.Scripts.Interfaces;
+using _01.Scripts.Outgame.Account.Manager;
 using UnityEngine;
 
 namespace _01.Scripts.Ingame.Stage
@@ -10,8 +11,7 @@ namespace _01.Scripts.Ingame.Stage
         [SerializeField] private StageData _stageData;
         [SerializeField] private StageScalingData _scalingData;
 
-        [Header("Dependencies")]
-        [SerializeField] private StageRepositoryBridge _repositoryBridge;
+        private IStageRepository _repository;
 
         private int _currentStage = 1;
         private int _currentKillCount;
@@ -29,16 +29,10 @@ namespace _01.Scripts.Ingame.Stage
 
         private void Awake()
         {
+            _repository = new StageRepository(AccountManager.Instance.CurrentAccountId);
             _statCalculator = new StageStatCalculator(_scalingData, _stageData);
 
             LoadOrDefault();
-
-            _repositoryBridge.OnSaveRequested += HandleSaveRequested;
-        }
-
-        private void OnDestroy()
-        {
-            _repositoryBridge.OnSaveRequested -= HandleSaveRequested;
         }
 
         private void Start()
@@ -75,7 +69,7 @@ namespace _01.Scripts.Ingame.Stage
 
         private void LoadOrDefault()
         {
-            var data = _repositoryBridge.Load();
+            var data = _repository.Load();
 
             if (data != null)
             {
@@ -86,7 +80,7 @@ namespace _01.Scripts.Ingame.Stage
 
         private void PersistState()
         {
-            _repositoryBridge.Save(CreateSaveData());
+            _repository.Save(CreateSaveData());
         }
 
         private StageSaveData CreateSaveData()
@@ -98,9 +92,5 @@ namespace _01.Scripts.Ingame.Stage
             };
         }
 
-        private void HandleSaveRequested()
-        {
-            PersistState();
-        }
     }
 }

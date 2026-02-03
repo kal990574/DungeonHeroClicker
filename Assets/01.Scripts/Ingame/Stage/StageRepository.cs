@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace _01.Scripts.Ingame.Stage
 {
-    public class StageRepository
+    public class StageRepository : IStageRepository
     {
         private readonly string _savePath;
 

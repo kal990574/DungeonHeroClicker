@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using System.IO;
 using _01.Scripts.Core.Utils;
+using _01.Scripts.Interfaces.Account;
 using UnityEngine;
 
 namespace _01.Scripts.Outgame.Account.Repo
 {
-    public class AccountRepository
+    public class AccountRepository : IAccountRepository
     {
         private readonly string _savePath;
         private readonly Dictionary<string, AccountSaveData> _cache = new Dictionary<string, AccountSaveData>();

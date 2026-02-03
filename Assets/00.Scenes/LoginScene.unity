@@ -129,9 +129,8 @@ GameObject:
   m_Component:
   - component: {fileID: 403662456}
   - component: {fileID: 403662457}
-  - component: {fileID: 403662458}
   m_Layer: 0
-  m_Name: AccountSystem
+  m_Name: AccountManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,19 +163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 383c5c2418ed498696e01faa448fe8de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Outgame.Account.Manager.AccountManager
-  _repositoryBridge: {fileID: 403662458}
---- !u!114 &403662458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 403662455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52f96232b491a44489d692b33873642a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Outgame.Account.Repo.AccountRepositoryBridge
 --- !u!1 &429754880
 GameObject:
   m_ObjectHideFlags: 0

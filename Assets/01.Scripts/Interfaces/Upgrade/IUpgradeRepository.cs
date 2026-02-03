@@ -1,4 +1,3 @@
-using System;
 using _01.Scripts.Outgame.Upgrade.Repo;
 
 namespace _01.Scripts.Interfaces.Upgrade
@@ -7,6 +6,5 @@ namespace _01.Scripts.Interfaces.Upgrade
     {
         void Save(UpgradeSaveData data);
         UpgradeSaveData Load();
-        event Action OnSaveRequested;
     }
 }

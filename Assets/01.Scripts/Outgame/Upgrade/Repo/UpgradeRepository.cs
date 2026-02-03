@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace _01.Scripts.Outgame.Upgrade.Repo
 {
-    public class UpgradeRepository
+    public class UpgradeRepository : IUpgradeRepository
     {
         private readonly string _savePath;
 

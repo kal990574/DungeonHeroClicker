@@ -2,6 +2,8 @@ using System;
 using _01.Scripts.Core.Audio;
 using _01.Scripts.Core.Utils;
 using _01.Scripts.Ingame.Monster;
+using _01.Scripts.Interfaces.Currency;
+using _01.Scripts.Outgame.Account.Manager;
 using _01.Scripts.Outgame.Currency.Config;
 using _01.Scripts.Outgame.Currency.Domain;
 using _01.Scripts.Outgame.Currency.Repo;
@@ -15,12 +17,10 @@ namespace _01.Scripts.Outgame.Currency
         [Header("Config")]
         [SerializeField] private CurrencyConfig[] _configs;
 
-        [Header("Dependencies")]
-        [SerializeField] private CurrencyRepositoryBridge _repositoryBridge;
-
         [Header("Effects")]
         [SerializeField] private GoldFlyEffect _goldFlyEffect;
 
+        private ICurrencyRepository _repository;
         private Domain.Currency[] _currencies;
 
 
@@ -78,11 +78,10 @@ namespace _01.Scripts.Outgame.Currency
 
         private void Awake()
         {
+            _repository = new CurrencyRepository(AccountManager.Instance.CurrentAccountId);
             _currencies = new Domain.Currency[(int)ECurrencyType.Count];
 
             LoadOrDefault();
-
-            _repositoryBridge.OnSaveRequested += HandleSaveRequested;
         }
 
         private void OnEnable()
@@ -95,14 +94,9 @@ namespace _01.Scripts.Outgame.Currency
             MonsterReward.OnGoldDropped -= HandleGoldDropped;
         }
 
-        private void OnDestroy()
-        {
-            _repositoryBridge.OnSaveRequested -= HandleSaveRequested;
-        }
-
         private void LoadOrDefault()
         {
-            var data = _repositoryBridge.Load();
+            var data = _repository.Load();
 
             if (data != null)
             {
@@ -127,7 +121,7 @@ namespace _01.Scripts.Outgame.Currency
 
         private void PersistState()
         {
-            _repositoryBridge.Save(CreateSaveData());
+            _repository.Save(CreateSaveData());
         }
 
         private CurrencySaveData CreateSaveData()
@@ -146,11 +140,6 @@ namespace _01.Scripts.Outgame.Currency
             }
 
             return data;
-        }
-
-        private void HandleSaveRequested()
-        {
-            PersistState();
         }
 
         private void HandleGoldDropped(BigNumber amount, Vector3 worldPosition)

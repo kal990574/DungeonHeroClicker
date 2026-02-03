@@ -1,4 +1,3 @@
-using System;
 using _01.Scripts.Ingame.Stage;
 
 namespace _01.Scripts.Interfaces
@@ -7,6 +6,5 @@ namespace _01.Scripts.Interfaces
     {
         void Save(StageSaveData data);
         StageSaveData Load();
-        event Action OnSaveRequested;
     }
 }
