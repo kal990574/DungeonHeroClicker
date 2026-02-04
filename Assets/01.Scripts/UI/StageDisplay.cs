@@ -1,4 +1,4 @@
-using _01.Scripts.Ingame.Stage;
+using _01.Scripts.Outgame.Stage;
 using TMPro;
 using UnityEngine;
 

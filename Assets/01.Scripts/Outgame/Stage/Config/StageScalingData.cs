@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _01.Scripts.Ingame.Stage
+namespace _01.Scripts.Outgame.Stage.Config
 {
     [CreateAssetMenu(fileName = "StageScalingData", menuName = "DungeonHeroClicker/Stage Scaling Data")]
     public class StageScalingData : ScriptableObject

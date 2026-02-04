@@ -1,9 +1,9 @@
-using UnityEngine;
 using _01.Scripts.Core.Utils;
 using _01.Scripts.Interfaces;
+using _01.Scripts.Outgame.Stage.Config;
 using System;
 
-namespace _01.Scripts.Ingame.Stage
+namespace _01.Scripts.Outgame.Stage.Domain
 {
     public class StageStatCalculator : IMonsterStatModifier
     {

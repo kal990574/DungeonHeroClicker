@@ -3,7 +3,7 @@ using _01.Scripts.Core.Utils;
 using _01.Scripts.Interfaces;
 using UnityEngine;
 
-namespace _01.Scripts.Ingame.Stage
+namespace _01.Scripts.Outgame.Stage.Repo
 {
     public class StageRepository : IStageRepository
     {

@@ -1,4 +1,4 @@
-using _01.Scripts.Ingame.Stage;
+using _01.Scripts.Outgame.Stage.Repo;
 
 namespace _01.Scripts.Interfaces
 {

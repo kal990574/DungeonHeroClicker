@@ -1,6 +1,6 @@
 using System;
 using _01.Scripts.Ingame.Click;
-using _01.Scripts.Ingame.Stage;
+using _01.Scripts.Outgame.Stage;
 using _01.Scripts.UI;
 using UnityEngine;
 

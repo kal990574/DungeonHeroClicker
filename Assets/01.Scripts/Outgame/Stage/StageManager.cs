@@ -1,9 +1,12 @@
 using System;
 using _01.Scripts.Interfaces;
 using _01.Scripts.Outgame.Account.Manager;
+using _01.Scripts.Outgame.Stage.Config;
+using _01.Scripts.Outgame.Stage.Domain;
+using _01.Scripts.Outgame.Stage.Repo;
 using UnityEngine;
 
-namespace _01.Scripts.Ingame.Stage
+namespace _01.Scripts.Outgame.Stage
 {
     public class StageManager : MonoBehaviour, IStageProvider, IStageProgressHandler
     {

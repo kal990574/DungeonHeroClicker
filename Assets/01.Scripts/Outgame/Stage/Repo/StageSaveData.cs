@@ -1,6 +1,6 @@
 using System;
 
-namespace _01.Scripts.Ingame.Stage
+namespace _01.Scripts.Outgame.Stage.Repo
 {
     [Serializable]
     public class StageSaveData
