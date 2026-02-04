@@ -37,18 +37,29 @@ namespace _01.Scripts.UI
         private void OnEnable()
         {
             _currencyManager.OnCurrencyChanged += HandleCurrencyChanged;
-        }
 
-        private void Start()
-        {
-            _previousGold = _currencyManager.Gold.Value;
-            _displayedGold = _previousGold;
-            _goldText.text = NumberFormatter.Format(_displayedGold);
+            if (_currencyManager.IsInitialized)
+                RefreshDisplay();
+            else
+                _currencyManager.OnInitialized += HandleInitialized;
         }
 
         private void OnDisable()
         {
             _currencyManager.OnCurrencyChanged -= HandleCurrencyChanged;
+            _currencyManager.OnInitialized -= HandleInitialized;
+        }
+
+        private void HandleInitialized()
+        {
+            RefreshDisplay();
+        }
+
+        private void RefreshDisplay()
+        {
+            _previousGold = _currencyManager.Gold.Value;
+            _displayedGold = _previousGold;
+            _goldText.text = NumberFormatter.Format(_displayedGold);
         }
 
         private void Update()

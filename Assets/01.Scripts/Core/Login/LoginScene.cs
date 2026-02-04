@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using _01.Scripts.Interfaces.Account;
 using _01.Scripts.Outgame.Account.Domain;
 using _01.Scripts.Outgame.Account.Manager;
@@ -67,9 +68,9 @@ namespace _01.Scripts.Core.Login
             _messageTextUI.text = string.Empty;
         }
 
-        private void Login()
+        private async void Login()
         {
-            AuthResult result = _accountService.TryLogin(
+            AccountResult result = await _accountService.TryLogin(
                 _idInputField.text,
                 _passwordInputField.text);
 
@@ -82,9 +83,9 @@ namespace _01.Scripts.Core.Login
             SceneManager.LoadScene("GameScene");
         }
 
-        private void Register()
+        private async void Register()
         {
-            AuthResult result = _accountService.TryRegister(
+            AccountResult result = await _accountService.TryRegister(
                 _idInputField.text,
                 _passwordInputField.text,
                 _passwordConfirmInputField.text);

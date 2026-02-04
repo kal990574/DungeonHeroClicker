@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.IO;
+using Cysharp.Threading.Tasks;
 using _01.Scripts.Core.Utils;
 using _01.Scripts.Interfaces.Account;
+using _01.Scripts.Outgame.Account.Domain;
 using UnityEngine;
 
 namespace _01.Scripts.Outgame.Account.Repo
@@ -17,21 +19,42 @@ namespace _01.Scripts.Outgame.Account.Repo
             LoadAll();
         }
 
-        public bool Exists(string accountId)
+        public UniTask<AccountResult> Register(string email, string password)
         {
-            return _cache.ContainsKey(accountId);
-        }
+            if (_cache.ContainsKey(email))
+            {
+                return UniTask.FromResult(AccountResult.Fail("This ID is already taken."));
+            }
 
-        public AccountSaveData Load(string accountId)
-        {
-            _cache.TryGetValue(accountId, out AccountSaveData data);
-            return data;
-        }
+            var saveData = new AccountSaveData
+            {
+                Id = email,
+                Password = password
+            };
 
-        public void Save(AccountSaveData data)
-        {
-            _cache[data.Id] = data;
+            _cache[email] = saveData;
             SaveAll();
+
+            return UniTask.FromResult(AccountResult.Ok());
+        }
+
+        public UniTask<AccountResult> Login(string email, string password)
+        {
+            if (!_cache.TryGetValue(email, out AccountSaveData data))
+            {
+                return UniTask.FromResult(AccountResult.Fail("Invalid ID or password."));
+            }
+
+            if (data.Password != password)
+            {
+                return UniTask.FromResult(AccountResult.Fail("Invalid ID or password."));
+            }
+
+            return UniTask.FromResult(AccountResult.Ok(email));
+        }
+
+        public void Logout()
+        {
         }
 
         private void LoadAll()

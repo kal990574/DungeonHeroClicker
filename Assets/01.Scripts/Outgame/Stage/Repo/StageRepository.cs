@@ -1,4 +1,5 @@
 using System.IO;
+using Cysharp.Threading.Tasks;
 using _01.Scripts.Core.Utils;
 using _01.Scripts.Interfaces;
 using UnityEngine;
@@ -16,22 +17,23 @@ namespace _01.Scripts.Outgame.Stage.Repo
             _savePath = Path.Combine(directory, "stage_data.json");
         }
 
-        public void Save(StageSaveData data)
+        public UniTask Save(StageSaveData data)
         {
             string json = JsonUtility.ToJson(data, true);
             File.WriteAllText(_savePath, json);
             WebGLFileSync.Sync();
+            return UniTask.CompletedTask;
         }
 
-        public StageSaveData Load()
+        public UniTask<StageSaveData> Load()
         {
             if (!File.Exists(_savePath))
             {
-                return null;
+                return UniTask.FromResult<StageSaveData>(null);
             }
 
             string json = File.ReadAllText(_savePath);
-            return JsonUtility.FromJson<StageSaveData>(json);
+            return UniTask.FromResult(JsonUtility.FromJson<StageSaveData>(json));
         }
     }
 }

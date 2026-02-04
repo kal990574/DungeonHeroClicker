@@ -1,45 +1,53 @@
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Firebase.Auth;
 using Firebase.Firestore;
 using _01.Scripts.Interfaces;
+using UnityEngine;
 
 namespace _01.Scripts.Outgame.Stage.Repo
 {
-    public class FirebaseStageRepository : IFirebaseStageRepository
+    public class FirebaseStageRepository : IStageRepository
     {
-        private readonly DocumentReference _docRef;
+        private const string FieldName = "Stage";
 
-        public FirebaseStageRepository(FirebaseFirestore db, string userId)
-        {
-            _docRef = db.Collection("users").Document(userId).Collection("saves").Document("stage");
-        }
+        private readonly FirebaseAuth _auth = FirebaseAuth.DefaultInstance;
+        private readonly FirebaseFirestore _db = FirebaseFirestore.DefaultInstance;
 
         public async UniTask Save(StageSaveData data)
         {
-            var dict = new Dictionary<string, object>
+            try
             {
-                { "CurrentStage", data.CurrentStage },
-                { "CurrentKillCount", data.CurrentKillCount }
-            };
-
-            await _docRef.SetAsync(dict).AsUniTask();
+                string email = _auth.CurrentUser.Email;
+                var dict = new Dictionary<string, object> { { FieldName, data } };
+                await _db.Collection("users").Document(email).SetAsync(dict, SetOptions.MergeAll);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("[FirebaseStageRepository] Save 실패: " + e.Message);
+            }
         }
 
         public async UniTask<StageSaveData> Load()
         {
-            DocumentSnapshot snapshot = await _docRef.GetSnapshotAsync().AsUniTask();
-
-            if (!snapshot.Exists)
+            try
             {
+                string email = _auth.CurrentUser.Email;
+                DocumentSnapshot snapshot = await _db.Collection("users").Document(email).GetSnapshotAsync();
+
+                if (!snapshot.Exists || !snapshot.ContainsField(FieldName))
+                {
+                    return null;
+                }
+
+                return snapshot.GetValue<StageSaveData>(FieldName);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("[FirebaseStageRepository] Load 실패: " + e.Message);
                 return null;
             }
-
-            return new StageSaveData
-            {
-                CurrentStage = Convert.ToInt32(snapshot.GetValue<object>("CurrentStage")),
-                CurrentKillCount = Convert.ToInt32(snapshot.GetValue<object>("CurrentKillCount"))
-            };
         }
     }
 }

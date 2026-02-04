@@ -1,9 +1,9 @@
 using System;
+using Cysharp.Threading.Tasks;
 using _01.Scripts.Core.Audio;
 using _01.Scripts.Core.Utils;
 using _01.Scripts.Ingame.Monster;
 using _01.Scripts.Interfaces.Currency;
-using _01.Scripts.Outgame.Account.Manager;
 using _01.Scripts.Outgame.Currency.Config;
 using _01.Scripts.Outgame.Currency.Domain;
 using _01.Scripts.Outgame.Currency.Repo;
@@ -24,8 +24,10 @@ namespace _01.Scripts.Outgame.Currency
         private Domain.Currency[] _currencies;
 
 
-        public event Action<ECurrencyType> OnCurrencyChanged;
+        public bool IsInitialized { get; private set; }
 
+        public event Action OnInitialized;
+        public event Action<ECurrencyType> OnCurrencyChanged;
 
         public Domain.Currency Gold => _currencies[(int)ECurrencyType.Gold];
 
@@ -76,12 +78,14 @@ namespace _01.Scripts.Outgame.Currency
             return true;
         }
 
-        private void Awake()
+        private async void Awake()
         {
-            _repository = new CurrencyRepository(AccountManager.Instance.CurrentAccountId);
+            _repository = new FirebaseCurrencyRepository();
             _currencies = new Domain.Currency[(int)ECurrencyType.Count];
 
-            LoadOrDefault();
+            await LoadOrDefaultAsync();
+            IsInitialized = true;
+            OnInitialized?.Invoke();
         }
 
         private void OnEnable()
@@ -94,9 +98,9 @@ namespace _01.Scripts.Outgame.Currency
             MonsterReward.OnGoldDropped -= HandleGoldDropped;
         }
 
-        private void LoadOrDefault()
+        private async UniTask LoadOrDefaultAsync()
         {
-            var data = _repository.Load();
+            var data = await _repository.Load();
 
             if (data != null)
             {
@@ -121,7 +125,7 @@ namespace _01.Scripts.Outgame.Currency
 
         private void PersistState()
         {
-            _repository.Save(CreateSaveData());
+            _repository.Save(CreateSaveData()).Forget();
         }
 
         private CurrencySaveData CreateSaveData()

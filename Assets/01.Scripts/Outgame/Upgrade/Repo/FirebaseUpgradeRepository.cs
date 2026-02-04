@@ -1,63 +1,53 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Cysharp.Threading.Tasks;
+using Firebase.Auth;
 using Firebase.Firestore;
 using _01.Scripts.Interfaces.Upgrade;
+using UnityEngine;
 
 namespace _01.Scripts.Outgame.Upgrade.Repo
 {
-    public class FirebaseUpgradeRepository : IFirebaseUpgradeRepository
+    public class FirebaseUpgradeRepository : IUpgradeRepository
     {
-        private readonly DocumentReference _docRef;
+        private const string FieldName = "Upgrade";
 
-        public FirebaseUpgradeRepository(FirebaseFirestore db, string userId)
-        {
-            _docRef = db.Collection("users").Document(userId).Collection("saves").Document("upgrade");
-        }
+        private readonly FirebaseAuth _auth = FirebaseAuth.DefaultInstance;
+        private readonly FirebaseFirestore _db = FirebaseFirestore.DefaultInstance;
 
         public async UniTask Save(UpgradeSaveData data)
         {
-            var entries = data.Entries.Select(entry => new Dictionary<string, object>
+            try
             {
-                { "Id", entry.Id },
-                { "Type", entry.Type },
-                { "CurrentLevel", entry.CurrentLevel },
-                { "IsPurchased", entry.IsPurchased }
-            }).ToList();
-
-            var dict = new Dictionary<string, object>
+                string email = _auth.CurrentUser.Email;
+                var dict = new Dictionary<string, object> { { FieldName, data } };
+                await _db.Collection("users").Document(email).SetAsync(dict, SetOptions.MergeAll);
+            }
+            catch (Exception e)
             {
-                { "Entries", entries }
-            };
-
-            await _docRef.SetAsync(dict).AsUniTask();
+                Debug.LogError("[FirebaseUpgradeRepository] Save 실패: " + e.Message);
+            }
         }
 
         public async UniTask<UpgradeSaveData> Load()
         {
-            DocumentSnapshot snapshot = await _docRef.GetSnapshotAsync().AsUniTask();
-
-            if (!snapshot.Exists)
+            try
             {
+                string email = _auth.CurrentUser.Email;
+                DocumentSnapshot snapshot = await _db.Collection("users").Document(email).GetSnapshotAsync();
+
+                if (!snapshot.Exists || !snapshot.ContainsField(FieldName))
+                {
+                    return null;
+                }
+
+                return snapshot.GetValue<UpgradeSaveData>(FieldName);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("[FirebaseUpgradeRepository] Load 실패: " + e.Message);
                 return null;
             }
-
-            var rawEntries = snapshot.GetValue<List<object>>("Entries");
-
-            var data = new UpgradeSaveData();
-            foreach (Dictionary<string, object> raw in rawEntries)
-            {
-                data.Entries.Add(new UpgradeStateEntry
-                {
-                    Id = Convert.ToString(raw["Id"]),
-                    Type = Convert.ToInt32(raw["Type"]),
-                    CurrentLevel = Convert.ToInt32(raw["CurrentLevel"]),
-                    IsPurchased = Convert.ToBoolean(raw["IsPurchased"])
-                });
-            }
-
-            return data;
         }
     }
 }

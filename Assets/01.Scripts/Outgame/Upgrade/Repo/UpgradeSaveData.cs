@@ -1,20 +1,31 @@
 using System;
 using System.Collections.Generic;
+using Firebase.Firestore;
 
 namespace _01.Scripts.Outgame.Upgrade.Repo
 {
     [Serializable]
+    [FirestoreData]
     public class UpgradeSaveData
     {
-        public List<UpgradeStateEntry> Entries = new List<UpgradeStateEntry>();
+        [FirestoreProperty]
+        public List<UpgradeStateEntry> Entries { get; set; } = new List<UpgradeStateEntry>();
     }
 
     [Serializable]
+    [FirestoreData]
     public class UpgradeStateEntry
     {
-        public string Id;
-        public int Type;
-        public int CurrentLevel;
-        public bool IsPurchased;
+        [FirestoreProperty]
+        public string Id { get; set; }
+
+        [FirestoreProperty]
+        public int Type { get; set; }
+
+        [FirestoreProperty]
+        public int CurrentLevel { get; set; }
+
+        [FirestoreProperty]
+        public bool IsPurchased { get; set; }
     }
 }

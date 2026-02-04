@@ -1,4 +1,5 @@
 using System.IO;
+using Cysharp.Threading.Tasks;
 using _01.Scripts.Core.Utils;
 using _01.Scripts.Interfaces.Currency;
 using UnityEngine;
@@ -16,22 +17,23 @@ namespace _01.Scripts.Outgame.Currency.Repo
             _savePath = Path.Combine(directory, "currency_data.json");
         }
 
-        public void Save(CurrencySaveData data)
+        public UniTask Save(CurrencySaveData data)
         {
             string json = JsonUtility.ToJson(data, true);
             File.WriteAllText(_savePath, json);
             WebGLFileSync.Sync();
+            return UniTask.CompletedTask;
         }
 
-        public CurrencySaveData Load()
+        public UniTask<CurrencySaveData> Load()
         {
             if (!File.Exists(_savePath))
             {
-                return null;
+                return UniTask.FromResult<CurrencySaveData>(null);
             }
 
             string json = File.ReadAllText(_savePath);
-            return JsonUtility.FromJson<CurrencySaveData>(json);
+            return UniTask.FromResult(JsonUtility.FromJson<CurrencySaveData>(json));
         }
     }
 }

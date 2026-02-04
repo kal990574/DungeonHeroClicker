@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using _01.Scripts.Interfaces.Account;
 using _01.Scripts.Outgame.Account.Domain;
 using _01.Scripts.Outgame.Account.Repo;
@@ -30,78 +31,63 @@ namespace _01.Scripts.Outgame.Account.Manager
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            _repository = new AccountRepository();
+            _repository = new FirebaseAccountRepository();
         }
 
-        public AuthResult TryLogin(string id, string password)
+        public async UniTask<AccountResult> TryLogin(string id, string password)
         {
-            AuthResult idResult = AccountValidator.ValidateId(id);
+            AccountResult idResult = AccountValidator.ValidateId(id);
             if (!idResult.Success)
             {
                 return idResult;
             }
 
-            AuthResult passwordResult = AccountValidator.ValidatePassword(password);
+            AccountResult passwordResult = AccountValidator.ValidatePassword(password);
             if (!passwordResult.Success)
             {
                 return passwordResult;
             }
 
-            if (!_repository.Exists(id))
+            AccountResult result = await _repository.Login(id, password);
+            if (!result.Success)
             {
-                return AuthResult.Fail("Invalid ID or password.");
+                return result;
             }
 
-            AccountSaveData savedData = _repository.Load(id);
-            if (savedData.Password != password)
-            {
-                return AuthResult.Fail("Invalid ID or password.");
-            }
+            string accountId = result.UserId ?? id;
+            _currentAccount = new Domain.Account(accountId, password);
+            OnLoggedIn?.Invoke(accountId);
 
-            _currentAccount = new Domain.Account(id, password);
-            OnLoggedIn?.Invoke(id);
-
-            return AuthResult.Ok();
+            return AccountResult.Ok(accountId);
         }
 
-        public AuthResult TryRegister(string id, string password, string passwordConfirm)
+        public async UniTask<AccountResult> TryRegister(string id, string password, string passwordConfirm)
         {
-            AuthResult idResult = AccountValidator.ValidateId(id);
+            AccountResult idResult = AccountValidator.ValidateId(id);
             if (!idResult.Success)
             {
                 return idResult;
             }
 
-            AuthResult passwordResult = AccountValidator.ValidatePassword(password);
+            AccountResult passwordResult = AccountValidator.ValidatePassword(password);
             if (!passwordResult.Success)
             {
                 return passwordResult;
             }
 
-            AuthResult confirmResult = AccountValidator.ValidatePasswordConfirm(password, passwordConfirm);
+            AccountResult confirmResult = AccountValidator.ValidatePasswordConfirm(password, passwordConfirm);
             if (!confirmResult.Success)
             {
                 return confirmResult;
             }
 
-            if (_repository.Exists(id))
-            {
-                return AuthResult.Fail("This ID is already taken.");
-            }
-
-            var saveData = new AccountSaveData
-            {
-                Id = id,
-                Password = password
-            };
-
-            _repository.Save(saveData);
-
-            return AuthResult.Ok();
+            AccountResult result = await _repository.Register(id, password);
+            return result;
         }
 
         public void Logout()
         {
+            _repository.Logout();
             _currentAccount = null;
             OnLoggedOut?.Invoke();
         }

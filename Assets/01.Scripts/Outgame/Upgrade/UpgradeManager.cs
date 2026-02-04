@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using Cysharp.Threading.Tasks;
 using _01.Scripts.Core.Audio;
 using _01.Scripts.Core.Utils;
 using _01.Scripts.Interfaces.Upgrade;
-using _01.Scripts.Outgame.Account.Manager;
 using _01.Scripts.Outgame.Currency;
 using _01.Scripts.Outgame.Upgrade.Config;
 using _01.Scripts.Outgame.Upgrade.Domain;
@@ -25,19 +24,24 @@ namespace _01.Scripts.Outgame.Upgrade
 
         private readonly Dictionary<string, UpgradeItem> _items = new();
 
+        public bool IsInitialized { get; private set; }
+
+        public event Action OnInitialized;
         public event Action<UpgradeItem> OnItemUpgraded;
         public event Action<UpgradeItem> OnItemPurchased;
         public event Action OnTotalDPSChanged;
 
-        private void Awake()
+        private async void Awake()
         {
-            _repository = new UpgradeRepository(AccountManager.Instance.CurrentAccountId);
-            InitializeItems();
+            _repository = new FirebaseUpgradeRepository();
+            await InitializeItemsAsync();
+            IsInitialized = true;
+            OnInitialized?.Invoke();
         }
 
-        private void InitializeItems()
+        private async UniTask InitializeItemsAsync()
         {
-            var saveData = _repository.Load();
+            var saveData = await _repository.Load();
             var savedEntries = new Dictionary<string, UpgradeStateEntry>();
 
             if (saveData?.Entries != null)
@@ -171,7 +175,7 @@ namespace _01.Scripts.Outgame.Upgrade
 
         private void PersistState()
         {
-            _repository.Save(CreateSaveData());
+            _repository.Save(CreateSaveData()).Forget();
         }
 
         private UpgradeSaveData CreateSaveData()

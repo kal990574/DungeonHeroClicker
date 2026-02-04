@@ -1,6 +1,6 @@
 using System;
+using Cysharp.Threading.Tasks;
 using _01.Scripts.Interfaces;
-using _01.Scripts.Outgame.Account.Manager;
 using _01.Scripts.Outgame.Stage.Config;
 using _01.Scripts.Outgame.Stage.Domain;
 using _01.Scripts.Outgame.Stage.Repo;
@@ -27,19 +27,20 @@ namespace _01.Scripts.Outgame.Stage
 
         public IMonsterStatModifier StatCalculator => _statCalculator;
 
+        public bool IsInitialized { get; private set; }
+
+        public event Action OnInitialized;
         public event Action<int> OnStageChanged;
         public event Action<int, int> OnKillCountChanged;
 
-        private void Awake()
+        private async void Awake()
         {
-            _repository = new StageRepository(AccountManager.Instance.CurrentAccountId);
+            _repository = new FirebaseStageRepository();
             _statCalculator = new StageStatCalculator(_scalingData, _stageData);
 
-            LoadOrDefault();
-        }
-
-        private void Start()
-        {
+            await LoadOrDefaultAsync();
+            IsInitialized = true;
+            OnInitialized?.Invoke();
             OnStageChanged?.Invoke(_currentStage);
             OnKillCountChanged?.Invoke(_currentKillCount, RequiredKillCount);
         }
@@ -70,9 +71,9 @@ namespace _01.Scripts.Outgame.Stage
             OnKillCountChanged?.Invoke(_currentKillCount, RequiredKillCount);
         }
 
-        private void LoadOrDefault()
+        private async UniTask LoadOrDefaultAsync()
         {
-            var data = _repository.Load();
+            var data = await _repository.Load();
 
             if (data != null)
             {
@@ -83,7 +84,7 @@ namespace _01.Scripts.Outgame.Stage
 
         private void PersistState()
         {
-            _repository.Save(CreateSaveData());
+            _repository.Save(CreateSaveData()).Forget();
         }
 
         private StageSaveData CreateSaveData()

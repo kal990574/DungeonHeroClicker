@@ -1,4 +1,5 @@
 using System.IO;
+using Cysharp.Threading.Tasks;
 using _01.Scripts.Core.Utils;
 using _01.Scripts.Interfaces.Upgrade;
 using UnityEngine;
@@ -16,22 +17,23 @@ namespace _01.Scripts.Outgame.Upgrade.Repo
             _savePath = Path.Combine(directory, "upgrade_data.json");
         }
 
-        public void Save(UpgradeSaveData data)
+        public UniTask Save(UpgradeSaveData data)
         {
             string json = JsonUtility.ToJson(data, true);
             File.WriteAllText(_savePath, json);
             WebGLFileSync.Sync();
+            return UniTask.CompletedTask;
         }
 
-        public UpgradeSaveData Load()
+        public UniTask<UpgradeSaveData> Load()
         {
             if (!File.Exists(_savePath))
             {
-                return null;
+                return UniTask.FromResult<UpgradeSaveData>(null);
             }
 
             string json = File.ReadAllText(_savePath);
-            return JsonUtility.FromJson<UpgradeSaveData>(json);
+            return UniTask.FromResult(JsonUtility.FromJson<UpgradeSaveData>(json));
         }
     }
 }

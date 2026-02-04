@@ -1,7 +1,6 @@
+using System;
 using Cysharp.Threading.Tasks;
 using Firebase;
-using Firebase.Auth;
-using Firebase.Firestore;
 using UnityEngine;
 
 namespace _01.Scripts.Core
@@ -9,10 +8,6 @@ namespace _01.Scripts.Core
     public class FirebaseInitializer : MonoBehaviour
     {
         public static FirebaseInitializer Instance { get; private set; }
-
-        public FirebaseFirestore Db { get; private set; }
-        public FirebaseAuth Auth { get; private set; }
-        public bool IsInitialized { get; private set; }
 
         private void Awake()
         {
@@ -26,26 +21,30 @@ namespace _01.Scripts.Core
             DontDestroyOnLoad(gameObject);
         }
 
-        public async UniTask InitAsync()
+        private void Start()
         {
-            if (IsInitialized)
+            InitFirebase().Forget();
+        }
+
+        private async UniTask InitFirebase()
+        {
+            try
             {
-                return;
+                DependencyStatus status = await FirebaseApp.CheckAndFixDependenciesAsync().AsUniTask();
+
+                if (status == DependencyStatus.Available)
+                {
+                    Debug.Log("Firebase init success.");
+                }
+                else
+                {
+                    Debug.LogError("Firebase init failed: " + status);
+                }
             }
-
-            DependencyStatus status = await FirebaseApp.CheckAndFixDependenciesAsync().AsUniTask();
-
-            if (status != DependencyStatus.Available)
+            catch (Exception e)
             {
-                Debug.LogError("Firebase init failed: " + status);
-                return;
+                Debug.LogError("Firebase init failed: " + e.Message);
             }
-
-            Auth = FirebaseAuth.DefaultInstance;
-            Db = FirebaseFirestore.DefaultInstance;
-            IsInitialized = true;
-
-            Debug.Log("Firebase init success.");
         }
     }
 }

@@ -16,12 +16,22 @@ namespace _01.Scripts.Ingame.Hero
         private void OnEnable()
         {
             _upgradeManager.OnItemUpgraded += HandleItemUpgraded;
-            UpdateVisual();
+
+            if (_upgradeManager.IsInitialized)
+                UpdateVisual();
+            else
+                _upgradeManager.OnInitialized += HandleInitialized;
         }
 
         private void OnDisable()
         {
             _upgradeManager.OnItemUpgraded -= HandleItemUpgraded;
+            _upgradeManager.OnInitialized -= HandleInitialized;
+        }
+
+        private void HandleInitialized()
+        {
+            UpdateVisual();
         }
 
         private void HandleItemUpgraded(UpgradeItem item)
