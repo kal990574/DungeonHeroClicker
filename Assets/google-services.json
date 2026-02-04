@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "554172476435",
+    "project_id": "dungeonheroclicker",
+    "storage_bucket": "dungeonheroclicker.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554172476435:android:bfc474b02bd2ea3850a3e6",
+        "android_client_info": {
+          "package_name": "com.com2us_say.DungeonHeroClicker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDR3LjJB22y5pb8x-c806rL3h-yfk6763k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

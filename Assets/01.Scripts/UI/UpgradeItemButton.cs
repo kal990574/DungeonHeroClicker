@@ -29,9 +29,12 @@ namespace _01.Scripts.UI
 
         private void Start()
         {
-            _item = _upgradeManager.GetItem(_upgradeItemId);
             _button.onClick.AddListener(OnButtonClick);
-            UpdateUI();
+
+            if (_upgradeManager.IsInitialized)
+                InitializeItem();
+            else
+                _upgradeManager.OnInitialized += HandleInitialized;
         }
 
         private void OnDestroy()
@@ -52,7 +55,19 @@ namespace _01.Scripts.UI
         {
             _upgradeManager.OnItemUpgraded -= HandleItemChanged;
             _upgradeManager.OnItemPurchased -= HandleItemChanged;
+            _upgradeManager.OnInitialized -= HandleInitialized;
             _currencyManager.OnCurrencyChanged -= HandleCurrencyChanged;
+        }
+
+        private void HandleInitialized()
+        {
+            InitializeItem();
+        }
+
+        private void InitializeItem()
+        {
+            _item = _upgradeManager.GetItem(_upgradeItemId);
+            UpdateUI();
         }
 
         private void OnButtonClick()

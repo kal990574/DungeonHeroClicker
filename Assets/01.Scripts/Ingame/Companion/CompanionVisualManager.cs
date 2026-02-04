@@ -19,19 +19,25 @@ namespace _01.Scripts.Ingame.Companion
 
         private readonly Dictionary<string, CompanionVisualInstance> _visuals = new();
 
-        private void Start()
-        {
-            RestoreAlreadyPurchased();
-        }
-
         private void OnEnable()
         {
             _upgradeManager.OnItemPurchased += HandleItemPurchased;
+
+            if (_upgradeManager.IsInitialized)
+                RestoreAlreadyPurchased();
+            else
+                _upgradeManager.OnInitialized += HandleInitialized;
         }
 
         private void OnDisable()
         {
             _upgradeManager.OnItemPurchased -= HandleItemPurchased;
+            _upgradeManager.OnInitialized -= HandleInitialized;
+        }
+
+        private void HandleInitialized()
+        {
+            RestoreAlreadyPurchased();
         }
 
         private void HandleItemPurchased(UpgradeItem item)

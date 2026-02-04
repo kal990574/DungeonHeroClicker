@@ -197,7 +197,6 @@ GameObject:
   m_Component:
   - component: {fileID: 205307152}
   - component: {fileID: 205307153}
-  - component: {fileID: 205307154}
   - component: {fileID: 205307155}
   m_Layer: 0
   m_Name: CurrencyManager
@@ -235,20 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Outgame.Currency.CurrencyManager
   _configs:
   - {fileID: 11400000, guid: 85303f8db0fb144918ca6382ff697247, type: 2}
-  _repositoryBridge: {fileID: 205307154}
   _goldFlyEffect: {fileID: 205307155}
---- !u!114 &205307154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 205307150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 908bd418072c64a27844d48353ac30b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Outgame.Currency.Repo.CurrencyRepositoryBridge
 --- !u!114 &205307155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1155,7 +1141,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1275095875}
   - component: {fileID: 1275095874}
-  - component: {fileID: 1275095876}
   m_Layer: 0
   m_Name: StageManager
   m_TagString: Untagged
@@ -1177,7 +1162,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Stage.StageManager
   _stageData: {fileID: 11400000, guid: 4cb7cebb8ed014555bd41b0bccd9277f, type: 2}
   _scalingData: {fileID: 11400000, guid: 1d4e0f25fe85d45b28d8cfbdba625e05, type: 2}
-  _repositoryBridge: {fileID: 1275095876}
 --- !u!4 &1275095875
 Transform:
   m_ObjectHideFlags: 0
@@ -1193,18 +1177,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1275095876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1275095873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73adc3c036b044bffac00503901e5b05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Ingame.Stage.StageRepositoryBridge
 --- !u!1 &1363523841
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,7 +1187,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1363523843}
   - component: {fileID: 1363523842}
-  - component: {fileID: 1363523844}
   m_Layer: 0
   m_Name: UpgradeManager
   m_TagString: Untagged
@@ -1241,7 +1212,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4cbfdc542080a4c16a012a4f233dee1e, type: 2}
   - {fileID: 11400000, guid: a9169ee74fa15443fadf43d4e3e6272c, type: 2}
   - {fileID: 11400000, guid: 4ed75b5d6466b43e384855ffcfe62d11, type: 2}
-  _repositoryBridge: {fileID: 1363523844}
   _currencyManager: {fileID: 205307153}
 --- !u!4 &1363523843
 Transform:
@@ -1258,18 +1228,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1363523844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1363523841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 773da794c753145fc9644b12a617c2d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_01.Scripts.Outgame.Upgrade.Repo.UpgradeRepositoryBridge
 --- !u!114 &1444767702 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8672395792917560561, guid: 9a9ea99034bae41e2ae5382b50086285, type: 3}

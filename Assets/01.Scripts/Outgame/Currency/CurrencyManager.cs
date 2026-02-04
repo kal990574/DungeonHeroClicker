@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using _01.Scripts.Core.Audio;
 using _01.Scripts.Core.Utils;
 using _01.Scripts.Ingame.Monster;
@@ -16,9 +17,6 @@ namespace _01.Scripts.Outgame.Currency
         [Header("Config")]
         [SerializeField] private CurrencyConfig[] _configs;
 
-        [Header("Dependencies")]
-        [SerializeField] private CurrencyRepositoryBridge _repositoryBridge;
-
         [Header("Effects")]
         [SerializeField] private GoldFlyEffect _goldFlyEffect;
 
@@ -26,15 +24,12 @@ namespace _01.Scripts.Outgame.Currency
         private Domain.Currency[] _currencies;
 
 
+        public bool IsInitialized { get; private set; }
+
+        public event Action OnInitialized;
         public event Action<ECurrencyType> OnCurrencyChanged;
 
-
         public Domain.Currency Gold => _currencies[(int)ECurrencyType.Gold];
-
-        public Domain.Currency Get(ECurrencyType type)
-        {
-            return _currencies[(int)type];
-        }
 
         public bool CanAfford(ECurrencyType type, BigNumber cost)
         {
@@ -83,14 +78,14 @@ namespace _01.Scripts.Outgame.Currency
             return true;
         }
 
-        private void Awake()
+        private async void Awake()
         {
-            _repository = _repositoryBridge.Repository;
+            _repository = new FirebaseCurrencyRepository();
             _currencies = new Domain.Currency[(int)ECurrencyType.Count];
 
-            LoadOrDefault();
-
-            _repositoryBridge.OnSaveRequested += HandleSaveRequested;
+            await LoadOrDefaultAsync();
+            IsInitialized = true;
+            OnInitialized?.Invoke();
         }
 
         private void OnEnable()
@@ -103,14 +98,9 @@ namespace _01.Scripts.Outgame.Currency
             MonsterReward.OnGoldDropped -= HandleGoldDropped;
         }
 
-        private void OnDestroy()
+        private async UniTask LoadOrDefaultAsync()
         {
-            _repositoryBridge.OnSaveRequested -= HandleSaveRequested;
-        }
-
-        private void LoadOrDefault()
-        {
-            var data = _repository.Load();
+            var data = await _repository.Load();
 
             if (data != null)
             {
@@ -135,7 +125,7 @@ namespace _01.Scripts.Outgame.Currency
 
         private void PersistState()
         {
-            _repository.Save(CreateSaveData());
+            _repository.Save(CreateSaveData()).Forget();
         }
 
         private CurrencySaveData CreateSaveData()
@@ -154,11 +144,6 @@ namespace _01.Scripts.Outgame.Currency
             }
 
             return data;
-        }
-
-        private void HandleSaveRequested()
-        {
-            PersistState();
         }
 
         private void HandleGoldDropped(BigNumber amount, Vector3 worldPosition)

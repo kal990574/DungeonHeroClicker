@@ -29,14 +29,29 @@ namespace _01.Scripts.UI
         private void OnEnable()
         {
             _upgradeManager.OnTotalDPSChanged += HandleDPSChanged;
-            _previousDPS = _upgradeManager.TotalDPS;
-            _displayedDPS = _previousDPS;
-            _dpsText.text = NumberFormatter.Format(_displayedDPS);
+
+            if (_upgradeManager.IsInitialized)
+                RefreshDisplay();
+            else
+                _upgradeManager.OnInitialized += HandleInitialized;
         }
 
         private void OnDisable()
         {
             _upgradeManager.OnTotalDPSChanged -= HandleDPSChanged;
+            _upgradeManager.OnInitialized -= HandleInitialized;
+        }
+
+        private void HandleInitialized()
+        {
+            RefreshDisplay();
+        }
+
+        private void RefreshDisplay()
+        {
+            _previousDPS = _upgradeManager.TotalDPS;
+            _displayedDPS = _previousDPS;
+            _dpsText.text = NumberFormatter.Format(_displayedDPS);
         }
 
         private void HandleDPSChanged()
