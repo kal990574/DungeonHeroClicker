@@ -1,0 +1,230 @@
+<mxfile host="app.diagrams.net" modified="2026-02-04T00:00:00.000Z" agent="Claude" version="24.0.0" type="device">
+  <diagram name="Firebase 인증 &amp; 저장 흐름" id="firebase-flow">
+    <mxGraphModel dx="1200" dy="850" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- TITLE -->
+        <mxCell id="t1" value="Firebase 인증 &amp; 저장 흐름" style="text;html=1;align=left;verticalAlign=middle;fontSize=22;fontColor=#222222;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="15" width="400" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="t2" value="&quot;로그인/저장은 어떻게 동작하지?&quot;" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#888888;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="45" width="350" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- ====== ACTORS (5개) ====== -->
+
+        <!-- User -->
+        <mxCell id="a_user" value="User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fillColor=#E8EAF6;strokeColor=#5C6BC0;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="62" y="80" width="25" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_user" value="" style="endArrow=none;dashed=1;strokeColor=#DDD;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="74" y="135" as="sourcePoint"/>
+            <mxPoint x="74" y="800" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- AccountManager -->
+        <mxCell id="a_account" value="&lt;b&gt;AccountManager&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:8px' color='#888'&gt;IAccountService&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#5C6BC0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="170" y="80" width="130" height="38" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_account" value="" style="endArrow=none;dashed=1;strokeColor=#DDD;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="235" y="118" as="sourcePoint"/>
+            <mxPoint x="235" y="800" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Firebase Auth -->
+        <mxCell id="a_auth" value="&lt;b&gt;Firebase Auth&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#F9A825;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="375" y="85" width="110" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_auth" value="" style="endArrow=none;dashed=1;strokeColor=#DDD;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="115" as="sourcePoint"/>
+            <mxPoint x="430" y="800" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Game Managers -->
+        <mxCell id="a_mgr" value="&lt;b&gt;Managers&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:8px' color='#888'&gt;Currency · Upgrade · Stage&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9800;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="555" y="80" width="140" height="38" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_mgr" value="" style="endArrow=none;dashed=1;strokeColor=#DDD;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="625" y="118" as="sourcePoint"/>
+            <mxPoint x="625" y="800" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Firestore DB -->
+        <mxCell id="a_db" value="&lt;b&gt;Firestore&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:8px' color='#888'&gt;users/{email}/...&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#F9A825;fontSize=10;boundedLbl=1;size=10;" vertex="1" parent="1">
+          <mxGeometry x="770" y="75" width="90" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_db" value="" style="endArrow=none;dashed=1;strokeColor=#DDD;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="815" y="125" as="sourcePoint"/>
+            <mxPoint x="815" y="800" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ====== PHASE 1: 인증 ====== -->
+        <mxCell id="phase1" value="① 인증 (Login)" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#5C6BC0;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="920" y="148" width="130" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- User → AccountManager: Login -->
+        <mxCell id="m1" value="Login(email, password)" style="endArrow=block;endFill=1;strokeColor=#5C6BC0;strokeWidth=2;fontSize=10;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="74" y="160" as="sourcePoint"/>
+            <mxPoint x="235" y="160" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- AccountManager: Validate -->
+        <mxCell id="m1b" value="입력 검증 (AccountValidator)" style="endArrow=block;endFill=1;strokeColor=#5C6BC0;strokeWidth=1;fontSize=9;fontColor=#5C6BC0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="235" y="195" as="sourcePoint"/>
+            <mxPoint x="235" y="215" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="270" y="195"/>
+              <mxPoint x="270" y="215"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- AccountManager → Firebase Auth -->
+        <mxCell id="m2" value="SignInWithEmailAndPasswordAsync()" style="endArrow=block;endFill=1;strokeColor=#F9A825;strokeWidth=2;fontSize=10;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="235" y="240" as="sourcePoint"/>
+            <mxPoint x="430" y="240" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Firebase Auth → AccountManager: Result -->
+        <mxCell id="m3" value="AuthResult {userId}" style="endArrow=open;endFill=0;strokeColor=#F9A825;strokeWidth=1.5;dashed=1;fontSize=10;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="280" as="sourcePoint"/>
+            <mxPoint x="235" y="280" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- AccountManager: OnLoggedIn -->
+        <mxCell id="m4" value="OnLoggedIn 이벤트 → 씬 전환 (GameScene)" style="endArrow=open;endFill=0;strokeColor=#5C6BC0;strokeWidth=1.5;dashed=1;fontSize=9;fontColor=#5C6BC0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="235" y="315" as="sourcePoint"/>
+            <mxPoint x="625" y="315" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ====== PHASE 2: 데이터 로드 ====== -->
+        <mxCell id="phase2" value="② 데이터 로드" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#FF9800;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="920" y="358" width="130" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- alt box -->
+        <mxCell id="alt_load" value="" style="shape=frame;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#FF9800;rounded=0;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="555" y="355" width="310" height="175" as="geometry"/>
+        </mxCell>
+        <mxCell id="alt_load_label" value="[GameScene Awake] 3개 매니저 병렬 초기화" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#FF9800;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="355" width="280" height="18" as="geometry"/>
+        </mxCell>
+
+        <!-- Managers: new FirebaseXxxRepository() -->
+        <mxCell id="m5" value="new FirebaseXxxRepository()" style="endArrow=block;endFill=1;strokeColor=#FF9800;strokeWidth=1;fontSize=9;fontColor=#FF9800;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="625" y="390" as="sourcePoint"/>
+            <mxPoint x="625" y="410" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="660" y="390"/>
+              <mxPoint x="660" y="410"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Managers → Firestore: Load -->
+        <mxCell id="m6" value="Load() → users/{email}/{Collection}" style="endArrow=block;endFill=1;strokeColor=#F9A825;strokeWidth=2;fontSize=10;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="625" y="435" as="sourcePoint"/>
+            <mxPoint x="815" y="435" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Firestore → Managers: SaveData -->
+        <mxCell id="m7" value="SaveData (Currency · Upgrade · Stage)" style="endArrow=open;endFill=0;strokeColor=#F9A825;strokeWidth=1.5;dashed=1;fontSize=10;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="815" y="470" as="sourcePoint"/>
+            <mxPoint x="625" y="470" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Managers: OnInitialized -->
+        <mxCell id="m8" value="OnInitialized 이벤트 → UI 구독 시작" style="endArrow=open;endFill=0;strokeColor=#FF9800;strokeWidth=1;dashed=1;fontSize=9;fontColor=#FF9800;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="625" y="505" as="sourcePoint"/>
+            <mxPoint x="74" y="505" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ====== PHASE 3: 게임플레이 중 저장 ====== -->
+        <mxCell id="phase3" value="③ 게임플레이 중 저장" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#43A047;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="920" y="565" width="160" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- User → Managers: 상태 변경 -->
+        <mxCell id="m9" value="상태 변경 (클릭, 업그레이드, 스테이지 클리어)" style="endArrow=block;endFill=1;strokeColor=#43A047;strokeWidth=2;fontSize=10;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="74" y="580" as="sourcePoint"/>
+            <mxPoint x="625" y="580" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Managers: PersistState() -->
+        <mxCell id="m10" value="PersistState()" style="endArrow=block;endFill=1;strokeColor=#FF9800;strokeWidth=1;fontSize=9;fontColor=#FF9800;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="625" y="615" as="sourcePoint"/>
+            <mxPoint x="625" y="635" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="660" y="615"/>
+              <mxPoint x="660" y="635"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Managers → Firestore: Save (비동기) -->
+        <mxCell id="m11" value="Save() → SetAsync(MergeAll)" style="endArrow=block;endFill=1;strokeColor=#F9A825;strokeWidth=2;fontSize=10;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="625" y="660" as="sourcePoint"/>
+            <mxPoint x="815" y="660" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- 비동기 표시 -->
+        <mxCell id="m11b" value="비동기 fire-and-forget&lt;br&gt;(UniTask.Forget())" style="text;html=1;align=left;verticalAlign=middle;fontSize=9;fontColor=#F9A825;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="650" y="670" width="150" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- Firestore: 데이터 구조 표시 -->
+        <mxCell id="m12" value="&lt;font style='font-size:9px' color='#888'&gt;users/{email}/Currency&lt;br&gt;users/{email}/Upgrade&lt;br&gt;users/{email}/Stage&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;fontSize=9;fontColor=#888888;" vertex="1" parent="1">
+          <mxGeometry x="820" y="670" width="160" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- ====== NOTE ====== -->
+        <mxCell id="note" value="&lt;b&gt;왜 이렇게 동작하는가&lt;/b&gt;&lt;hr&gt;&lt;b&gt;Repository 패턴&lt;/b&gt;&lt;br&gt;Manager → IRepository (인터페이스)&lt;br&gt;→ FirebaseRepository (구현체)&lt;br&gt;Firebase를 교체해도 Manager 불변&lt;br&gt;&lt;br&gt;&lt;b&gt;MergeAll 전략&lt;/b&gt;&lt;br&gt;Currency·Upgrade·Stage 각각&lt;br&gt;독립 필드로 저장 → 덮어쓰기 방지&lt;br&gt;&lt;br&gt;&lt;b&gt;Fire-and-Forget&lt;/b&gt;&lt;br&gt;저장은 비동기로 처리하여&lt;br&gt;게임플레이를 블로킹하지 않음&lt;br&gt;(UniTask.Forget())&lt;br&gt;&lt;br&gt;&lt;b&gt;Email/Password 인증&lt;/b&gt;&lt;br&gt;Firebase Auth로 이메일 기반 인증&lt;br&gt;AccountValidator로 입력값 검증" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#E0E0E0;fontSize=10;align=left;verticalAlign=top;spacingLeft=8;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="940" y="160" width="220" height="300" as="geometry"/>
+        </mxCell>
+
+        <!-- Repository 패턴 시각화 (인터페이스 레이어) -->
+        <mxCell id="repo_box" value="&lt;font color='#FF9800'&gt;IRepository&lt;/font&gt; &amp;nbsp;→&amp;nbsp; &lt;font color='#F9A825'&gt;FirebaseRepository&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#FF9800;strokeWidth=1;dashed=1;fontSize=9;arcSize=15;" vertex="1" parent="1">
+          <mxGeometry x="600" y="740" width="250" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="repo_label" value="DIP: Manager는 인터페이스에만 의존" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#AAAAAA;" vertex="1" parent="1">
+          <mxGeometry x="600" y="765" width="250" height="18" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

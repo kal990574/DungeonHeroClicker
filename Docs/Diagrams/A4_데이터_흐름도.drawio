@@ -1,0 +1,155 @@
+<mxfile host="app.diagrams.net" modified="2026-02-04T00:00:00.000Z" agent="Claude" version="24.0.0" type="device">
+  <diagram name="데이터 흐름도" id="data-flow">
+    <mxGraphModel dx="1200" dy="850" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- TITLE -->
+        <mxCell id="t1" value="데이터 흐름도" style="text;html=1;align=left;verticalAlign=middle;fontSize=22;fontColor=#222222;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="15" width="250" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="t2" value="&quot;데이터가 어디서 어디로 흐르지?&quot;" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#888888;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="45" width="350" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- ====== CONFIG LAYER (데이터 소스) ====== -->
+        <mxCell id="config" value="&lt;b&gt;Config (ScriptableObject)&lt;/b&gt;  UpgradeConfig · StageScalingData · CurrencyConfig · HeroVisualData" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#90A4AE;strokeWidth=1.5;fontSize=10;arcSize=15;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="110" y="85" width="530" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cfg_arrow" value="초기 설정값 주입" style="endArrow=open;endFill=0;strokeColor=#90A4AE;strokeWidth=1;dashed=1;fontSize=9;fontColor=#90A4AE;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="375" y="120" as="sourcePoint"/>
+            <mxPoint x="375" y="170" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ====== USER INPUT ====== -->
+        <mxCell id="a_user" value="User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fillColor=#E8EAF6;strokeColor=#5C6BC0;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="22" y="200" width="20" height="35" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="a_touch" value="터치" style="endArrow=block;endFill=1;strokeColor=#5C6BC0;strokeWidth=2;fontSize=10;fontStyle=1;fontColor=#5C6BC0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="50" y="220" as="sourcePoint"/>
+            <mxPoint x="110" y="220" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ====== CORE MODULES (4개 순환) ====== -->
+
+        <!-- ClickManager (좌상) -->
+        <mxCell id="m_click" value="&lt;b&gt;ClickManager&lt;/b&gt;&lt;br&gt;&lt;font color='#888' style='font-size:8px'&gt;수동 클릭 · 자동 DPS&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#5C6BC0;strokeWidth=2;fontSize=10;arcSize=12;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="110" y="195" width="155" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Monster (우상) -->
+        <mxCell id="m_monster" value="&lt;b&gt;Monster&lt;/b&gt;&lt;br&gt;&lt;font color='#888' style='font-size:8px'&gt;IDamageable · 사망 이벤트&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#E53935;strokeWidth=2;fontSize=10;arcSize=12;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="415" y="195" width="155" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- CurrencyManager (우하) -->
+        <mxCell id="m_currency" value="&lt;b&gt;CurrencyManager&lt;/b&gt;&lt;br&gt;&lt;font color='#888' style='font-size:8px'&gt;골드 적립 · 소비&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9800;strokeWidth=2;fontSize=10;arcSize=12;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="415" y="390" width="155" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- UpgradeManager (좌하) -->
+        <mxCell id="m_upgrade" value="&lt;b&gt;UpgradeManager&lt;/b&gt;&lt;br&gt;&lt;font color='#888' style='font-size:8px'&gt;무기 강화 · 동료 고용&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#43A047;strokeWidth=2;fontSize=10;arcSize=12;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="110" y="390" width="155" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- StageManager (우측) -->
+        <mxCell id="m_stage" value="&lt;b&gt;StageManager&lt;/b&gt;&lt;br&gt;&lt;font color='#888' style='font-size:8px'&gt;스테이지 진행 · 스케일링&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;strokeWidth=2;fontSize=10;arcSize=12;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="660" y="285" width="155" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- 코어 루프 라벨 (중앙) -->
+        <mxCell id="cycle_label" value="코어 루프" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#CCCCCC;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="310" width="80" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- ====== CORE CYCLE ARROWS ====== -->
+
+        <!-- 1. Click → Monster: ClickInfo -->
+        <mxCell id="a1" value="&lt;b&gt;ClickInfo&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:8px'&gt;{Damage, Type, IsCritical}&lt;/font&gt;" style="endArrow=block;endFill=1;strokeColor=#E53935;strokeWidth=2;fontSize=9;fontColor=#E53935;" edge="1" parent="1" source="m_click" target="m_monster">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- 2. Monster → Currency: 골드 드롭 -->
+        <mxCell id="a2" value="&lt;b&gt;BigNumber (골드)&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:8px'&gt;OnGoldDropped 이벤트&lt;/font&gt;" style="endArrow=block;endFill=1;strokeColor=#FF9800;strokeWidth=2;fontSize=9;fontColor=#FF9800;" edge="1" parent="1" source="m_monster" target="m_currency">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- 3. Currency → Upgrade: 골드 소비 -->
+        <mxCell id="a3" value="&lt;b&gt;BigNumber (소비)&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:8px'&gt;TrySpendGold()&lt;/font&gt;" style="endArrow=block;endFill=1;strokeColor=#43A047;strokeWidth=2;fontSize=9;fontColor=#43A047;" edge="1" parent="1" source="m_currency" target="m_upgrade">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- 4. Upgrade → Click: 데미지 증가 -->
+        <mxCell id="a4" value="&lt;b&gt;BigNumber (데미지↑)&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:8px'&gt;TotalClickDamage / TotalDPS&lt;/font&gt;" style="endArrow=block;endFill=1;strokeColor=#5C6BC0;strokeWidth=2;fontSize=9;fontColor=#5C6BC0;" edge="1" parent="1" source="m_upgrade" target="m_click">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ====== STAGE ARROWS ====== -->
+
+        <!-- 5. Monster → Stage: 킬 카운트 -->
+        <mxCell id="a5" value="킬 카운트" style="endArrow=block;endFill=1;strokeColor=#1976D2;strokeWidth=1.5;fontSize=9;fontColor=#1976D2;" edge="1" parent="1" source="m_monster" target="m_stage">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="640" y="240"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- 6. Stage → Monster: HP/골드 스케일링 -->
+        <mxCell id="a6" value="HP·골드 스케일링" style="endArrow=block;endFill=1;strokeColor=#1976D2;strokeWidth=1.5;fontSize=9;fontColor=#1976D2;dashed=1;" edge="1" parent="1" source="m_stage" target="m_monster">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="640" y="190"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ====== OUTPUT LAYER ====== -->
+
+        <!-- UI Layer -->
+        <mxCell id="m_ui" value="&lt;b&gt;UI Layer&lt;/b&gt;  GoldDisplay · DPSDisplay · StageDisplay · HealthBar" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B2DFDB;strokeColor=#00897B;strokeWidth=1.5;fontSize=10;arcSize=15;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="110" y="540" width="370" height="35" as="geometry"/>
+        </mxCell>
+
+        <!-- Firebase Firestore -->
+        <mxCell id="m_firebase" value="&lt;b&gt;Firebase Firestore&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:8px' color='#888'&gt;users/{email}/{Currency|Upgrade|Stage}&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#F9A825;strokeWidth=1.5;fontSize=10;arcSize=12;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="533" width="220" height="45" as="geometry"/>
+        </mxCell>
+
+        <!-- 7. Core → UI: 이벤트 구독 -->
+        <mxCell id="a_ui" value="이벤트 구독 (OnChanged)" style="endArrow=open;endFill=0;strokeColor=#00897B;strokeWidth=1.5;dashed=1;fontSize=9;fontColor=#00897B;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="240" y="460" as="sourcePoint"/>
+            <mxPoint x="240" y="540" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- 8. Core → Firebase: SaveData -->
+        <mxCell id="a_fb" value="SaveData (비동기 저장)" style="endArrow=open;endFill=0;strokeColor=#F9A825;strokeWidth=1.5;dashed=1;fontSize=9;fontColor=#F9A825;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="570" y="460" as="sourcePoint"/>
+            <mxPoint x="650" y="533" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ====== NOTE ====== -->
+        <mxCell id="note" value="&lt;b&gt;왜 이렇게 흐르는가&lt;/b&gt;&lt;hr&gt;&lt;b&gt;단방향 순환&lt;/b&gt;&lt;br&gt;Click→Monster→Currency→Upgrade&lt;br&gt;→Click (역방향 의존 없음)&lt;br&gt;&lt;br&gt;&lt;b&gt;BigNumber 통일&lt;/b&gt;&lt;br&gt;데미지·골드·비용 모두 동일한&lt;br&gt;BigNumber 타입으로 흐름&lt;br&gt;→ 타입 안전성 + 대수 지원&lt;br&gt;&lt;br&gt;&lt;b&gt;Config ↔ Runtime 분리&lt;/b&gt;&lt;br&gt;SO는 읽기 전용 설정값만 주입&lt;br&gt;런타임 상태는 Manager가 소유&lt;br&gt;&lt;br&gt;&lt;b&gt;출력은 이벤트 기반&lt;/b&gt;&lt;br&gt;UI/Firebase는 이벤트 구독만&lt;br&gt;Manager가 UI를 직접 참조 안 함" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#E0E0E0;fontSize=10;align=left;verticalAlign=top;spacingLeft=8;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="870" y="160" width="220" height="290" as="geometry"/>
+        </mxCell>
+
+        <!-- LEGEND -->
+        <mxCell id="leg" value="━▶ 데이터 전달 (타입 표시) &amp;nbsp; - -▶ 이벤트 / 설정 주입 &amp;nbsp; 화살표 색 = 데이터 소유 모듈" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#AAAAAA;" vertex="1" parent="1">
+          <mxGeometry x="160" y="595" width="500" height="18" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

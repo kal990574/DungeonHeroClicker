@@ -1,0 +1,377 @@
+<mxfile host="app.diagrams.net" modified="2026-02-04T00:00:00.000Z" agent="Claude" version="24.0.0" type="device">
+  <diagram name="데이터 흐름도 - Damage / Gold / Stage" id="dataflow">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2000" pageHeight="1500" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- TITLE -->
+        <mxCell id="title" value="&lt;b&gt;DungeonHeroClicker — 데이터 흐름도&lt;/b&gt;&lt;br&gt;3가지 핵심 데이터 흐름: 데미지(빨강), 골드(노랑), 스테이지(파랑)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=14;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="400" y="10" width="700" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- SECTION 1: DAMAGE FLOW (RED) -->
+        <!-- ============================================================ -->
+        <mxCell id="dmg_section" value="&lt;b&gt;1. 데미지 데이터 흐름&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontColor=#E53935;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="70" width="300" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Damage Source: UpgradeManager -->
+        <mxCell id="d_src" value="&lt;b&gt;UpgradeManager&lt;/b&gt;&lt;br&gt;&lt;i&gt;데미지 원천 데이터&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="40" y="110" width="180" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Split into Click & DPS -->
+        <mxCell id="d_click_dmg" value="&lt;b&gt;TotalClickDamage&lt;/b&gt;&lt;br&gt;Hero 타입 합산" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#E53935;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="300" y="100" width="150" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="d_dps" value="&lt;b&gt;TotalDPS&lt;/b&gt;&lt;br&gt;Companion 타입 합산" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#E53935;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="300" y="150" width="150" height="40" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="d_src_to_click" value="" style="endArrow=block;endFill=1;strokeColor=#E53935;strokeWidth=2;" edge="1" parent="1" source="d_src" target="d_click_dmg">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="d_src_to_dps" value="" style="endArrow=block;endFill=1;strokeColor=#E53935;strokeWidth=2;" edge="1" parent="1" source="d_src" target="d_dps">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ClickManager -->
+        <mxCell id="d_clickmgr" value="&lt;b&gt;ClickManager&lt;/b&gt;&lt;br&gt;+ 크리티컬 계산&lt;br&gt;→ ClickInfo 생성" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="520" y="90" width="150" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="d_automgr" value="&lt;b&gt;AutoClickManager&lt;/b&gt;&lt;br&gt;× tickInterval&lt;br&gt;+ 크리티컬 → ClickInfo" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="520" y="155" width="150" height="55" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="d_click_to_mgr" value="" style="endArrow=block;endFill=1;strokeColor=#E53935;strokeWidth=2;" edge="1" parent="1" source="d_click_dmg" target="d_clickmgr">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="d_dps_to_mgr" value="" style="endArrow=block;endFill=1;strokeColor=#E53935;strokeWidth=2;" edge="1" parent="1" source="d_dps" target="d_automgr">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ClickInfo struct -->
+        <mxCell id="d_clickinfo" value="&lt;b&gt;ClickInfo&lt;/b&gt; (struct)&lt;br&gt;{ Damage, IsCritical, ClickType }" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontSize=10;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="740" y="110" width="230" height="40" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="d_mgr_to_info1" value="" style="endArrow=block;endFill=1;strokeColor=#E53935;strokeWidth=2;" edge="1" parent="1" source="d_clickmgr" target="d_clickinfo">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="d_mgr_to_info2" value="" style="endArrow=block;endFill=1;strokeColor=#E53935;strokeWidth=2;" edge="1" parent="1" source="d_automgr" target="d_clickinfo">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Monster (IDamageable) -->
+        <mxCell id="d_monster" value="&lt;b&gt;Monster&lt;/b&gt;&lt;br&gt;IDamageable.TakeDamage()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="105" width="180" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="d_info_to_monster" value="TakeDamage(ClickInfo)" style="endArrow=block;endFill=1;strokeColor=#E53935;strokeWidth=2;" edge="1" parent="1" source="d_clickinfo" target="d_monster">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- MonsterHealth -->
+        <mxCell id="d_mhp" value="&lt;b&gt;MonsterHealth&lt;/b&gt;&lt;br&gt;_currentHealth -= damage&lt;br&gt;if (_currentHealth &lt;= 0) → OnDeath" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="90" width="220" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="d_monster_to_hp" value="" style="endArrow=block;endFill=1;strokeColor=#E53935;strokeWidth=2;" edge="1" parent="1" source="d_monster" target="d_mhp">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Feedback branch -->
+        <mxCell id="d_feedback" value="&lt;b&gt;FeedbackPlayer&lt;/b&gt;&lt;br&gt;데미지 팝업, 파티클,&lt;br&gt;카메라 쉐이크" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#AB47BC;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1580" y="90" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="d_hp_to_fb" value="" style="endArrow=open;endFill=0;dashed=1;strokeColor=#AB47BC;" edge="1" parent="1" source="d_mhp" target="d_feedback">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- SECTION 2: GOLD FLOW (YELLOW/ORANGE) -->
+        <!-- ============================================================ -->
+        <mxCell id="gold_section" value="&lt;b&gt;2. 골드(재화) 데이터 흐름&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontColor=#FF9800;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="240" width="300" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Monster Dies -->
+        <mxCell id="g_death" value="&lt;b&gt;MonsterHealth&lt;/b&gt;&lt;br&gt;OnDeath 이벤트" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#E53935;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="290" width="150" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- MonsterReward -->
+        <mxCell id="g_reward" value="&lt;b&gt;MonsterReward&lt;/b&gt;&lt;br&gt;DropReward()&lt;br&gt;goldAmount = CalcGold(stage)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9800;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="250" y="280" width="210" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="g_death_to_reward" value="" style="endArrow=block;endFill=1;strokeColor=#FF9800;strokeWidth=2;" edge="1" parent="1" source="g_death" target="g_reward">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Static Event -->
+        <mxCell id="g_event" value="[static event]&lt;br&gt;&lt;b&gt;OnGoldDropped&lt;/b&gt;&lt;br&gt;(BigNumber, Vector3)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="520" y="270" width="170" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="g_reward_to_event" value="" style="endArrow=block;endFill=1;strokeColor=#FF9800;strokeWidth=2;" edge="1" parent="1" source="g_reward" target="g_event">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- CurrencyManager -->
+        <mxCell id="g_curr" value="&lt;b&gt;CurrencyManager&lt;/b&gt;&lt;br&gt;HandleGoldDropped()&lt;br&gt;→ GoldFlyEffect.Play()&lt;br&gt;→ AddGold(amount)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="750" y="268" width="200" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="g_event_to_curr" value="subscribe" style="endArrow=block;endFill=1;strokeColor=#FF9800;strokeWidth=2;" edge="1" parent="1" source="g_event" target="g_curr">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Currency Data Store -->
+        <mxCell id="g_store" value="&lt;b&gt;Currency[]&lt;/b&gt;&lt;br&gt;(in-memory)&lt;br&gt;Gold.Amount += goldAmount" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#FFF9C4;strokeColor=#F9A825;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="260" width="160" height="75" as="geometry"/>
+        </mxCell>
+        <mxCell id="g_curr_to_store" value="" style="endArrow=block;endFill=1;strokeColor=#FF9800;strokeWidth=2;" edge="1" parent="1" source="g_curr" target="g_store">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Firebase Save -->
+        <mxCell id="g_firebase" value="&lt;b&gt;Firebase&lt;/b&gt;&lt;br&gt;Firestore&lt;br&gt;users/{email}/Currency" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#FFF3E0;strokeColor=#FF9800;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="360" width="160" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="g_store_to_fb" value="ICurrencyRepository.Save()" style="endArrow=open;endFill=0;dashed=1;strokeColor=#FF9800;" edge="1" parent="1" source="g_store" target="g_firebase">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- UI Update -->
+        <mxCell id="g_ui_gold" value="&lt;b&gt;GoldDisplay&lt;/b&gt;&lt;br&gt;UI 골드 표시 갱신" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B2DFDB;strokeColor=#00897B;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="265" width="140" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="g_ui_upgrade" value="&lt;b&gt;UpgradeItemButton&lt;/b&gt;&lt;br&gt;구매 가능 여부 갱신" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B2DFDB;strokeColor=#00897B;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="320" width="160" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="g_store_to_ui1" value="[event] OnCurrencyChanged" style="endArrow=open;endFill=0;dashed=1;strokeColor=#FF9800;" edge="1" parent="1" source="g_store" target="g_ui_gold">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="g_store_to_ui2" value="" style="endArrow=open;endFill=0;dashed=1;strokeColor=#FF9800;" edge="1" parent="1" source="g_store" target="g_ui_upgrade">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Gold Spend (from Upgrade) -->
+        <mxCell id="g_spend" value="&lt;b&gt;UpgradeManager&lt;/b&gt;&lt;br&gt;TrySpendGold(cost)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="750" y="370" width="170" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="g_spend_to_curr" value="소비" style="endArrow=block;endFill=1;strokeColor=#b85450;strokeWidth=1.5;" edge="1" parent="1" source="g_spend" target="g_curr">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- SECTION 3: STAGE FLOW (BLUE) -->
+        <!-- ============================================================ -->
+        <mxCell id="stage_section" value="&lt;b&gt;3. 스테이지 데이터 흐름&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontColor=#1976D2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="460" width="300" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Monster Death Event -->
+        <mxCell id="s_death" value="&lt;b&gt;Monster&lt;/b&gt;&lt;br&gt;OnMonsterDeath" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#E53935;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="510" width="140" height="55" as="geometry"/>
+        </mxCell>
+
+        <!-- MonsterSpawner -->
+        <mxCell id="s_spawner" value="&lt;b&gt;MonsterSpawner&lt;/b&gt;&lt;br&gt;HandleMonsterDeath()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1976D2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="240" y="505" width="180" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="s_death_to_spawner" value="" style="endArrow=block;endFill=1;strokeColor=#1976D2;strokeWidth=2;" edge="1" parent="1" source="s_death" target="s_spawner">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- StageManager -->
+        <mxCell id="s_mgr" value="&lt;b&gt;StageManager&lt;/b&gt;&lt;br&gt;OnMonsterKilled()&lt;br&gt;_currentKillCount++" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="480" y="498" width="180" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="s_spawner_to_mgr" value="" style="endArrow=block;endFill=1;strokeColor=#1976D2;strokeWidth=2;" edge="1" parent="1" source="s_spawner" target="s_mgr">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Decision: Stage Clear? -->
+        <mxCell id="s_decision" value="killCount&lt;br&gt;&gt;= required?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="720" y="488" width="130" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="s_mgr_to_decision" value="" style="endArrow=block;endFill=1;strokeColor=#1976D2;strokeWidth=2;" edge="1" parent="1" source="s_mgr" target="s_decision">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Yes: Stage Clear -->
+        <mxCell id="s_clear" value="&lt;b&gt;OnStageCleared()&lt;/b&gt;&lt;br&gt;_currentStage++&lt;br&gt;_currentKillCount = 0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#43A047;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="910" y="458" width="180" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="s_yes" value="Yes" style="endArrow=block;endFill=1;strokeColor=#43A047;strokeWidth=2;" edge="1" parent="1" source="s_decision" target="s_clear">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- No: Continue -->
+        <mxCell id="s_continue" value="다음 몬스터&lt;br&gt;동일 스테이지" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="910" y="530" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="s_no" value="No" style="endArrow=block;endFill=1;strokeColor=#1976D2;strokeWidth=1.5;" edge="1" parent="1" source="s_decision" target="s_continue">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- StageStatCalculator -->
+        <mxCell id="s_calc" value="&lt;b&gt;StageStatCalculator&lt;/b&gt;&lt;br&gt;(IMonsterStatModifier)&lt;br&gt;CalculateHealth(base, stage, isBoss)&lt;br&gt;CalculateGold(base, stage, isBoss)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#5C6BC0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="450" width="260" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="s_clear_to_calc" value="" style="endArrow=block;endFill=1;strokeColor=#1976D2;strokeWidth=1.5;" edge="1" parent="1" source="s_clear" target="s_calc">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="s_cont_to_calc" value="" style="endArrow=block;endFill=1;strokeColor=#1976D2;strokeWidth=1;" edge="1" parent="1" source="s_continue" target="s_calc">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Formula -->
+        <mxCell id="s_formula" value="&lt;b&gt;스케일링 공식:&lt;/b&gt;&lt;br&gt;Health = base × growthRate^(stage-1) × bossMultiplier&lt;br&gt;Gold = base × growthRate^(stage-1) × bossMultiplier" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;fillColor=#E8EAF6;strokeColor=#5C6BC0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="540" width="320" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- New Monster Stats -->
+        <mxCell id="s_newmonster" value="새 몬스터 설정&lt;br&gt;&lt;b&gt;MonsterHealth.SetMaxHealth()&lt;/b&gt;&lt;br&gt;&lt;b&gt;MonsterReward.SetGoldAmount()&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1510" y="450" width="230" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="s_calc_to_new" value="" style="endArrow=block;endFill=1;strokeColor=#1976D2;strokeWidth=2;" edge="1" parent="1" source="s_calc" target="s_newmonster">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Stage UI -->
+        <mxCell id="s_ui" value="&lt;b&gt;StageDisplay&lt;/b&gt;&lt;br&gt;스테이지/킬카운트 갱신" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B2DFDB;strokeColor=#00897B;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1510" y="530" width="180" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="s_clear_to_ui" value="OnStageChanged / OnKillCountChanged" style="endArrow=open;endFill=0;dashed=1;strokeColor=#1976D2;" edge="1" parent="1" source="s_clear" target="s_ui">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1000" y="555"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- SECTION 4: UPGRADE FLOW -->
+        <!-- ============================================================ -->
+        <mxCell id="upg_section" value="&lt;b&gt;4. 업그레이드 데이터 흐름&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontColor=#9C27B0;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="630" width="300" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- User Click Upgrade Button -->
+        <mxCell id="u_click" value="&lt;b&gt;UpgradeItemButton&lt;/b&gt;&lt;br&gt;OnButtonClick()" style="ellipse;whiteSpace=wrap;html=1;fillColor=#B2DFDB;strokeColor=#00897B;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="680" width="160" height="55" as="geometry"/>
+        </mxCell>
+
+        <!-- UpgradeManager: TryUpgrade/TryPurchase -->
+        <mxCell id="u_mgr" value="&lt;b&gt;UpgradeManager&lt;/b&gt;&lt;br&gt;TryUpgrade(itemId) or&lt;br&gt;TryPurchase(itemId)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="260" y="670" width="200" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="u_click_to_mgr" value="" style="endArrow=block;endFill=1;strokeColor=#9C27B0;strokeWidth=2;" edge="1" parent="1" source="u_click" target="u_mgr">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- CurrencyManager: Spend Gold -->
+        <mxCell id="u_spend" value="&lt;b&gt;CurrencyManager&lt;/b&gt;&lt;br&gt;TrySpendGold(cost)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="520" y="675" width="160" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="u_mgr_to_spend" value="" style="endArrow=block;endFill=1;strokeColor=#9C27B0;strokeWidth=2;" edge="1" parent="1" source="u_mgr" target="u_spend">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- UpgradeItem: Level++ -->
+        <mxCell id="u_item" value="&lt;b&gt;UpgradeItem&lt;/b&gt;&lt;br&gt;CurrentLevel++&lt;br&gt;비용: BaseCost × 1.15^level" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#5C6BC0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="740" y="665" width="190" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="u_spend_to_item" value="" style="endArrow=block;endFill=1;strokeColor=#9C27B0;strokeWidth=2;" edge="1" parent="1" source="u_spend" target="u_item">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Branch: Hero or Companion -->
+        <mxCell id="u_branch" value="UpgradeType?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#9C27B0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="990" y="665" width="110" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="u_item_to_branch" value="" style="endArrow=block;endFill=1;strokeColor=#9C27B0;strokeWidth=2;" edge="1" parent="1" source="u_item" target="u_branch">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Hero Branch -->
+        <mxCell id="u_hero" value="&lt;b&gt;Hero 타입&lt;/b&gt;&lt;br&gt;OnItemUpgraded →&lt;br&gt;HeroUpgradeConnector →&lt;br&gt;HeroVisual.UpdateVisual()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1976D2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="640" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="u_hero_arrow" value="Hero" style="endArrow=block;endFill=1;strokeColor=#1976D2;strokeWidth=1.5;" edge="1" parent="1" source="u_branch" target="u_hero">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Companion Branch -->
+        <mxCell id="u_comp" value="&lt;b&gt;Companion 타입&lt;/b&gt;&lt;br&gt;OnItemPurchased →&lt;br&gt;CompanionVisualManager →&lt;br&gt;SpawnCompanion()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1976D2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="710" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="u_comp_arrow" value="Companion" style="endArrow=block;endFill=1;strokeColor=#1976D2;strokeWidth=1.5;" edge="1" parent="1" source="u_branch" target="u_comp">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- DPS/Damage Recalculation -->
+        <mxCell id="u_recalc" value="&lt;b&gt;TotalClickDamage / TotalDPS&lt;/b&gt;&lt;br&gt;재계산 → 데미지 흐름으로 반영" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#E53935;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1420" y="660" width="230" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="u_hero_to_recalc" value="" style="endArrow=block;endFill=1;strokeColor=#E53935;strokeWidth=1.5;" edge="1" parent="1" source="u_hero" target="u_recalc">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="u_comp_to_recalc" value="" style="endArrow=block;endFill=1;strokeColor=#E53935;strokeWidth=1.5;" edge="1" parent="1" source="u_comp" target="u_recalc">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- DPS Display -->
+        <mxCell id="u_dps_ui" value="&lt;b&gt;DPSDisplay&lt;/b&gt;&lt;br&gt;DPS UI 갱신" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B2DFDB;strokeColor=#00897B;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1420" y="720" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="u_recalc_to_dps" value="OnTotalDPSChanged" style="endArrow=open;endFill=0;dashed=1;strokeColor=#FF9800;" edge="1" parent="1" source="u_recalc" target="u_dps_ui">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Firebase Save -->
+        <mxCell id="u_firebase" value="&lt;b&gt;Firebase&lt;/b&gt;&lt;br&gt;users/{email}/Upgrade" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#FFF3E0;strokeColor=#FF9800;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1600" y="710" width="150" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="u_item_to_fb" value="IUpgradeRepository.Save()" style="endArrow=open;endFill=0;dashed=1;strokeColor=#FF9800;" edge="1" parent="1" source="u_recalc" target="u_firebase">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LEGEND -->
+        <!-- ============================================================ -->
+        <mxCell id="legend" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#BDBDBD;container=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="800" width="700" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_title" value="&lt;b&gt;범례 (Legend)&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;" vertex="1" parent="legend">
+          <mxGeometry x="10" y="5" width="100" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_1" value="&lt;font color=&quot;#E53935&quot;&gt;━━▶&lt;/font&gt; 데미지 흐름" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="legend">
+          <mxGeometry x="10" y="28" width="130" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_2" value="&lt;font color=&quot;#FF9800&quot;&gt;━━▶&lt;/font&gt; 골드 흐름" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="legend">
+          <mxGeometry x="150" y="28" width="120" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_3" value="&lt;font color=&quot;#1976D2&quot;&gt;━━▶&lt;/font&gt; 스테이지 흐름" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="legend">
+          <mxGeometry x="280" y="28" width="130" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_4" value="&lt;font color=&quot;#9C27B0&quot;&gt;━━▶&lt;/font&gt; 업그레이드 흐름" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="legend">
+          <mxGeometry x="420" y="28" width="140" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_5" value="&lt;font color=&quot;#FF9800&quot;&gt;- - -▶&lt;/font&gt; 이벤트 구독" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="legend">
+          <mxGeometry x="10" y="50" width="130" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_6" value="◇ 분기점 (Decision)" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="legend">
+          <mxGeometry x="150" y="50" width="130" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_7" value="⊙ 이벤트 트리거" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="legend">
+          <mxGeometry x="280" y="50" width="130" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_8" value="🔵 DB 저장소" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="legend">
+          <mxGeometry x="420" y="50" width="120" height="20" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

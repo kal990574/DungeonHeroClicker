@@ -1,0 +1,338 @@
+<mxfile host="app.diagrams.net" modified="2026-02-04T00:00:00.000Z" agent="Claude" version="24.0.0" type="device">
+  <diagram name="Repository 패턴 &amp; DIP (의존성 역전)" id="repo-dip">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- TITLE -->
+        <mxCell id="title" value="&lt;b&gt;DungeonHeroClicker — Repository 패턴 &amp; 의존성 역전 원칙 (DIP)&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=16;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="300" y="10" width="600" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LEFT SIDE: DIP Principle Explanation -->
+        <!-- ============================================================ -->
+        <mxCell id="dip_box" value="&lt;b&gt;의존성 역전 원칙 (DIP)&lt;/b&gt;&lt;hr&gt;&lt;i&gt;&quot;고수준 모듈은 저수준 모듈에 의존하면 안 된다.&lt;br&gt;둘 다 추상화(인터페이스)에 의존해야 한다.&quot;&lt;/i&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;적용 결과:&lt;/b&gt;&lt;br&gt;• Manager(고수준) → Interface(추상화) ← Repository(저수준)&lt;br&gt;• Firebase ↔ Local 교체 시 Manager 수정 불필요 (OCP)&lt;br&gt;• 테스트 시 Mock Repository 주입 가능" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#43A047;fontSize=11;align=left;verticalAlign=top;spacingLeft=10;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="60" width="360" height="170" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- MAIN DIAGRAM: 4 Domains -->
+        <!-- ============================================================ -->
+
+        <!-- ==================== CURRENCY ==================== -->
+        <mxCell id="curr_title" value="&lt;b&gt;Currency Domain&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#FF9800;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="260" width="340" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- CurrencyManager (High-Level) -->
+        <mxCell id="curr_mgr" value="&lt;b&gt;CurrencyManager&lt;/b&gt;&lt;br&gt;&lt;i&gt;(고수준 모듈)&lt;/i&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="40" y="295" width="200" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="curr_mgr_f" value="- _repository : ICurrencyRepository&#xa;- _currencies : Currency[]" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="curr_mgr">
+          <mxGeometry y="40" width="200" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="curr_mgr_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="curr_mgr">
+          <mxGeometry y="75" width="200" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="curr_mgr_m" value="+ AddGold() / TrySpendGold()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=10;" vertex="1" parent="curr_mgr">
+          <mxGeometry y="83" width="200" height="27" as="geometry"/>
+        </mxCell>
+
+        <!-- ICurrencyRepository (Abstraction) -->
+        <mxCell id="curr_iface" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;ICurrencyRepository&lt;/b&gt;&lt;br&gt;&lt;i&gt;(추상화)&lt;/i&gt;" style="swimlane;fontStyle=0;align=center;startSize=50;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="40" y="450" width="200" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="curr_iface_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="curr_iface">
+          <mxGeometry y="50" width="200" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="curr_iface_m" value="+ Save(CurrencySaveData) : UniTask&#xa;+ Load() : UniTask&lt;SaveData&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=10;" vertex="1" parent="curr_iface">
+          <mxGeometry y="58" width="200" height="42" as="geometry"/>
+        </mxCell>
+
+        <!-- Local CurrencyRepository -->
+        <mxCell id="curr_local" value="&lt;b&gt;CurrencyRepository&lt;/b&gt;&lt;br&gt;&lt;i&gt;(저수준 - Local JSON)&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="290" y="590" width="170" height="45" as="geometry"/>
+        </mxCell>
+
+        <!-- Firebase CurrencyRepository -->
+        <mxCell id="curr_firebase" value="&lt;b&gt;FirebaseCurrencyRepository&lt;/b&gt;&lt;br&gt;&lt;i&gt;(저수준 - Firestore)&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9800;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="290" y="645" width="200" height="45" as="geometry"/>
+        </mxCell>
+
+        <!-- Arrows: Manager → Interface (depends on) -->
+        <mxCell id="curr_dep" value="depends on" style="endArrow=open;endFill=0;dashed=1;strokeColor=#43A047;strokeWidth=2;" edge="1" parent="1" source="curr_mgr" target="curr_iface">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Arrows: Repos → Interface (implements) -->
+        <mxCell id="curr_impl1" value="" style="endArrow=block;endFill=0;dashed=1;dashPattern=8 4;strokeColor=#82b366;strokeWidth=1.5;" edge="1" parent="1" source="curr_local" target="curr_iface">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="curr_impl2" value="" style="endArrow=block;endFill=0;dashed=1;dashPattern=8 4;strokeColor=#82b366;strokeWidth=1.5;" edge="1" parent="1" source="curr_firebase" target="curr_iface">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== UPGRADE ==================== -->
+        <mxCell id="upg_title" value="&lt;b&gt;Upgrade Domain&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#9C27B0;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="260" width="340" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- UpgradeManager -->
+        <mxCell id="upg_mgr" value="&lt;b&gt;UpgradeManager&lt;/b&gt;&lt;br&gt;&lt;i&gt;(고수준 모듈)&lt;/i&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="430" y="295" width="220" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="upg_mgr_f" value="- _repository : IUpgradeRepository&#xa;- _items : Dict&lt;string, UpgradeItem&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="upg_mgr">
+          <mxGeometry y="40" width="220" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="upg_mgr_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="upg_mgr">
+          <mxGeometry y="75" width="220" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="upg_mgr_m" value="+ TryUpgrade() / TryPurchase()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=10;" vertex="1" parent="upg_mgr">
+          <mxGeometry y="83" width="220" height="27" as="geometry"/>
+        </mxCell>
+
+        <!-- IUpgradeRepository -->
+        <mxCell id="upg_iface" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;IUpgradeRepository&lt;/b&gt;&lt;br&gt;&lt;i&gt;(추상화)&lt;/i&gt;" style="swimlane;fontStyle=0;align=center;startSize=50;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="430" y="450" width="220" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="upg_iface_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="upg_iface">
+          <mxGeometry y="50" width="220" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="upg_iface_m" value="+ Save(UpgradeSaveData) : UniTask&#xa;+ Load() : UniTask&lt;SaveData&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=10;" vertex="1" parent="upg_iface">
+          <mxGeometry y="58" width="220" height="42" as="geometry"/>
+        </mxCell>
+
+        <!-- Local UpgradeRepository -->
+        <mxCell id="upg_local" value="&lt;b&gt;UpgradeRepository&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Local JSON)&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="540" y="590" width="150" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="upg_firebase" value="&lt;b&gt;FirebaseUpgradeRepository&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Firestore)&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9800;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="540" y="645" width="200" height="45" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="upg_dep" value="depends on" style="endArrow=open;endFill=0;dashed=1;strokeColor=#43A047;strokeWidth=2;" edge="1" parent="1" source="upg_mgr" target="upg_iface">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="upg_impl1" value="" style="endArrow=block;endFill=0;dashed=1;dashPattern=8 4;strokeColor=#82b366;strokeWidth=1.5;" edge="1" parent="1" source="upg_local" target="upg_iface">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="upg_impl2" value="" style="endArrow=block;endFill=0;dashed=1;dashPattern=8 4;strokeColor=#82b366;strokeWidth=1.5;" edge="1" parent="1" source="upg_firebase" target="upg_iface">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== STAGE ==================== -->
+        <mxCell id="stg_title" value="&lt;b&gt;Stage Domain&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#1976D2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="810" y="260" width="340" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- StageManager -->
+        <mxCell id="stg_mgr" value="&lt;b&gt;StageManager&lt;/b&gt;&lt;br&gt;&lt;i&gt;(고수준 모듈)&lt;/i&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="810" y="295" width="200" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="stg_mgr_f" value="- _repository : IStageRepository&#xa;- _statCalculator : StageStatCalc" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="stg_mgr">
+          <mxGeometry y="40" width="200" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="stg_mgr_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="stg_mgr">
+          <mxGeometry y="75" width="200" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="stg_mgr_m" value="+ OnMonsterKilled() / OnStageCleared()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=10;" vertex="1" parent="stg_mgr">
+          <mxGeometry y="83" width="200" height="27" as="geometry"/>
+        </mxCell>
+
+        <!-- IStageRepository -->
+        <mxCell id="stg_iface" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;IStageRepository&lt;/b&gt;&lt;br&gt;&lt;i&gt;(추상화)&lt;/i&gt;" style="swimlane;fontStyle=0;align=center;startSize=50;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="810" y="450" width="200" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="stg_iface_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="stg_iface">
+          <mxGeometry y="50" width="200" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="stg_iface_m" value="+ Save(StageSaveData) : UniTask&#xa;+ Load() : UniTask&lt;SaveData&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=10;" vertex="1" parent="stg_iface">
+          <mxGeometry y="58" width="200" height="42" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="stg_local" value="&lt;b&gt;StageRepository&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Local JSON)&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="800" y="590" width="140" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="stg_firebase" value="&lt;b&gt;FirebaseStageRepository&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Firestore)&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9800;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="800" y="645" width="190" height="45" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="stg_dep" value="depends on" style="endArrow=open;endFill=0;dashed=1;strokeColor=#43A047;strokeWidth=2;" edge="1" parent="1" source="stg_mgr" target="stg_iface">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="stg_impl1" value="" style="endArrow=block;endFill=0;dashed=1;dashPattern=8 4;strokeColor=#82b366;strokeWidth=1.5;" edge="1" parent="1" source="stg_local" target="stg_iface">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="stg_impl2" value="" style="endArrow=block;endFill=0;dashed=1;dashPattern=8 4;strokeColor=#82b366;strokeWidth=1.5;" edge="1" parent="1" source="stg_firebase" target="stg_iface">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ==================== ACCOUNT ==================== -->
+        <mxCell id="acc_title" value="&lt;b&gt;Account Domain&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#E53935;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="260" width="340" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- AccountManager -->
+        <mxCell id="acc_mgr" value="&lt;b&gt;AccountManager&lt;/b&gt;&lt;br&gt;&lt;i&gt;(고수준 모듈, Singleton)&lt;/i&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="295" width="230" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="acc_mgr_f" value="- _repository : IAccountRepository&#xa;- _currentAccount : Account" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="acc_mgr">
+          <mxGeometry y="40" width="230" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="acc_mgr_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="acc_mgr">
+          <mxGeometry y="75" width="230" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="acc_mgr_m" value="+ TryLogin() / TryRegister() / Logout()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=10;" vertex="1" parent="acc_mgr">
+          <mxGeometry y="83" width="230" height="27" as="geometry"/>
+        </mxCell>
+
+        <!-- IAccountRepository -->
+        <mxCell id="acc_iface" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;IAccountRepository&lt;/b&gt;&lt;br&gt;&lt;i&gt;(추상화)&lt;/i&gt;" style="swimlane;fontStyle=0;align=center;startSize=50;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="450" width="230" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="acc_iface_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="acc_iface">
+          <mxGeometry y="50" width="230" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="acc_iface_m" value="+ Register(id, pw) : UniTask&lt;bool&gt;&#xa;+ Login(id, pw) : UniTask&lt;Result&gt;&#xa;+ Logout() : UniTask" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=10;" vertex="1" parent="acc_iface">
+          <mxGeometry y="58" width="230" height="42" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="acc_local" value="&lt;b&gt;AccountRepository&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Local)&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="590" width="150" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="acc_firebase" value="&lt;b&gt;FirebaseAccountRepository&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Firebase Auth)&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9800;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="645" width="200" height="45" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="acc_dep" value="depends on" style="endArrow=open;endFill=0;dashed=1;strokeColor=#43A047;strokeWidth=2;" edge="1" parent="1" source="acc_mgr" target="acc_iface">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="acc_impl1" value="" style="endArrow=block;endFill=0;dashed=1;dashPattern=8 4;strokeColor=#82b366;strokeWidth=1.5;" edge="1" parent="1" source="acc_local" target="acc_iface">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="acc_impl2" value="" style="endArrow=block;endFill=0;dashed=1;dashPattern=8 4;strokeColor=#82b366;strokeWidth=1.5;" edge="1" parent="1" source="acc_firebase" target="acc_iface">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- SAVE DATA LAYER -->
+        <!-- ============================================================ -->
+        <mxCell id="save_title" value="&lt;b&gt;SaveData (직렬화 계층)&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#666666;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="720" width="250" height="25" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="save_curr" value="&lt;b&gt;CurrencySaveData&lt;/b&gt;&lt;br&gt;{ Mantissas[], Exponents[] }" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#90A4AE;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="755" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="save_upg" value="&lt;b&gt;UpgradeSaveData&lt;/b&gt;&lt;br&gt;{ Entries[{ Id, Type, Level, IsPurchased }] }" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#90A4AE;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="280" y="755" width="280" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="save_stg" value="&lt;b&gt;StageSaveData&lt;/b&gt;&lt;br&gt;{ CurrentStage, CurrentKillCount }" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#90A4AE;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="600" y="755" width="230" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="save_acc" value="&lt;b&gt;AccountSaveData&lt;/b&gt;&lt;br&gt;{ Id, PasswordHash }" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#90A4AE;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="870" y="755" width="180" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- FIREBASE STORAGE VISUAL -->
+        <!-- ============================================================ -->
+        <mxCell id="fb_title" value="&lt;b&gt;Firebase Firestore 저장 구조&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#FF9800;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="830" width="250" height="25" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="fb_structure" value="&lt;b&gt;Firestore Document 구조&lt;/b&gt;&lt;br&gt;&lt;br&gt;📁 users/&lt;br&gt;└── 📁 {email}/&lt;br&gt;    ├── 📄 Currency  { mantissas: [...], exponents: [...] }&lt;br&gt;    ├── 📄 Upgrade   { entries: [{ id, type, level, purchased }] }&lt;br&gt;    └── 📄 Stage     { currentStage: N, currentKillCount: M }&lt;br&gt;&lt;br&gt;🔐 Firebase Auth&lt;br&gt;└── Email/Password 인증" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9800;fontSize=11;align=left;verticalAlign=top;spacingLeft=10;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="860" width="450" height="180" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- DIP VISUAL (Dependency Direction) -->
+        <!-- ============================================================ -->
+        <mxCell id="dip_visual_title" value="&lt;b&gt;의존성 방향 시각화&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#43A047;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="830" width="250" height="25" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="dip_high" value="&lt;b&gt;고수준 모듈&lt;/b&gt;&lt;br&gt;(Manager)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="620" y="870" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="dip_abs" value="&lt;b&gt;추상화&lt;/b&gt;&lt;br&gt;(Interface)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="620" y="950" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="dip_low" value="&lt;b&gt;저수준 모듈&lt;/b&gt;&lt;br&gt;(Repository)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9800;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="620" y="1030" width="140" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="dip_arr1" value="depends on" style="endArrow=open;endFill=0;strokeColor=#43A047;strokeWidth=3;dashed=1;" edge="1" parent="1" source="dip_high" target="dip_abs">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="dip_arr2" value="implements" style="endArrow=block;endFill=0;strokeColor=#43A047;strokeWidth=3;dashed=1;dashPattern=8 4;" edge="1" parent="1" source="dip_low" target="dip_abs">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- X mark for wrong dependency -->
+        <mxCell id="dip_wrong" value="&lt;font color=&quot;#E53935&quot; style=&quot;font-size: 20px;&quot;&gt;✗&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#E53935&quot;&gt;직접 의존 금지&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="790" y="940" width="100" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="dip_wrong_line" value="" style="endArrow=block;endFill=1;strokeColor=#E53935;strokeWidth=2;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="760" y="895" as="sourcePoint"/>
+            <mxPoint x="760" y="1055" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dip_wrong_x" value="✗" style="text;html=1;align=center;verticalAlign=middle;fontSize=24;fontColor=#E53935;" vertex="1" parent="1">
+          <mxGeometry x="748" y="960" width="25" height="25" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- BENEFITS BOX -->
+        <!-- ============================================================ -->
+        <mxCell id="benefits" value="&lt;b&gt;이 패턴의 이점 (포트폴리오 어필 포인트)&lt;/b&gt;&lt;hr&gt;1. &lt;b&gt;OCP (개방-폐쇄 원칙)&lt;/b&gt;: 새 저장소 추가 시 기존 코드 수정 불필요&lt;br&gt;2. &lt;b&gt;테스트 용이성&lt;/b&gt;: Mock Repository 주입으로 단위 테스트 가능&lt;br&gt;3. &lt;b&gt;관심사 분리&lt;/b&gt;: 비즈니스 로직과 저장 로직 완전 분리&lt;br&gt;4. &lt;b&gt;교체 용이성&lt;/b&gt;: Local → Firebase 전환이 인터페이스 교체만으로 완료&lt;br&gt;5. &lt;b&gt;비동기 일관성&lt;/b&gt;: UniTask 기반 async/await 패턴 일관 적용" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#43A047;fontSize=11;align=left;verticalAlign=top;spacingLeft=10;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="920" y="860" width="440" height="160" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LEGEND -->
+        <!-- ============================================================ -->
+        <mxCell id="legend" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#BDBDBD;container=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1060" width="450" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_t" value="&lt;b&gt;범례 (Legend)&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;" vertex="1" parent="legend">
+          <mxGeometry x="10" y="5" width="100" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_1" value="&lt;font color=&quot;#43A047&quot;&gt;─ ─ ─▷&lt;/font&gt;  depends on (의존)" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="legend">
+          <mxGeometry x="10" y="28" width="200" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_2" value="&lt;font color=&quot;#82b366&quot;&gt;─ ─ ─▷&lt;/font&gt;  implements (구현)" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="legend">
+          <mxGeometry x="10" y="50" width="200" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="legend">
+          <mxGeometry x="230" y="30" width="15" height="12" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_3t" value="고수준 (Manager)" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="legend">
+          <mxGeometry x="250" y="25" width="110" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="legend">
+          <mxGeometry x="230" y="50" width="15" height="12" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_4t" value="추상화 (Interface)" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="legend">
+          <mxGeometry x="250" y="45" width="110" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_5" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9800;" vertex="1" parent="legend">
+          <mxGeometry x="370" y="30" width="15" height="12" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_5t" value="저수준 (Firebase)" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="legend">
+          <mxGeometry x="390" y="25" width="100" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_6" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;" vertex="1" parent="legend">
+          <mxGeometry x="370" y="50" width="15" height="12" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_6t" value="저수준 (Local)" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="legend">
+          <mxGeometry x="390" y="45" width="100" height="20" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

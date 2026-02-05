@@ -1,0 +1,422 @@
+<mxfile host="app.diagrams.net" modified="2026-02-04T00:00:00.000Z" agent="Claude" version="24.0.0" type="device">
+  <diagram name="시퀀스 다이어그램 - 클릭 → 골드 흐름" id="seq-click">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- TITLE -->
+        <mxCell id="title" value="&lt;b&gt;시퀀스 다이어그램 — 클릭 → 몬스터 처치 → 골드 획득 → 스테이지 진행&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=16;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="400" y="10" width="700" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- ACTORS / LIFELINES -->
+        <!-- ============================================================ -->
+
+        <!-- User -->
+        <mxCell id="a_user" value="&lt;b&gt;User&lt;/b&gt;&lt;br&gt;(Touch Input)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="60" y="60" width="30" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_user" value="" style="endArrow=none;dashed=1;strokeColor=#999999;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="75" y="120" as="sourcePoint"/>
+            <mxPoint x="75" y="1400" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ClickManager -->
+        <mxCell id="a_click" value="&lt;b&gt;ClickManager&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="150" y="70" width="130" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_click" value="" style="endArrow=none;dashed=1;strokeColor=#999999;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="215" y="105" as="sourcePoint"/>
+            <mxPoint x="215" y="1400" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- HeroAnimator -->
+        <mxCell id="a_hero" value="&lt;b&gt;HeroAnimator&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="300" y="70" width="120" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_hero" value="" style="endArrow=none;dashed=1;strokeColor=#999999;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="360" y="105" as="sourcePoint"/>
+            <mxPoint x="360" y="1400" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Monster -->
+        <mxCell id="a_monster" value="&lt;b&gt;Monster&lt;/b&gt;&lt;br&gt;&lt;i&gt;IDamageable&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="440" y="62" width="120" height="43" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_monster" value="" style="endArrow=none;dashed=1;strokeColor=#999999;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="500" y="105" as="sourcePoint"/>
+            <mxPoint x="500" y="1400" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- MonsterHealth -->
+        <mxCell id="a_mhp" value="&lt;b&gt;MonsterHealth&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="590" y="70" width="130" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_mhp" value="" style="endArrow=none;dashed=1;strokeColor=#999999;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="655" y="105" as="sourcePoint"/>
+            <mxPoint x="655" y="1400" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- FeedbackPlayer -->
+        <mxCell id="a_fb" value="&lt;b&gt;FeedbackPlayer&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#AB47BC;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="750" y="70" width="130" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_fb" value="" style="endArrow=none;dashed=1;strokeColor=#999999;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="815" y="105" as="sourcePoint"/>
+            <mxPoint x="815" y="1400" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- MonsterReward -->
+        <mxCell id="a_reward" value="&lt;b&gt;MonsterReward&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="910" y="70" width="130" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_reward" value="" style="endArrow=none;dashed=1;strokeColor=#999999;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="975" y="105" as="sourcePoint"/>
+            <mxPoint x="975" y="1400" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- CurrencyManager -->
+        <mxCell id="a_curr" value="&lt;b&gt;CurrencyManager&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="70" width="140" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_curr" value="" style="endArrow=none;dashed=1;strokeColor=#999999;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1140" y="105" as="sourcePoint"/>
+            <mxPoint x="1140" y="1400" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- MonsterSpawner -->
+        <mxCell id="a_spawner" value="&lt;b&gt;MonsterSpawner&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="70" width="130" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_spawner" value="" style="endArrow=none;dashed=1;strokeColor=#999999;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1305" y="105" as="sourcePoint"/>
+            <mxPoint x="1305" y="1400" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- StageManager -->
+        <mxCell id="a_stage" value="&lt;b&gt;StageManager&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1400" y="70" width="130" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_stage" value="" style="endArrow=none;dashed=1;strokeColor=#999999;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1465" y="105" as="sourcePoint"/>
+            <mxPoint x="1465" y="1400" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- UI (GoldDisplay, StageDisplay) -->
+        <mxCell id="a_ui" value="&lt;b&gt;UI&lt;/b&gt;&lt;br&gt;&lt;i&gt;GoldDisplay, StageDisplay, HealthBar&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B2DFDB;strokeColor=#00897B;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1560" y="60" width="200" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_ui" value="" style="endArrow=none;dashed=1;strokeColor=#999999;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1660" y="105" as="sourcePoint"/>
+            <mxPoint x="1660" y="1400" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- PHASE 1: Click Input & Damage -->
+        <!-- ============================================================ -->
+        <mxCell id="phase1" value="PHASE 1: 클릭 입력 &amp; 데미지 전달" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;fillColor=#FFFDE7;strokeColor=#F9A825;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1800" y="130" width="220" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- User -> ClickManager: Touch -->
+        <mxCell id="m1" value="터치 입력" style="endArrow=block;endFill=1;strokeColor=#333333;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="75" y="150" as="sourcePoint"/>
+            <mxPoint x="215" y="150" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ClickManager -> HeroAnimator: PlayAttack() -->
+        <mxCell id="m2" value="PlayAttack()" style="endArrow=block;endFill=1;strokeColor=#333333;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="215" y="185" as="sourcePoint"/>
+            <mxPoint x="360" y="185" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ClickManager -> Monster: TakeDamage(ClickInfo) -->
+        <mxCell id="m3" value="TakeDamage(ClickInfo)" style="endArrow=block;endFill=1;strokeColor=#E53935;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="215" y="220" as="sourcePoint"/>
+            <mxPoint x="500" y="220" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Monster -> MonsterHealth: TakeDamage(damage) -->
+        <mxCell id="m4" value="TakeDamage(BigNumber)" style="endArrow=block;endFill=1;strokeColor=#333333;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="500" y="255" as="sourcePoint"/>
+            <mxPoint x="655" y="255" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Monster -> FeedbackPlayer: PlayWithDamage() -->
+        <mxCell id="m5" value="PlayWithDamage(pos, damage, isCritical)" style="endArrow=block;endFill=1;strokeColor=#AB47BC;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="500" y="290" as="sourcePoint"/>
+            <mxPoint x="815" y="290" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- FeedbackPlayer -> UI: 데미지 팝업, 파티클, 카메라 쉐이크 -->
+        <mxCell id="m5b" value="ScaleFeedback + ParticleFeedback + DamagePopup" style="endArrow=open;endFill=0;dashed=1;strokeColor=#AB47BC;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="815" y="320" as="sourcePoint"/>
+            <mxPoint x="1660" y="320" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- MonsterHealth -> UI: OnDamaged event -->
+        <mxCell id="m6" value="[event] OnDamaged" style="endArrow=open;endFill=0;dashed=1;strokeColor=#FF9800;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="655" y="350" as="sourcePoint"/>
+            <mxPoint x="1660" y="350" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m6_note" value="HealthBar 갱신" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#00897B;" vertex="1" parent="1">
+          <mxGeometry x="1660" y="335" width="90" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- PHASE 2: Monster Death -->
+        <!-- ============================================================ -->
+        <mxCell id="phase2" value="PHASE 2: 몬스터 사망 처리" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;fillColor=#FFFDE7;strokeColor=#F9A825;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1800" y="390" width="220" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- opt: IsDead -->
+        <mxCell id="opt_frame" value="" style="shape=frame;whiteSpace=wrap;html=1;width=80;height=20;fillColor=none;strokeColor=#E53935;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="55" y="400" width="1720" height="370" as="geometry"/>
+        </mxCell>
+        <mxCell id="opt_label" value="[alt] IsDead == true (몬스터 사망 시)" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#E53935;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="400" width="250" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- MonsterHealth -> MonsterHealth: OnDeath event fires -->
+        <mxCell id="m7" value="[event] OnDeath" style="endArrow=block;endFill=1;strokeColor=#E53935;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="655" y="440" as="sourcePoint"/>
+            <mxPoint x="500" y="440" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Monster -> DeathParticleFeedback -->
+        <mxCell id="m7b" value="DeathParticleFeedback.Play()" style="endArrow=open;endFill=0;dashed=1;strokeColor=#AB47BC;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="500" y="465" as="sourcePoint"/>
+            <mxPoint x="815" y="465" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- MonsterHealth.OnDeath -> MonsterReward: DropReward() -->
+        <mxCell id="m8" value="DropReward()" style="endArrow=block;endFill=1;strokeColor=#333333;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="655" y="495" as="sourcePoint"/>
+            <mxPoint x="975" y="495" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- MonsterReward -> CurrencyManager: [static event] OnGoldDropped -->
+        <mxCell id="m9" value="[static event] OnGoldDropped(goldAmount, position)" style="endArrow=block;endFill=1;strokeColor=#FF9800;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="975" y="530" as="sourcePoint"/>
+            <mxPoint x="1140" y="530" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- CurrencyManager: GoldFlyEffect -> AddGold -->
+        <mxCell id="m10" value="GoldFlyEffect.Play() → onArrived → AddGold()" style="endArrow=open;endFill=0;dashed=1;strokeColor=#FF9800;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1140" y="565" as="sourcePoint"/>
+            <mxPoint x="1660" y="565" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- CurrencyManager -> UI: OnCurrencyChanged -->
+        <mxCell id="m11" value="[event] OnCurrencyChanged(Gold)" style="endArrow=open;endFill=0;dashed=1;strokeColor=#FF9800;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1140" y="600" as="sourcePoint"/>
+            <mxPoint x="1660" y="600" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m11_note" value="GoldDisplay 갱신" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#00897B;" vertex="1" parent="1">
+          <mxGeometry x="1660" y="585" width="100" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- CurrencyManager -> Firebase: Save -->
+        <mxCell id="m11b" value="Repository.Save()" style="endArrow=open;endFill=0;dashed=1;strokeColor=#999999;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1140" y="630" as="sourcePoint"/>
+            <mxPoint x="1140" y="660" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="1180" y="630"/>
+              <mxPoint x="1180" y="660"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- PHASE 3: Stage Progression -->
+        <!-- ============================================================ -->
+        <mxCell id="phase3" value="PHASE 3: 스테이지 진행 &amp; 다음 몬스터 스폰" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;fillColor=#FFFDE7;strokeColor=#F9A825;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1800" y="680" width="260" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Monster.OnMonsterDeath -> MonsterSpawner -->
+        <mxCell id="m12" value="[event] OnMonsterDeath" style="endArrow=block;endFill=1;strokeColor=#E53935;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="500" y="700" as="sourcePoint"/>
+            <mxPoint x="1305" y="700" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- MonsterSpawner -> StageManager: OnMonsterKilled() -->
+        <mxCell id="m13" value="OnMonsterKilled()" style="endArrow=block;endFill=1;strokeColor=#333333;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1305" y="735" as="sourcePoint"/>
+            <mxPoint x="1465" y="735" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- StageManager -> UI: OnKillCountChanged -->
+        <mxCell id="m14" value="[event] OnKillCountChanged" style="endArrow=open;endFill=0;dashed=1;strokeColor=#FF9800;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1465" y="770" as="sourcePoint"/>
+            <mxPoint x="1660" y="770" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m14_note" value="StageDisplay 갱신" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#00897B;" vertex="1" parent="1">
+          <mxGeometry x="1660" y="755" width="100" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- opt: Stage Clear -->
+        <mxCell id="opt2_frame" value="" style="shape=frame;whiteSpace=wrap;html=1;width=80;height=20;fillColor=none;strokeColor=#1976D2;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="800" width="520" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="opt2_label" value="[alt] killCount &gt;= requiredKillCount (스테이지 클리어)" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#1976D2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1255" y="800" width="320" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- StageManager: OnStageCleared() -->
+        <mxCell id="m15" value="OnStageCleared() → _currentStage++" style="endArrow=open;endFill=0;dashed=1;strokeColor=#1976D2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1465" y="840" as="sourcePoint"/>
+            <mxPoint x="1465" y="870" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="1500" y="840"/>
+              <mxPoint x="1500" y="870"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- StageManager -> UI: OnStageChanged -->
+        <mxCell id="m16" value="[event] OnStageChanged(newStage)" style="endArrow=open;endFill=0;dashed=1;strokeColor=#1976D2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1465" y="895" as="sourcePoint"/>
+            <mxPoint x="1660" y="895" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- PHASE 4: Next Monster Spawn -->
+        <!-- ============================================================ -->
+
+        <!-- MonsterSpawner -> AutoClickManager: ClearTarget() -->
+        <mxCell id="m17" value="ClearTarget()" style="endArrow=block;endFill=1;strokeColor=#333333;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1305" y="950" as="sourcePoint"/>
+            <mxPoint x="830" y="950" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- MonsterSpawner: Delay then Spawn -->
+        <mxCell id="m18_note" value="&lt;i&gt;0.5s delay&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="1305" y="968" width="70" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- MonsterSpawner -> MonsterSpawner: SpawnMonster() + ConfigureMonsterStats() -->
+        <mxCell id="m19" value="SpawnMonster() → ConfigureStats()" style="endArrow=block;endFill=1;strokeColor=#1976D2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1305" y="1000" as="sourcePoint"/>
+            <mxPoint x="500" y="1000" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- MonsterSpawner -> UI: HealthBar.SetTarget() -->
+        <mxCell id="m20" value="HealthBar.SetTarget(newMonster)" style="endArrow=open;endFill=0;dashed=1;strokeColor=#00897B;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1305" y="1035" as="sourcePoint"/>
+            <mxPoint x="1660" y="1035" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- MonsterSpawner -> AutoClickManager: SetTarget() -->
+        <mxCell id="m21" value="SetTarget(newMonster)" style="endArrow=block;endFill=1;strokeColor=#333333;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1305" y="1070" as="sourcePoint"/>
+            <mxPoint x="830" y="1070" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- PHASE DIVIDERS -->
+        <!-- ============================================================ -->
+        <mxCell id="div1" value="" style="endArrow=none;strokeColor=#E0E0E0;strokeWidth=1;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="40" y="385" as="sourcePoint"/>
+            <mxPoint x="1780" y="385" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="div2" value="" style="endArrow=none;strokeColor=#E0E0E0;strokeWidth=1;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="40" y="675" as="sourcePoint"/>
+            <mxPoint x="1780" y="675" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="div3" value="" style="endArrow=none;strokeColor=#E0E0E0;strokeWidth=1;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="40" y="930" as="sourcePoint"/>
+            <mxPoint x="1780" y="930" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- NOTES -->
+        <!-- ============================================================ -->
+        <mxCell id="note_dip" value="&lt;b&gt;설계 포인트&lt;/b&gt;&lt;br&gt;- ClickManager → IDamageable (DIP)&lt;br&gt;- static event로 느슨한 결합&lt;br&gt;- 이벤트 체인으로 단방향 흐름&lt;br&gt;- 각 컴포넌트는 단일 책임 (SRP)" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;fillColor=#E8F5E9;strokeColor=#43A047;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1800" y="1100" width="250" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="seq_legend" value="&lt;b&gt;범례&lt;/b&gt;&lt;br&gt;━━━▶ 동기 호출&lt;br&gt;- - -▶ 비동기 / 이벤트&lt;br&gt;&lt;font color=&quot;#E53935&quot;&gt;━━━ 핵심 데미지 흐름&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#FF9800&quot;&gt;- - - 이벤트 구독&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#AB47BC&quot;&gt;━━━ 피드백/연출&lt;/font&gt;" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;fillColor=#F5F5F5;strokeColor=#BDBDBD;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1800" y="1220" width="200" height="120" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
