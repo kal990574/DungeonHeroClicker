@@ -77,7 +77,7 @@ namespace _01.Scripts.UI
                 return;
             }
 
-            if (_upgradeManager.RequiresPurchase(_item) && !_item.IsPurchased)
+            if (_item.RequiresPurchase && !_item.IsPurchased)
             {
                 _upgradeManager.TryPurchase(_item.Id);
             }
@@ -113,7 +113,7 @@ namespace _01.Scripts.UI
                 return;
             }
 
-            if (_upgradeManager.RequiresPurchase(_item) && !_item.IsPurchased)
+            if (_item.RequiresPurchase && !_item.IsPurchased)
             {
                 ShowPurchaseView();
             }
@@ -128,19 +128,19 @@ namespace _01.Scripts.UI
         private void ShowPurchaseView()
         {
             _nameText.text = $"{_item.DisplayName} [Lock]";
-            _costText.text = $"{NumberFormatter.Format(_upgradeManager.GetPurchaseCost(_item))} G";
+            _costText.text = $"{NumberFormatter.Format(_item.PurchaseCost)} G";
 
             string effectLabel = _item.Type == EUpgradeType.Companion ? "DPS" : "DMG";
-            _effectText.text = $"{effectLabel} +{NumberFormatter.Format(_upgradeManager.GetCurrentEffect(_item))}";
+            _effectText.text = $"{effectLabel} +{NumberFormatter.Format(_item.CurrentEffect)}";
         }
 
         private void ShowUpgradeView()
         {
             _nameText.text = $"{_item.DisplayName} Lv.{_item.CurrentLevel}";
-            _costText.text = $"{NumberFormatter.Format(_upgradeManager.GetUpgradeCost(_item))} G";
+            _costText.text = $"{NumberFormatter.Format(_item.UpgradeCost)} G";
 
             string effectLabel = _item.Type == EUpgradeType.Companion ? "DPS" : "DMG";
-            _effectText.text = $"{effectLabel} {NumberFormatter.Format(_upgradeManager.GetCurrentEffect(_item))}";
+            _effectText.text = $"{effectLabel} {NumberFormatter.Format(_item.CurrentEffect)}";
         }
 
         private void UpdateInteractable()
@@ -151,7 +151,7 @@ namespace _01.Scripts.UI
                 return;
             }
 
-            if (_upgradeManager.RequiresPurchase(_item) && !_item.IsPurchased)
+            if (_item.RequiresPurchase && !_item.IsPurchased)
             {
                 _button.interactable = _upgradeManager.CanPurchase(_item.Id);
             }

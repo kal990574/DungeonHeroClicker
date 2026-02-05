@@ -25,5 +25,25 @@ namespace _01.Scripts.Outgame.Stage.Domain
             _currentStage = currentStage;
             _currentKillCount = currentKillCount;
         }
+
+        public StageProgress WithKillCountIncremented()
+        {
+            return new StageProgress(_currentStage, _currentKillCount + 1);
+        }
+
+        public StageProgress WithNextStage()
+        {
+            return new StageProgress(_currentStage + 1, 0);
+        }
+
+        public bool IsCleared(int requiredKillCount)
+        {
+            return _currentKillCount >= requiredKillCount;
+        }
+
+        public bool IsNextBoss(int requiredKillCount)
+        {
+            return _currentKillCount + 1 >= requiredKillCount;
+        }
     }
 }

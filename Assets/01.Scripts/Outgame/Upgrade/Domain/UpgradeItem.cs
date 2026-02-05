@@ -1,4 +1,5 @@
 using System;
+using _01.Scripts.Core.Utils;
 using _01.Scripts.Outgame.Upgrade.Config;
 using UnityEngine;
 
@@ -18,6 +19,17 @@ namespace _01.Scripts.Outgame.Upgrade.Domain
 
         public int CurrentLevel => _currentLevel;
         public bool IsPurchased => _isPurchased;
+
+        public BigNumber UpgradeCost =>
+            new BigNumber(Math.Round(_config.BaseCost * Math.Pow(_config.CostMultiplier, _currentLevel)));
+
+        public BigNumber CurrentEffect =>
+            new BigNumber(_config.BaseEffect * Math.Pow(_config.EffectMultiplier, _currentLevel));
+
+        public BigNumber PurchaseCost =>
+            _config is CompanionUpgradeConfig companion ? companion.PurchaseCost : BigNumber.Zero;
+
+        public bool RequiresPurchase => _config.Type == EUpgradeType.Companion;
 
         public UpgradeItem(UpgradeConfigBase config, int level, bool isPurchased)
         {
@@ -59,6 +71,16 @@ namespace _01.Scripts.Outgame.Upgrade.Domain
             _config = config;
             _currentLevel = level;
             _isPurchased = isPurchased || config.Type != EUpgradeType.Companion;
+        }
+
+        public UpgradeItem WithLevelIncremented()
+        {
+            return new UpgradeItem(_config, _currentLevel + 1, _isPurchased);
+        }
+
+        public UpgradeItem WithPurchased()
+        {
+            return new UpgradeItem(_config, 1, true);
         }
     }
 }

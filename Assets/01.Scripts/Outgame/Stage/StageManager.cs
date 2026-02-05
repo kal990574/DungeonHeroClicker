@@ -22,7 +22,7 @@ namespace _01.Scripts.Outgame.Stage
         public int CurrentStage => _progress.CurrentStage;
         public int CurrentKillCount => _progress.CurrentKillCount;
         public int RequiredKillCount => _stageData.MonstersPerStage;
-        public bool IsNextMonsterBoss => _progress.CurrentKillCount + 1 >= RequiredKillCount;
+        public bool IsNextMonsterBoss => _progress.IsNextBoss(RequiredKillCount);
 
         public IMonsterStatModifier StatCalculator => _statCalculator;
 
@@ -44,10 +44,10 @@ namespace _01.Scripts.Outgame.Stage
 
         public void OnMonsterKilled()
         {
-            _progress = new StageProgress(_progress.CurrentStage, _progress.CurrentKillCount + 1);
+            _progress = _progress.WithKillCountIncremented();
             OnKillCountChanged?.Invoke(_progress.CurrentKillCount, RequiredKillCount);
 
-            if (_progress.CurrentKillCount >= RequiredKillCount)
+            if (_progress.IsCleared(RequiredKillCount))
             {
                 OnStageCleared();
             }
@@ -59,7 +59,7 @@ namespace _01.Scripts.Outgame.Stage
 
         public void OnStageCleared()
         {
-            _progress = new StageProgress(_progress.CurrentStage + 1, 0);
+            _progress = _progress.WithNextStage();
             PersistState();
 
             OnStageChanged?.Invoke(_progress.CurrentStage);
