@@ -77,7 +77,7 @@ namespace _01.Scripts.UI
                 return;
             }
 
-            if (_item.RequiresPurchase && !_item.IsPurchased)
+            if (_upgradeManager.RequiresPurchase(_item) && !_item.IsPurchased)
             {
                 _upgradeManager.TryPurchase(_item.Id);
             }
@@ -93,6 +93,7 @@ namespace _01.Scripts.UI
         {
             if (item.Id == _upgradeItemId)
             {
+                _item = item;
                 UpdateUI();
             }
         }
@@ -112,7 +113,7 @@ namespace _01.Scripts.UI
                 return;
             }
 
-            if (_item.RequiresPurchase && !_item.IsPurchased)
+            if (_upgradeManager.RequiresPurchase(_item) && !_item.IsPurchased)
             {
                 ShowPurchaseView();
             }
@@ -127,19 +128,19 @@ namespace _01.Scripts.UI
         private void ShowPurchaseView()
         {
             _nameText.text = $"{_item.DisplayName} [Lock]";
-            _costText.text = $"{NumberFormatter.Format(_item.PurchaseCost)} G";
+            _costText.text = $"{NumberFormatter.Format(_upgradeManager.GetPurchaseCost(_item))} G";
 
             string effectLabel = _item.Type == EUpgradeType.Companion ? "DPS" : "DMG";
-            _effectText.text = $"{effectLabel} +{NumberFormatter.Format(_item.CurrentEffect)}";
+            _effectText.text = $"{effectLabel} +{NumberFormatter.Format(_upgradeManager.GetCurrentEffect(_item))}";
         }
 
         private void ShowUpgradeView()
         {
             _nameText.text = $"{_item.DisplayName} Lv.{_item.CurrentLevel}";
-            _costText.text = $"{NumberFormatter.Format(_item.UpgradeCost)} G";
+            _costText.text = $"{NumberFormatter.Format(_upgradeManager.GetUpgradeCost(_item))} G";
 
             string effectLabel = _item.Type == EUpgradeType.Companion ? "DPS" : "DMG";
-            _effectText.text = $"{effectLabel} {NumberFormatter.Format(_item.CurrentEffect)}";
+            _effectText.text = $"{effectLabel} {NumberFormatter.Format(_upgradeManager.GetCurrentEffect(_item))}";
         }
 
         private void UpdateInteractable()
@@ -150,13 +151,13 @@ namespace _01.Scripts.UI
                 return;
             }
 
-            if (_item.RequiresPurchase && !_item.IsPurchased)
+            if (_upgradeManager.RequiresPurchase(_item) && !_item.IsPurchased)
             {
-                _button.interactable = _currencyManager.CanAffordGold(_item.PurchaseCost);
+                _button.interactable = _upgradeManager.CanPurchase(_item.Id);
             }
             else
             {
-                _button.interactable = _currencyManager.CanAffordGold(_item.UpgradeCost);
+                _button.interactable = _upgradeManager.CanUpgrade(_item.Id);
             }
         }
     }

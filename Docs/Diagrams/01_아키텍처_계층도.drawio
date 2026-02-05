@@ -1,0 +1,408 @@
+<mxfile host="app.diagrams.net" modified="2026-02-04T00:00:00.000Z" agent="Claude" version="24.0.0" type="device">
+  <diagram name="아키텍처 계층도" id="arch-layer">
+    <mxGraphModel dx="1422" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- ============================================================ -->
+        <!-- TITLE -->
+        <!-- ============================================================ -->
+        <mxCell id="title" value="&lt;b&gt;DungeonHeroClicker — 아키텍처 계층도&lt;/b&gt;&lt;br&gt;의존성 방향: 상위 → 하위 (위에서 아래로)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=18;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="400" y="10" width="600" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LAYER 7: UI / Presentation -->
+        <!-- ============================================================ -->
+        <mxCell id="L7" value="&lt;b&gt;Layer 7 — UI / Presentation&lt;/b&gt;  (01.Scripts/UI/)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B2DFDB;strokeColor=#00897B;container=1;collapsible=0;fontSize=13;fontStyle=1;verticalAlign=top;spacingTop=5;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="70" width="1520" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="L7_1" value="GoldDisplay" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#00897B;fontSize=11;" vertex="1" parent="L7">
+          <mxGeometry x="20" y="35" width="130" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L7_2" value="DPSDisplay" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#00897B;fontSize=11;" vertex="1" parent="L7">
+          <mxGeometry x="165" y="35" width="130" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L7_3" value="StageDisplay" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#00897B;fontSize=11;" vertex="1" parent="L7">
+          <mxGeometry x="310" y="35" width="130" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L7_4" value="MonsterHealthBar" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#00897B;fontSize=11;" vertex="1" parent="L7">
+          <mxGeometry x="455" y="35" width="140" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L7_5" value="UpgradeItemButton" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#00897B;fontSize=11;" vertex="1" parent="L7">
+          <mxGeometry x="610" y="35" width="140" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L7_6" value="LoginScene" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#00897B;fontSize=11;" vertex="1" parent="L7">
+          <mxGeometry x="765" y="35" width="130" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L7_7" value="GoldFlyEffect" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#00897B;fontSize=11;" vertex="1" parent="L7">
+          <mxGeometry x="20" y="72" width="130" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L7_8" value="FloatingTextSpawner" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#00897B;fontSize=11;" vertex="1" parent="L7">
+          <mxGeometry x="165" y="72" width="150" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L7_9" value="ButtonFeedback" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#00897B;fontSize=11;" vertex="1" parent="L7">
+          <mxGeometry x="330" y="72" width="130" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L7_10" value="UITextFeedback" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#00897B;fontSize=11;" vertex="1" parent="L7">
+          <mxGeometry x="475" y="72" width="130" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L7_11" value="ScrollFadeIndicator" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#00897B;fontSize=11;" vertex="1" parent="L7">
+          <mxGeometry x="620" y="72" width="150" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LAYER 6: Feedback / VFX -->
+        <!-- ============================================================ -->
+        <mxCell id="L6" value="&lt;b&gt;Layer 6 — Feedback / VFX&lt;/b&gt;  (01.Scripts/Ingame/Feedback/)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#AB47BC;container=1;collapsible=0;fontSize=13;fontStyle=1;verticalAlign=top;spacingTop=5;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="210" width="1520" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="L6_1" value="FeedbackPlayer" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AB47BC;fontSize=11;fontStyle=1;" vertex="1" parent="L6">
+          <mxGeometry x="20" y="35" width="140" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L6_2" value="HeroTierUpFeedbackPlayer" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AB47BC;fontSize=11;fontStyle=1;" vertex="1" parent="L6">
+          <mxGeometry x="175" y="35" width="190" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L6_3" value="ScaleFeedback" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AB47BC;fontSize=11;" vertex="1" parent="L6">
+          <mxGeometry x="20" y="72" width="120" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L6_4" value="ParticleFeedback" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AB47BC;fontSize=11;" vertex="1" parent="L6">
+          <mxGeometry x="155" y="72" width="130" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L6_5" value="DamagePopupFeedback" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AB47BC;fontSize=11;" vertex="1" parent="L6">
+          <mxGeometry x="300" y="72" width="160" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L6_6" value="ColorFlashFeedback" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AB47BC;fontSize=11;" vertex="1" parent="L6">
+          <mxGeometry x="475" y="72" width="150" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L6_7" value="CameraShakeFeedback" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AB47BC;fontSize=11;" vertex="1" parent="L6">
+          <mxGeometry x="640" y="72" width="160" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L6_8" value="DeathParticleFeedback" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AB47BC;fontSize=11;" vertex="1" parent="L6">
+          <mxGeometry x="815" y="72" width="160" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L6_9" value="SoundFeedback" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AB47BC;fontSize=11;" vertex="1" parent="L6">
+          <mxGeometry x="990" y="72" width="120" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L6_10" value="TierUpScale / Text / Particle" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AB47BC;fontSize=11;" vertex="1" parent="L6">
+          <mxGeometry x="380" y="35" width="200" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LAYER 5: Ingame Systems -->
+        <!-- ============================================================ -->
+        <mxCell id="L5" value="&lt;b&gt;Layer 5 — Ingame Systems&lt;/b&gt;  (01.Scripts/Ingame/)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1976D2;container=1;collapsible=0;fontSize=13;fontStyle=1;verticalAlign=top;spacingTop=5;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="350" width="1520" height="120" as="geometry"/>
+        </mxCell>
+        <!-- Click -->
+        <mxCell id="L5_grp1" value="Click" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;container=1;collapsible=0;fontSize=10;fontStyle=1;verticalAlign=top;dashed=1;dashPattern=5 5;" vertex="1" parent="L5">
+          <mxGeometry x="15" y="30" width="310" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="L5_1" value="ClickManager" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1976D2;fontSize=11;fontStyle=1;" vertex="1" parent="L5_grp1">
+          <mxGeometry x="10" y="22" width="130" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="L5_2" value="AutoClickManager" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1976D2;fontSize=11;fontStyle=1;" vertex="1" parent="L5_grp1">
+          <mxGeometry x="150" y="22" width="145" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="L5_3" value="DamageFloater" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1976D2;fontSize=11;" vertex="1" parent="L5_grp1">
+          <mxGeometry x="10" y="52" width="120" height="26" as="geometry"/>
+        </mxCell>
+        <!-- Monster -->
+        <mxCell id="L5_grp2" value="Monster" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;container=1;collapsible=0;fontSize=10;fontStyle=1;verticalAlign=top;dashed=1;dashPattern=5 5;" vertex="1" parent="L5">
+          <mxGeometry x="340" y="30" width="470" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="L5_4" value="Monster" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1976D2;fontSize=11;fontStyle=1;" vertex="1" parent="L5_grp2">
+          <mxGeometry x="10" y="22" width="95" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="L5_5" value="MonsterHealth" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1976D2;fontSize=11;" vertex="1" parent="L5_grp2">
+          <mxGeometry x="115" y="22" width="110" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="L5_6" value="MonsterReward" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1976D2;fontSize=11;" vertex="1" parent="L5_grp2">
+          <mxGeometry x="235" y="22" width="110" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="L5_7" value="MonsterSpawner" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1976D2;fontSize=11;fontStyle=1;" vertex="1" parent="L5_grp2">
+          <mxGeometry x="355" y="22" width="110" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="L5_8" value="MonsterAnimator" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1976D2;fontSize=11;" vertex="1" parent="L5_grp2">
+          <mxGeometry x="10" y="52" width="120" height="26" as="geometry"/>
+        </mxCell>
+        <!-- Hero -->
+        <mxCell id="L5_grp3" value="Hero" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;container=1;collapsible=0;fontSize=10;fontStyle=1;verticalAlign=top;dashed=1;dashPattern=5 5;" vertex="1" parent="L5">
+          <mxGeometry x="825" y="30" width="370" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="L5_9" value="HeroVisual" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1976D2;fontSize=11;" vertex="1" parent="L5_grp3">
+          <mxGeometry x="10" y="22" width="100" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="L5_10" value="HeroAnimator" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1976D2;fontSize=11;" vertex="1" parent="L5_grp3">
+          <mxGeometry x="120" y="22" width="110" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="L5_11" value="HeroUpgradeConnector" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1976D2;fontSize=11;" vertex="1" parent="L5_grp3">
+          <mxGeometry x="240" y="22" width="125" height="26" as="geometry"/>
+        </mxCell>
+        <!-- Companion -->
+        <mxCell id="L5_grp4" value="Companion" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;container=1;collapsible=0;fontSize=10;fontStyle=1;verticalAlign=top;dashed=1;dashPattern=5 5;" vertex="1" parent="L5">
+          <mxGeometry x="1210" y="30" width="290" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="L5_12" value="CompanionVisualManager" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1976D2;fontSize=11;" vertex="1" parent="L5_grp4">
+          <mxGeometry x="10" y="22" width="170" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="L5_13" value="CompanionAnimator" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1976D2;fontSize=11;" vertex="1" parent="L5_grp4">
+          <mxGeometry x="10" y="52" width="150" height="26" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LAYER 4: Outgame Managers -->
+        <!-- ============================================================ -->
+        <mxCell id="L4" value="&lt;b&gt;Layer 4 — Outgame Managers&lt;/b&gt;  (01.Scripts/Outgame/*/)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#E53935;container=1;collapsible=0;fontSize=13;fontStyle=1;verticalAlign=top;spacingTop=5;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="500" width="1520" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="L4_1" value="CurrencyManager" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E53935;fontSize=12;fontStyle=1;" vertex="1" parent="L4">
+          <mxGeometry x="40" y="35" width="150" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="L4_2" value="UpgradeManager" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E53935;fontSize=12;fontStyle=1;" vertex="1" parent="L4">
+          <mxGeometry x="230" y="35" width="150" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="L4_3" value="StageManager" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E53935;fontSize=12;fontStyle=1;" vertex="1" parent="L4">
+          <mxGeometry x="420" y="35" width="140" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="L4_4" value="AccountManager" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E53935;fontSize=12;fontStyle=1;" vertex="1" parent="L4">
+          <mxGeometry x="600" y="35" width="150" height="32" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LAYER 3: Repository (Data Persistence) -->
+        <!-- ============================================================ -->
+        <mxCell id="L3" value="&lt;b&gt;Layer 3 — Repository (Data Persistence)&lt;/b&gt;  (01.Scripts/Outgame/*/Repo/)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;container=1;collapsible=0;fontSize=13;fontStyle=1;verticalAlign=top;spacingTop=5;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="610" width="1520" height="110" as="geometry"/>
+        </mxCell>
+        <!-- Local -->
+        <mxCell id="L3_grp1" value="Local (JSON)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFDE7;strokeColor=#F9A825;container=1;collapsible=0;fontSize=10;fontStyle=1;verticalAlign=top;dashed=1;dashPattern=5 5;" vertex="1" parent="L3">
+          <mxGeometry x="15" y="30" width="720" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="L3_1" value="CurrencyRepository" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F9A825;fontSize=11;" vertex="1" parent="L3_grp1">
+          <mxGeometry x="10" y="25" width="140" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="L3_2" value="UpgradeRepository" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F9A825;fontSize=11;" vertex="1" parent="L3_grp1">
+          <mxGeometry x="165" y="25" width="140" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="L3_3" value="StageRepository" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F9A825;fontSize=11;" vertex="1" parent="L3_grp1">
+          <mxGeometry x="320" y="25" width="130" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="L3_4" value="AccountRepository" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F9A825;fontSize=11;" vertex="1" parent="L3_grp1">
+          <mxGeometry x="465" y="25" width="140" height="28" as="geometry"/>
+        </mxCell>
+        <!-- Firebase -->
+        <mxCell id="L3_grp2" value="Firebase (Firestore / Auth)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9800;container=1;collapsible=0;fontSize=10;fontStyle=1;verticalAlign=top;dashed=1;dashPattern=5 5;" vertex="1" parent="L3">
+          <mxGeometry x="755" y="30" width="750" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="L3_5" value="FirebaseCurrencyRepository" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FF9800;fontSize=11;" vertex="1" parent="L3_grp2">
+          <mxGeometry x="10" y="25" width="190" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="L3_6" value="FirebaseUpgradeRepository" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FF9800;fontSize=11;" vertex="1" parent="L3_grp2">
+          <mxGeometry x="215" y="25" width="190" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="L3_7" value="FirebaseStageRepository" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FF9800;fontSize=11;" vertex="1" parent="L3_grp2">
+          <mxGeometry x="420" y="25" width="170" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="L3_8" value="FirebaseAccountRepository" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#FF9800;fontSize=11;" vertex="1" parent="L3_grp2">
+          <mxGeometry x="605" y="25" width="140" height="28" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LAYER 2: Domain / Config -->
+        <!-- ============================================================ -->
+        <mxCell id="L2" value="&lt;b&gt;Layer 2 — Domain / Config&lt;/b&gt;  (01.Scripts/Outgame/*/Domain/, Config/)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;container=1;collapsible=0;fontSize=13;fontStyle=1;verticalAlign=top;spacingTop=5;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="750" width="1520" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="L2_1" value="UpgradeItem" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673A6;fontSize=11;" vertex="1" parent="L2">
+          <mxGeometry x="20" y="35" width="110" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="L2_2" value="Currency (struct)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673A6;fontSize=11;" vertex="1" parent="L2">
+          <mxGeometry x="145" y="35" width="120" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="L2_3" value="Account" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673A6;fontSize=11;" vertex="1" parent="L2">
+          <mxGeometry x="280" y="35" width="90" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="L2_4" value="StageStatCalculator" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673A6;fontSize=11;" vertex="1" parent="L2">
+          <mxGeometry x="385" y="35" width="140" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="L2_5" value="AccountValidator" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673A6;fontSize=11;" vertex="1" parent="L2">
+          <mxGeometry x="540" y="35" width="130" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="L2_6" value="ClickInfo (struct)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673A6;fontSize=11;" vertex="1" parent="L2">
+          <mxGeometry x="685" y="35" width="120" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="L2_7" value="TierChangeInfo (struct)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673A6;fontSize=11;" vertex="1" parent="L2">
+          <mxGeometry x="820" y="35" width="150" height="28" as="geometry"/>
+        </mxCell>
+        <!-- Config (ScriptableObjects) -->
+        <mxCell id="L2_8" value="&lt;i&gt;UpgradeConfigBase&lt;/i&gt; (SO)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#9673A6;fontSize=11;fontStyle=2;" vertex="1" parent="L2">
+          <mxGeometry x="20" y="72" width="160" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="L2_9" value="HeroUpgradeConfig" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#9673A6;fontSize=11;" vertex="1" parent="L2">
+          <mxGeometry x="195" y="72" width="140" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="L2_10" value="CompanionUpgradeConfig" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#9673A6;fontSize=11;" vertex="1" parent="L2">
+          <mxGeometry x="350" y="72" width="170" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="L2_11" value="StageData (SO)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#9673A6;fontSize=11;" vertex="1" parent="L2">
+          <mxGeometry x="535" y="72" width="120" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="L2_12" value="StageScalingData (SO)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#9673A6;fontSize=11;" vertex="1" parent="L2">
+          <mxGeometry x="670" y="72" width="155" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="L2_13" value="CurrencyConfig (SO)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#9673A6;fontSize=11;" vertex="1" parent="L2">
+          <mxGeometry x="840" y="72" width="145" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="L2_14" value="HeroVisualData (SO)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#9673A6;fontSize=11;" vertex="1" parent="L2">
+          <mxGeometry x="1000" y="72" width="145" height="28" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LAYER 1: Interfaces (Abstractions) -->
+        <!-- ============================================================ -->
+        <mxCell id="L1" value="&lt;b&gt;Layer 1 — Interfaces (Abstractions)&lt;/b&gt;  (01.Scripts/Interfaces/)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#43A047;container=1;collapsible=0;fontSize=13;fontStyle=1;verticalAlign=top;spacingTop=5;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="890" width="1520" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="L1_1" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;IDamageable&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#43A047;fontSize=10;dashed=1;dashPattern=8 4;" vertex="1" parent="L1">
+          <mxGeometry x="20" y="32" width="120" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="L1_2" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;IClickable&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#43A047;fontSize=10;dashed=1;dashPattern=8 4;" vertex="1" parent="L1">
+          <mxGeometry x="155" y="32" width="110" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="L1_3" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;IStageProvider&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#43A047;fontSize=10;dashed=1;dashPattern=8 4;" vertex="1" parent="L1">
+          <mxGeometry x="280" y="32" width="130" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="L1_4" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;IStageProgressHandler&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#43A047;fontSize=10;dashed=1;dashPattern=8 4;" vertex="1" parent="L1">
+          <mxGeometry x="425" y="32" width="160" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="L1_5" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;IMonsterStatModifier&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#43A047;fontSize=10;dashed=1;dashPattern=8 4;" vertex="1" parent="L1">
+          <mxGeometry x="600" y="32" width="160" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="L1_6" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;ICompanionVisualManager&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#43A047;fontSize=10;dashed=1;dashPattern=8 4;" vertex="1" parent="L1">
+          <mxGeometry x="775" y="32" width="170" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="L1_7" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;ICurrencyRepository&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#43A047;fontSize=10;dashed=1;dashPattern=8 4;" vertex="1" parent="L1">
+          <mxGeometry x="20" y="74" width="150" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="L1_8" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;IUpgradeRepository&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#43A047;fontSize=10;dashed=1;dashPattern=8 4;" vertex="1" parent="L1">
+          <mxGeometry x="185" y="74" width="150" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="L1_9" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;IStageRepository&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#43A047;fontSize=10;dashed=1;dashPattern=8 4;" vertex="1" parent="L1">
+          <mxGeometry x="350" y="74" width="140" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="L1_10" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;IAccountRepository&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#43A047;fontSize=10;dashed=1;dashPattern=8 4;" vertex="1" parent="L1">
+          <mxGeometry x="505" y="74" width="150" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="L1_11" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;IAccountService&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#43A047;fontSize=10;dashed=1;dashPattern=8 4;" vertex="1" parent="L1">
+          <mxGeometry x="670" y="74" width="140" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="L1_12" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;IFeedback&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#43A047;fontSize=10;dashed=1;dashPattern=8 4;" vertex="1" parent="L1">
+          <mxGeometry x="960" y="32" width="110" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="L1_13" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;IValueFeedback&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#43A047;fontSize=10;dashed=1;dashPattern=8 4;" vertex="1" parent="L1">
+          <mxGeometry x="1085" y="32" width="130" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="L1_14" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;ILoginStateProvider&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#43A047;fontSize=10;dashed=1;dashPattern=8 4;" vertex="1" parent="L1">
+          <mxGeometry x="825" y="74" width="150" height="35" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LAYER 0: Core Infrastructure -->
+        <!-- ============================================================ -->
+        <mxCell id="L0" value="&lt;b&gt;Layer 0 — Core Infrastructure&lt;/b&gt;  (01.Scripts/Core/)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;container=1;collapsible=0;fontSize=13;fontStyle=1;verticalAlign=top;spacingTop=5;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1030" width="1520" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="L0_1" value="BigNumber (struct)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6C8EBF;fontSize=11;fontStyle=1;" vertex="1" parent="L0">
+          <mxGeometry x="20" y="35" width="140" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L0_2" value="NumberFormatter" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6C8EBF;fontSize=11;" vertex="1" parent="L0">
+          <mxGeometry x="175" y="35" width="130" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L0_3" value="SFXManager (Singleton)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6C8EBF;fontSize=11;fontStyle=1;" vertex="1" parent="L0">
+          <mxGeometry x="320" y="35" width="160" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L0_4" value="BGMManager" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6C8EBF;fontSize=11;" vertex="1" parent="L0">
+          <mxGeometry x="495" y="35" width="110" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L0_5" value="FirebaseInitializer (Singleton)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6C8EBF;fontSize=11;" vertex="1" parent="L0">
+          <mxGeometry x="620" y="35" width="195" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="L0_6" value="Crypto" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6C8EBF;fontSize=11;" vertex="1" parent="L0">
+          <mxGeometry x="830" y="35" width="80" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- DEPENDENCY ARROWS (between layers) -->
+        <!-- ============================================================ -->
+        <!-- UI → Feedback -->
+        <mxCell id="dep_7_6" value="" style="endArrow=open;endFill=0;dashed=1;strokeColor=#999999;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="L7" target="L6">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <!-- UI → Managers -->
+        <mxCell id="dep_7_4" value="" style="endArrow=open;endFill=0;dashed=1;strokeColor=#E53935;strokeWidth=1.5;exitX=0.85;exitY=1;exitDx=0;exitDy=0;entryX=0.85;entryY=0;entryDx=0;entryDy=0;curved=1;" edge="1" parent="1" source="L7" target="L4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="dep_7_4_label" value="subscribe events" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=9;fontColor=#E53935;" vertex="1" parent="1">
+          <mxGeometry x="1370" y="380" width="100" height="20" as="geometry"/>
+        </mxCell>
+        <!-- Feedback → Ingame -->
+        <mxCell id="dep_6_5" value="" style="endArrow=open;endFill=0;dashed=1;strokeColor=#999999;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="L6" target="L5">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <!-- Ingame → Managers -->
+        <mxCell id="dep_5_4" value="" style="endArrow=open;endFill=0;dashed=1;strokeColor=#999999;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="L5" target="L4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <!-- Managers → Interfaces (DIP!) -->
+        <mxCell id="dep_4_1" value="&lt;b&gt;DIP&lt;/b&gt;: 인터페이스에 의존" style="endArrow=open;endFill=0;dashed=1;strokeColor=#43A047;strokeWidth=2;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=0;entryDx=0;entryDy=0;curved=1;" edge="1" parent="1" source="L4" target="L1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <!-- Repository → Interfaces (DIP!) -->
+        <mxCell id="dep_3_1" value="&lt;b&gt;DIP&lt;/b&gt;: 인터페이스 구현" style="endArrow=block;endFill=0;dashed=1;strokeColor=#43A047;strokeWidth=2;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.7;entryY=0;entryDx=0;entryDy=0;curved=1;" edge="1" parent="1" source="L3" target="L1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <!-- Managers → Domain -->
+        <mxCell id="dep_4_2" value="" style="endArrow=open;endFill=0;dashed=1;strokeColor=#999999;strokeWidth=1.5;exitX=0.6;exitY=1;exitDx=0;exitDy=0;entryX=0.6;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="L4" target="L2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <!-- Domain → Core -->
+        <mxCell id="dep_2_0" value="" style="endArrow=open;endFill=0;dashed=1;strokeColor=#999999;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="L1" target="L0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LEGEND -->
+        <!-- ============================================================ -->
+        <mxCell id="legend" value="&lt;b&gt;범례 (Legend)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#BDBDBD;container=1;collapsible=0;fontSize=12;fontStyle=1;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1140" width="600" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_1" value="──▷  의존 (uses)" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=10;fontColor=#999999;" vertex="1" parent="legend">
+          <mxGeometry x="10" y="30" width="110" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_2" value="──▷  구현 (implements)" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=10;fontColor=#43A047;" vertex="1" parent="legend">
+          <mxGeometry x="10" y="55" width="130" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_3" value="┆ ┆  점선 테두리 = 인터페이스" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=10;fontColor=#43A047;" vertex="1" parent="legend">
+          <mxGeometry x="160" y="30" width="180" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_4" value="(SO) = ScriptableObject" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=10;fontColor=#9673A6;" vertex="1" parent="legend">
+          <mxGeometry x="160" y="55" width="130" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_5" value="Singleton = 전역 접근 싱글톤" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=10;fontColor=#6C8EBF;" vertex="1" parent="legend">
+          <mxGeometry x="360" y="30" width="170" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg_6" value="굵은 글씨 = 핵심 클래스" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=10;fontColor=#333333;" vertex="1" parent="legend">
+          <mxGeometry x="360" y="55" width="130" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- External Dependencies note -->
+        <mxCell id="ext_note" value="&lt;b&gt;외부 라이브러리&lt;/b&gt;&lt;br&gt;DOTween | LeanPool | UniTask | Firebase | TextMeshPro | SPUM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#90A4AE;fontSize=11;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="700" y="1140" width="500" height="50" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -73,6 +73,33 @@ namespace _01.Scripts.Outgame.Upgrade
             return _items.TryGetValue(id, out var item) ? item : null;
         }
 
+        public BigNumber GetUpgradeCost(UpgradeItem item)
+        {
+            double cost = item.Config.BaseCost * Math.Pow(item.Config.CostMultiplier, item.CurrentLevel);
+            return new BigNumber(Math.Round(cost));
+        }
+
+        public BigNumber GetCurrentEffect(UpgradeItem item)
+        {
+            double effect = item.Config.BaseEffect * Math.Pow(item.Config.EffectMultiplier, item.CurrentLevel);
+            return new BigNumber(effect);
+        }
+
+        public BigNumber GetPurchaseCost(UpgradeItem item)
+        {
+            if (item.Config is CompanionUpgradeConfig companion)
+            {
+                return companion.PurchaseCost;
+            }
+
+            return BigNumber.Zero;
+        }
+
+        public bool RequiresPurchase(UpgradeItem item)
+        {
+            return item.Type == EUpgradeType.Companion;
+        }
+
         public BigNumber TotalClickDamage
         {
             get
@@ -82,7 +109,7 @@ namespace _01.Scripts.Outgame.Upgrade
                 {
                     if (item.Type == EUpgradeType.Hero && item.IsPurchased)
                     {
-                        total += item.CurrentEffect;
+                        total += GetCurrentEffect(item);
                     }
                 }
                 return total;
@@ -98,14 +125,14 @@ namespace _01.Scripts.Outgame.Upgrade
                 {
                     if (item.Type == EUpgradeType.Companion && item.IsPurchased)
                     {
-                        total += item.CurrentEffect;
+                        total += GetCurrentEffect(item);
                     }
                 }
                 return total;
             }
         }
 
-        public bool TryUpgrade(string itemId)
+        public bool CanUpgrade(string itemId)
         {
             var item = GetItem(itemId);
             if (item == null)
@@ -113,55 +140,69 @@ namespace _01.Scripts.Outgame.Upgrade
                 return false;
             }
 
-            if (!item.CanUpgrade())
+            return item.IsPurchased && _currencyManager.CanAffordGold(GetUpgradeCost(item));
+        }
+
+        public bool CanPurchase(string itemId)
+        {
+            var item = GetItem(itemId);
+            if (item == null)
             {
                 return false;
             }
 
-            BigNumber cost = item.UpgradeCost;
+            return RequiresPurchase(item) && !item.IsPurchased && _currencyManager.CanAffordGold(GetPurchaseCost(item));
+        }
+
+        public bool TryUpgrade(string itemId)
+        {
+            var item = GetItem(itemId);
+            if (item == null || !item.IsPurchased)
+            {
+                return false;
+            }
+
+            BigNumber cost = GetUpgradeCost(item);
             if (!_currencyManager.TrySpendGold(cost))
             {
                 return false;
             }
 
-            item.TryUpgrade();
+            var upgradedItem = new UpgradeItem(item.Config, item.CurrentLevel + 1, item.IsPurchased);
+            _items[itemId] = upgradedItem;
             PersistState();
 
             SFXManager.Instance?.PlayUpgrade();
-            OnItemUpgraded?.Invoke(item);
-            NotifyTypeChanged(item.Type);
+            OnItemUpgraded?.Invoke(upgradedItem);
+            NotifyTypeChanged(upgradedItem.Type);
 
-            Debug.Log($"[UpgradeManager] {item.DisplayName} Lv.{item.CurrentLevel}, Effect: {item.CurrentEffect}");
+            Debug.Log($"[UpgradeManager] {upgradedItem.DisplayName} Lv.{upgradedItem.CurrentLevel}, Effect: {GetCurrentEffect(upgradedItem)}");
             return true;
         }
 
         public bool TryPurchase(string itemId)
         {
             var item = GetItem(itemId);
-            if (item == null)
+            if (item == null || !RequiresPurchase(item) || item.IsPurchased)
             {
                 return false;
             }
 
-            if (!item.CanPurchase())
-            {
-                return false;
-            }
-
-            BigNumber cost = item.PurchaseCost;
+            BigNumber cost = GetPurchaseCost(item);
             if (!_currencyManager.TrySpendGold(cost))
             {
                 return false;
             }
 
-            item.TryPurchase();
+            var purchasedItem = new UpgradeItem(item.Config, 1, true);
+            _items[itemId] = purchasedItem;
             PersistState();
 
             SFXManager.Instance?.PlayUpgrade();
-            OnItemPurchased?.Invoke(item);
-            NotifyTypeChanged(item.Type);
+            OnItemPurchased?.Invoke(purchasedItem);
+            NotifyTypeChanged(purchasedItem.Type);
 
-            Debug.Log($"[UpgradeManager] {item.DisplayName} Purchased! Effect: {item.CurrentEffect}");
+            Debug.Log($"[UpgradeManager] {purchasedItem.DisplayName} Purchased! Effect: {GetCurrentEffect(purchasedItem)}");
             return true;
         }
 

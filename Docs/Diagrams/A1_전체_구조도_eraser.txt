@@ -1,0 +1,45 @@
+// =================================================
+// 전체 구조도
+// "이 시스템은 뭘로 구성되어 있는가?"
+// =================================================
+// eraser.io 에디터에 붙여넣기 (Diagram as Code)
+//
+// [판단 근거]
+// Ingame vs Outgame: 상단 = 실시간 전투, 하단 = 영속 데이터
+// 순환 구조: Click → Monster → Currency → Upgrade → Click
+// 관심사 분리: 각 모듈은 하나의 책임, 이벤트 기반 통신
+
+colorMode bold
+typeface clean
+
+// === Ingame (실시간 전투) ===
+Ingame [color: blue] {
+  Click System [icon: mouse-pointer, color: blue]
+  Monster System [icon: skull, color: red]
+  "Hero & Companion" [icon: users, color: purple]
+}
+
+// === Outgame (영속 데이터) ===
+Outgame [color: orange] {
+  Currency [icon: coins, color: orange]
+  Upgrade [icon: arrow-up-circle, color: green]
+  Stage [icon: map, color: blue]
+}
+
+// === UI ===
+"UI Layer" [icon: monitor, color: green]
+
+// === 코어 루프 (순환) ===
+Click System > Monster System: 데미지
+Monster System > Currency: 골드 드롭
+Currency > Upgrade: 골드 소비
+Upgrade > Click System: 데미지↑
+
+// === 부가 흐름 ===
+Upgrade > "Hero & Companion": 비주얼 변경
+Monster System > Stage: 킬 카운트
+Stage --> Monster System: 스탯 스케일링
+
+// === 이벤트 → UI 갱신 ===
+Ingame --> "UI Layer": 이벤트
+Outgame --> "UI Layer": 이벤트

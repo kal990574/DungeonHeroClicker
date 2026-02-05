@@ -1,0 +1,480 @@
+<mxfile host="app.diagrams.net" modified="2026-02-04T00:00:00.000Z" agent="Claude" version="24.0.0" type="device">
+  <diagram name="UML 클래스 다이어그램 - Core Game Loop" id="uml-class">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2400" pageHeight="1800" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- TITLE -->
+        <mxCell id="title" value="&lt;b&gt;DungeonHeroClicker — UML 클래스 다이어그램 (Core Game Loop)&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=16;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="600" y="10" width="600" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- ================================================================ -->
+        <!-- INTERFACES -->
+        <!-- ================================================================ -->
+
+        <!-- IDamageable -->
+        <mxCell id="i_dmg" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;IDamageable&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="140" y="80" width="200" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="i_dmg_f" value="+ CurrentHealth : BigNumber&#xa;+ MaxHealth : BigNumber&#xa;+ IsDead : bool" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="i_dmg">
+          <mxGeometry y="40" width="200" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="i_dmg_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="i_dmg">
+          <mxGeometry y="90" width="200" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="i_dmg_m" value="+ TakeDamage(ClickInfo) : void" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="i_dmg">
+          <mxGeometry y="98" width="200" height="32" as="geometry"/>
+        </mxCell>
+
+        <!-- IClickable -->
+        <mxCell id="i_click" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;IClickable&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="400" y="80" width="180" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="i_click_f" value="+ IsClickable : bool" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="i_click">
+          <mxGeometry y="40" width="180" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="i_click_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="i_click">
+          <mxGeometry y="70" width="180" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="i_click_m" value="+ OnClick() : void" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="i_click">
+          <mxGeometry y="78" width="180" height="32" as="geometry"/>
+        </mxCell>
+
+        <!-- IFeedback -->
+        <mxCell id="i_fb" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;IFeedback&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="1700" y="80" width="180" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="i_fb_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="i_fb">
+          <mxGeometry y="40" width="180" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="i_fb_m" value="+ Play(Vector3) : void&#xa;+ Stop() : void" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="i_fb">
+          <mxGeometry y="48" width="180" height="42" as="geometry"/>
+        </mxCell>
+
+        <!-- IStageProvider -->
+        <mxCell id="i_stage" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;IStageProvider&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="640" y="80" width="220" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="i_stage_f" value="+ CurrentStage : int&#xa;+ CurrentKillCount : int&#xa;+ RequiredKillCount : int" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="i_stage">
+          <mxGeometry y="40" width="220" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="i_stage_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="i_stage">
+          <mxGeometry y="90" width="220" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="i_stage_m" value="" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=10;" vertex="1" parent="i_stage">
+          <mxGeometry y="98" width="220" height="22" as="geometry"/>
+        </mxCell>
+
+        <!-- ICurrencyRepository -->
+        <mxCell id="i_curr_repo" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;ICurrencyRepository&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="920" y="80" width="220" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="i_curr_repo_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="i_curr_repo">
+          <mxGeometry y="40" width="220" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="i_curr_repo_m" value="+ Save(CurrencySaveData) : UniTask&#xa;+ Load() : UniTask&lt;CurrencySaveData&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="i_curr_repo">
+          <mxGeometry y="48" width="220" height="52" as="geometry"/>
+        </mxCell>
+
+        <!-- IUpgradeRepository -->
+        <mxCell id="i_upg_repo" value="&amp;laquo;interface&amp;raquo;&lt;br&gt;&lt;b&gt;IUpgradeRepository&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="80" width="220" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="i_upg_repo_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="i_upg_repo">
+          <mxGeometry y="40" width="220" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="i_upg_repo_m" value="+ Save(UpgradeSaveData) : UniTask&#xa;+ Load() : UniTask&lt;UpgradeSaveData&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="i_upg_repo">
+          <mxGeometry y="48" width="220" height="52" as="geometry"/>
+        </mxCell>
+
+        <!-- ================================================================ -->
+        <!-- STRUCTS -->
+        <!-- ================================================================ -->
+
+        <!-- BigNumber -->
+        <mxCell id="s_big" value="&amp;laquo;struct&amp;raquo;&lt;br&gt;&lt;b&gt;BigNumber&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="140" y="280" width="200" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="s_big_f" value="+ Mantissa : double&#xa;+ Exponent : int" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="s_big">
+          <mxGeometry y="40" width="200" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="s_big_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="s_big">
+          <mxGeometry y="75" width="200" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="s_big_m" value="+ operator +, -, *, /&#xa;+ ToString() : string" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=10;" vertex="1" parent="s_big">
+          <mxGeometry y="83" width="200" height="37" as="geometry"/>
+        </mxCell>
+
+        <!-- ClickInfo -->
+        <mxCell id="s_click" value="&amp;laquo;struct&amp;raquo;&lt;br&gt;&lt;b&gt;ClickInfo&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="400" y="280" width="180" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="s_click_f" value="+ Damage : BigNumber&#xa;+ IsCritical : bool&#xa;+ ClickType : EClickType" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="s_click">
+          <mxGeometry y="40" width="180" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="s_click_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="s_click">
+          <mxGeometry y="90" width="180" height="8" as="geometry"/>
+        </mxCell>
+
+        <!-- ================================================================ -->
+        <!-- CORE CLASSES -->
+        <!-- ================================================================ -->
+
+        <!-- Monster -->
+        <mxCell id="c_monster" value="&lt;b&gt;Monster&lt;/b&gt;&lt;br&gt;&lt;i&gt;: MonoBehaviour, IDamageable, IClickable&lt;/i&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="100" y="470" width="260" height="170" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_monster_f" value="- _health : MonsterHealth&#xa;- _clickTarget : ClickTarget&#xa;- _feedbackPlayer : FeedbackPlayer&#xa;+ OnMonsterDeath : Action" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="c_monster">
+          <mxGeometry y="40" width="260" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_monster_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="c_monster">
+          <mxGeometry y="105" width="260" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_monster_m" value="+ TakeDamage(ClickInfo) : void&#xa;+ OnClick() : void&#xa;- HandleDeath() : void" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=10;" vertex="1" parent="c_monster">
+          <mxGeometry y="113" width="260" height="57" as="geometry"/>
+        </mxCell>
+
+        <!-- MonsterHealth -->
+        <mxCell id="c_mhp" value="&lt;b&gt;MonsterHealth&lt;/b&gt;&lt;br&gt;&lt;i&gt;: MonoBehaviour&lt;/i&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="100" y="700" width="230" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_mhp_f" value="- _currentHealth : BigNumber&#xa;- _maxHealth : BigNumber&#xa;+ OnDamaged : Action&lt;BigNumber&gt;&#xa;+ OnDeath : Action" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="c_mhp">
+          <mxGeometry y="40" width="230" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_mhp_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="c_mhp">
+          <mxGeometry y="105" width="230" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_mhp_m" value="+ TakeDamage(BigNumber) : void&#xa;+ SetMaxHealth(BigNumber) : void&#xa;+ Reset() : void" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=10;" vertex="1" parent="c_mhp">
+          <mxGeometry y="113" width="230" height="47" as="geometry"/>
+        </mxCell>
+
+        <!-- MonsterReward -->
+        <mxCell id="c_mrew" value="&lt;b&gt;MonsterReward&lt;/b&gt;&lt;br&gt;&lt;i&gt;: MonoBehaviour&lt;/i&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="370" y="700" width="250" height="140" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_mrew_f" value="- _calculatedGoldAmount : BigNumber&#xa;+ OnGoldDropped : Action&lt;BN, V3&gt; (static)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="c_mrew">
+          <mxGeometry y="40" width="250" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_mrew_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="c_mrew">
+          <mxGeometry y="80" width="250" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_mrew_m" value="+ DropReward() : void&#xa;+ SetGoldAmount(BigNumber) : void" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=10;" vertex="1" parent="c_mrew">
+          <mxGeometry y="88" width="250" height="42" as="geometry"/>
+        </mxCell>
+
+        <!-- MonsterSpawner -->
+        <mxCell id="c_spawn" value="&lt;b&gt;MonsterSpawner&lt;/b&gt;&lt;br&gt;&lt;i&gt;: MonoBehaviour&lt;/i&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="370" y="470" width="260" height="170" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_spawn_f" value="- _monsterPrefabs : Monster[]&#xa;- _healthBar : MonsterHealthBar&#xa;- _autoClickManager : AutoClickManager&#xa;- _stageManager : StageManager" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="c_spawn">
+          <mxGeometry y="40" width="260" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_spawn_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="c_spawn">
+          <mxGeometry y="105" width="260" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_spawn_m" value="+ SpawnMonster() : void&#xa;- HandleMonsterDeath() : void&#xa;- ConfigureMonsterStats() : void" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=10;" vertex="1" parent="c_spawn">
+          <mxGeometry y="113" width="260" height="57" as="geometry"/>
+        </mxCell>
+
+        <!-- ClickManager -->
+        <mxCell id="c_click" value="&lt;b&gt;ClickManager&lt;/b&gt;&lt;br&gt;&lt;i&gt;: MonoBehaviour&lt;/i&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="700" y="470" width="260" height="170" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_click_f" value="- _upgradeManager : UpgradeManager&#xa;- _heroAnimator : HeroAnimator&#xa;- _criticalChance : float&#xa;- _criticalMultiplier : float" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="c_click">
+          <mxGeometry y="40" width="260" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_click_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="c_click">
+          <mxGeometry y="105" width="260" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_click_m" value="- TryClick() : void&#xa;- DealClickDamage() : void" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=10;" vertex="1" parent="c_click">
+          <mxGeometry y="113" width="260" height="47" as="geometry"/>
+        </mxCell>
+
+        <!-- AutoClickManager -->
+        <mxCell id="c_auto" value="&lt;b&gt;AutoClickManager&lt;/b&gt;&lt;br&gt;&lt;i&gt;: MonoBehaviour&lt;/i&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="700" y="700" width="260" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_auto_f" value="- _upgradeManager : UpgradeManager&#xa;- _companionVisualMgr : CompanionVisualMgr&#xa;- _currentTarget : IDamageable&#xa;- _tickInterval : float" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="c_auto">
+          <mxGeometry y="40" width="260" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_auto_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="c_auto">
+          <mxGeometry y="105" width="260" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_auto_m" value="+ SetTarget(IDamageable) : void&#xa;+ ClearTarget() : void&#xa;- ApplyAutoDamage() : void" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=10;" vertex="1" parent="c_auto">
+          <mxGeometry y="113" width="260" height="47" as="geometry"/>
+        </mxCell>
+
+        <!-- UpgradeManager -->
+        <mxCell id="c_upg" value="&lt;b&gt;UpgradeManager&lt;/b&gt;&lt;br&gt;&lt;i&gt;: MonoBehaviour&lt;/i&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="470" width="280" height="200" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_upg_f" value="- _configs : List&lt;UpgradeConfigBase&gt;&#xa;- _currencyManager : CurrencyManager&#xa;- _repository : IUpgradeRepository&#xa;- _items : Dict&lt;string, UpgradeItem&gt;&#xa;+ OnItemUpgraded : Action&lt;UpgradeItem&gt;&#xa;+ OnItemPurchased : Action&lt;UpgradeItem&gt;&#xa;+ OnTotalDPSChanged : Action" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="c_upg">
+          <mxGeometry y="40" width="280" height="95" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_upg_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="c_upg">
+          <mxGeometry y="135" width="280" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_upg_m" value="+ TryUpgrade(string) : bool&#xa;+ TryPurchase(string) : bool&#xa;+ TotalClickDamage : BigNumber&#xa;+ TotalDPS : BigNumber" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=10;" vertex="1" parent="c_upg">
+          <mxGeometry y="143" width="280" height="57" as="geometry"/>
+        </mxCell>
+
+        <!-- CurrencyManager -->
+        <mxCell id="c_curr" value="&lt;b&gt;CurrencyManager&lt;/b&gt;&lt;br&gt;&lt;i&gt;: MonoBehaviour&lt;/i&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="730" width="280" height="170" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_curr_f" value="- _repository : ICurrencyRepository&#xa;- _currencies : Currency[]&#xa;- _goldFlyEffect : GoldFlyEffect&#xa;+ OnCurrencyChanged : Action&lt;ECurrencyType&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="c_curr">
+          <mxGeometry y="40" width="280" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_curr_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="c_curr">
+          <mxGeometry y="105" width="280" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_curr_m" value="+ AddGold(BigNumber) : void&#xa;+ TrySpendGold(BigNumber) : bool&#xa;+ CanAffordGold(BigNumber) : bool" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=10;" vertex="1" parent="c_curr">
+          <mxGeometry y="113" width="280" height="57" as="geometry"/>
+        </mxCell>
+
+        <!-- StageManager -->
+        <mxCell id="c_stage" value="&lt;b&gt;StageManager&lt;/b&gt;&lt;br&gt;&lt;i&gt;: MonoBehaviour, IStageProvider, IStageProgressHandler&lt;/i&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1400" y="470" width="310" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_stage_f" value="- _stageData : StageData&#xa;- _repository : IStageRepository&#xa;- _statCalculator : StageStatCalculator&#xa;+ OnStageChanged : Action&lt;int&gt;&#xa;+ OnKillCountChanged : Action&lt;int, int&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="c_stage">
+          <mxGeometry y="40" width="310" height="75" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_stage_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="c_stage">
+          <mxGeometry y="115" width="310" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_stage_m" value="+ OnMonsterKilled() : void&#xa;+ OnStageCleared() : void" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=10;" vertex="1" parent="c_stage">
+          <mxGeometry y="123" width="310" height="47" as="geometry"/>
+        </mxCell>
+
+        <!-- FeedbackPlayer -->
+        <mxCell id="c_fb" value="&lt;b&gt;FeedbackPlayer&lt;/b&gt;&lt;br&gt;&lt;i&gt;: MonoBehaviour&lt;/i&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#F3E5F5;strokeColor=#AB47BC;" vertex="1" parent="1">
+          <mxGeometry x="1630" y="470" width="260" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_fb_f" value="- _scaleFeedback : ScaleFeedback&#xa;- _particleFeedback : ParticleFeedback&#xa;- _damagePopup : DamagePopupFeedback&#xa;- _colorFlash : ColorFlashFeedback" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="c_fb">
+          <mxGeometry y="40" width="260" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_fb_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="c_fb">
+          <mxGeometry y="100" width="260" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_fb_m" value="+ Play(Vector3) : void&#xa;+ PlayWithDamage(V3, BN, bool) : void" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=10;" vertex="1" parent="c_fb">
+          <mxGeometry y="108" width="260" height="42" as="geometry"/>
+        </mxCell>
+
+        <!-- FirebaseCurrencyRepository -->
+        <mxCell id="c_fb_curr" value="&lt;b&gt;FirebaseCurrencyRepository&lt;/b&gt;&lt;br&gt;&lt;i&gt;: ICurrencyRepository&lt;/i&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#FFF3E0;strokeColor=#FF9800;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="960" width="260" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_fb_curr_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="c_fb_curr">
+          <mxGeometry y="40" width="260" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_fb_curr_m" value="+ Save(CurrencySaveData) : UniTask&#xa;+ Load() : UniTask&lt;CurrencySaveData&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=10;" vertex="1" parent="c_fb_curr">
+          <mxGeometry y="48" width="260" height="42" as="geometry"/>
+        </mxCell>
+
+        <!-- FirebaseUpgradeRepository -->
+        <mxCell id="c_fb_upg" value="&lt;b&gt;FirebaseUpgradeRepository&lt;/b&gt;&lt;br&gt;&lt;i&gt;: IUpgradeRepository&lt;/i&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#FFF3E0;strokeColor=#FF9800;" vertex="1" parent="1">
+          <mxGeometry x="1370" y="960" width="260" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_fb_upg_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="c_fb_upg">
+          <mxGeometry y="40" width="260" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_fb_upg_m" value="+ Save(UpgradeSaveData) : UniTask&#xa;+ Load() : UniTask&lt;UpgradeSaveData&gt;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=10;" vertex="1" parent="c_fb_upg">
+          <mxGeometry y="48" width="260" height="42" as="geometry"/>
+        </mxCell>
+
+        <!-- UpgradeItem (Domain) -->
+        <mxCell id="c_upg_item" value="&lt;b&gt;UpgradeItem&lt;/b&gt;&lt;br&gt;&lt;i&gt;Domain Model&lt;/i&gt;" style="swimlane;fontStyle=0;align=center;startSize=40;fontSize=11;fillColor=#E8EAF6;strokeColor=#5C6BC0;" vertex="1" parent="1">
+          <mxGeometry x="1400" y="730" width="240" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_upg_item_f" value="+ Id : string&#xa;+ UpgradeType : EUpgradeType&#xa;+ CurrentLevel : int&#xa;+ IsPurchased : bool" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=10;" vertex="1" parent="c_upg_item">
+          <mxGeometry y="40" width="240" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_upg_item_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;" vertex="1" parent="c_upg_item">
+          <mxGeometry y="100" width="240" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_upg_item_m" value="+ TryUpgrade() : bool&#xa;+ TryPurchase() : bool&#xa;+ CurrentCost : BigNumber" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=10;" vertex="1" parent="c_upg_item">
+          <mxGeometry y="108" width="240" height="52" as="geometry"/>
+        </mxCell>
+
+        <!-- ================================================================ -->
+        <!-- RELATIONSHIPS -->
+        <!-- ================================================================ -->
+
+        <!-- Monster --implements--> IDamageable -->
+        <mxCell id="rel_1" value="" style="endArrow=block;endFill=0;dashed=1;dashPattern=8 4;strokeColor=#82b366;strokeWidth=1.5;" edge="1" parent="1" source="c_monster" target="i_dmg">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_1_label" value="&amp;laquo;implements&amp;raquo;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=#82b366;" vertex="1" connectable="0" parent="rel_1">
+          <mxGeometry x="-0.1" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Monster --implements--> IClickable -->
+        <mxCell id="rel_2" value="" style="endArrow=block;endFill=0;dashed=1;dashPattern=8 4;strokeColor=#82b366;strokeWidth=1.5;" edge="1" parent="1" source="c_monster" target="i_click">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- StageManager --implements--> IStageProvider -->
+        <mxCell id="rel_3" value="" style="endArrow=block;endFill=0;dashed=1;dashPattern=8 4;strokeColor=#82b366;strokeWidth=1.5;" edge="1" parent="1" source="c_stage" target="i_stage">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- CurrencyManager --uses--> ICurrencyRepository -->
+        <mxCell id="rel_4" value="" style="endArrow=open;endFill=0;dashed=1;strokeColor=#6c8ebf;strokeWidth=1.5;" edge="1" parent="1" source="c_curr" target="i_curr_repo">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_4_label" value="DIP" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=#43A047;fontStyle=1;" vertex="1" connectable="0" parent="rel_4">
+          <mxGeometry x="-0.1" relative="1" as="geometry">
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- UpgradeManager --uses--> IUpgradeRepository -->
+        <mxCell id="rel_5" value="" style="endArrow=open;endFill=0;dashed=1;strokeColor=#6c8ebf;strokeWidth=1.5;" edge="1" parent="1" source="c_upg" target="i_upg_repo">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_5_label" value="DIP" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=#43A047;fontStyle=1;" vertex="1" connectable="0" parent="rel_5">
+          <mxGeometry x="-0.1" relative="1" as="geometry">
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- FirebaseCurrencyRepo --implements--> ICurrencyRepository -->
+        <mxCell id="rel_6" value="" style="endArrow=block;endFill=0;dashed=1;dashPattern=8 4;strokeColor=#FF9800;strokeWidth=1.5;" edge="1" parent="1" source="c_fb_curr" target="i_curr_repo">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- FirebaseUpgradeRepo --implements--> IUpgradeRepository -->
+        <mxCell id="rel_7" value="" style="endArrow=block;endFill=0;dashed=1;dashPattern=8 4;strokeColor=#FF9800;strokeWidth=1.5;" edge="1" parent="1" source="c_fb_upg" target="i_upg_repo">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Monster --has--> MonsterHealth (composition) -->
+        <mxCell id="rel_8" value="" style="endArrow=diamond;endFill=1;strokeColor=#333333;strokeWidth=1.5;" edge="1" parent="1" source="c_mhp" target="c_monster">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Monster --has--> MonsterReward (indirect via event) -->
+        <mxCell id="rel_8b" value="OnDeath" style="endArrow=open;endFill=0;dashed=1;strokeColor=#999999;strokeWidth=1;" edge="1" parent="1" source="c_mhp" target="c_mrew">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- MonsterSpawner --creates--> Monster -->
+        <mxCell id="rel_9" value="&amp;laquo;creates&amp;raquo;" style="endArrow=open;endFill=0;dashed=1;strokeColor=#6c8ebf;strokeWidth=1.5;" edge="1" parent="1" source="c_spawn" target="c_monster">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ClickManager --uses--> IDamageable -->
+        <mxCell id="rel_10" value="TakeDamage" style="endArrow=open;endFill=0;dashed=1;strokeColor=#9673a6;strokeWidth=1.5;" edge="1" parent="1" source="c_click" target="i_dmg">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ClickManager --uses--> UpgradeManager -->
+        <mxCell id="rel_11" value="TotalClickDamage" style="endArrow=open;endFill=0;strokeColor=#b85450;strokeWidth=1;" edge="1" parent="1" source="c_click" target="c_upg">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- AutoClickManager --uses--> IDamageable -->
+        <mxCell id="rel_12" value="" style="endArrow=open;endFill=0;dashed=1;strokeColor=#9673a6;strokeWidth=1.5;" edge="1" parent="1" source="c_auto" target="i_dmg">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- AutoClickManager --uses--> UpgradeManager -->
+        <mxCell id="rel_13" value="TotalDPS" style="endArrow=open;endFill=0;strokeColor=#b85450;strokeWidth=1;" edge="1" parent="1" source="c_auto" target="c_upg">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- UpgradeManager --uses--> CurrencyManager -->
+        <mxCell id="rel_14" value="TrySpendGold" style="endArrow=open;endFill=0;strokeColor=#b85450;strokeWidth=1.5;" edge="1" parent="1" source="c_upg" target="c_curr">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- UpgradeManager --contains--> UpgradeItem -->
+        <mxCell id="rel_15" value="1..*" style="endArrow=diamond;endFill=1;strokeColor=#333333;strokeWidth=1.5;" edge="1" parent="1" source="c_upg_item" target="c_upg">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- MonsterReward --static event--> CurrencyManager -->
+        <mxCell id="rel_16" value="OnGoldDropped (static)" style="endArrow=open;endFill=0;dashed=1;strokeColor=#FF9800;strokeWidth=2;" edge="1" parent="1" source="c_mrew" target="c_curr">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- MonsterSpawner --uses--> StageManager -->
+        <mxCell id="rel_17" value="" style="endArrow=open;endFill=0;strokeColor=#b85450;strokeWidth=1;" edge="1" parent="1" source="c_spawn" target="c_stage">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- FeedbackPlayer --uses--> IFeedback -->
+        <mxCell id="rel_18" value="" style="endArrow=open;endFill=0;dashed=1;strokeColor=#AB47BC;strokeWidth=1.5;" edge="1" parent="1" source="c_fb" target="i_fb">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Monster --has--> FeedbackPlayer -->
+        <mxCell id="rel_19" value="" style="endArrow=open;endFill=0;strokeColor=#AB47BC;strokeWidth=1;" edge="1" parent="1" source="c_monster" target="c_fb">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="400" y="640"/>
+              <mxPoint x="1760" y="640"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ================================================================ -->
+        <!-- LEGEND -->
+        <!-- ================================================================ -->
+        <mxCell id="legend2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#BDBDBD;container=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="1630" y="700" width="280" height="200" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2_title" value="&lt;b&gt;범례 (Legend)&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" parent="legend2">
+          <mxGeometry x="70" y="5" width="140" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2_1" value="─ ─ ─▷  implements" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#82b366;" vertex="1" parent="legend2">
+          <mxGeometry x="10" y="35" width="160" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2_2" value="─ ─ ─▷  uses / depends" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#6c8ebf;" vertex="1" parent="legend2">
+          <mxGeometry x="10" y="55" width="160" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2_3" value="────◆  composition" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#333333;" vertex="1" parent="legend2">
+          <mxGeometry x="10" y="75" width="160" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2_4" value="─ ─ ─▷  event subscription" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#FF9800;" vertex="1" parent="legend2">
+          <mxGeometry x="10" y="95" width="180" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2_c1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="legend2">
+          <mxGeometry x="10" y="125" width="20" height="15" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2_c1t" value="Interface" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="legend2">
+          <mxGeometry x="35" y="122" width="70" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2_c2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="legend2">
+          <mxGeometry x="10" y="147" width="20" height="15" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2_c2t" value="Ingame Class" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="legend2">
+          <mxGeometry x="35" y="145" width="90" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2_c3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="legend2">
+          <mxGeometry x="130" y="125" width="20" height="15" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2_c3t" value="Manager" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="legend2">
+          <mxGeometry x="155" y="122" width="70" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2_c4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9800;" vertex="1" parent="legend2">
+          <mxGeometry x="130" y="147" width="20" height="15" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2_c4t" value="Firebase Repo" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="legend2">
+          <mxGeometry x="155" y="145" width="90" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2_c5" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#AB47BC;" vertex="1" parent="legend2">
+          <mxGeometry x="10" y="170" width="20" height="15" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2_c5t" value="Feedback" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="legend2">
+          <mxGeometry x="35" y="168" width="70" height="20" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

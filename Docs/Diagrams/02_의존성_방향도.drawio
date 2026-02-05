@@ -1,0 +1,228 @@
+<mxfile host="app.diagrams.net" modified="2026-02-04T00:00:00.000Z" agent="Claude" version="24.0.0" type="device">
+  <diagram name="의존성 방향도" id="dep-direction">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- ============================================================ -->
+        <!-- TITLE -->
+        <!-- ============================================================ -->
+        <mxCell id="title" value="DungeonHeroClicker — 의존성 방향도" style="text;html=1;align=center;verticalAlign=middle;fontSize=20;fontColor=#333333;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="15" width="440" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="subtitle" value="화살표 방향 = &quot;~를 사용한다&quot;  ·  모든 의존성은 아래(추상화) 방향으로 향한다" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="310" y="48" width="620" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LAYER: UI (최상위) -->
+        <!-- ============================================================ -->
+        <mxCell id="L_UI" value="&lt;b style='font-size:13px'&gt;UI&lt;/b&gt;&lt;br&gt;&lt;font color='#555' style='font-size:10px'&gt;GoldDisplay · DPSDisplay · StageDisplay · HealthBar · UpgradeItemButton&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B2DFDB;strokeColor=#00897B;strokeWidth=2;fontSize=12;arcSize=10;shadow=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="220" y="85" width="800" height="55" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LAYER: INGAME (인게임 시스템) -->
+        <!-- ============================================================ -->
+        <mxCell id="L_IG" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#5C6BC0;strokeWidth=2;fontSize=12;arcSize=10;shadow=1;container=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="220" y="190" width="800" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="L_IG_title" value="&lt;b style='font-size:13px'&gt;Ingame Systems&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontColor=#5C6BC0;" vertex="1" parent="L_IG">
+          <mxGeometry x="10" y="5" width="200" height="20" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ig_click" value="&lt;b&gt;Click&lt;/b&gt;&lt;br&gt;&lt;font color='#666' style='font-size:9px'&gt;ClickManager&lt;br&gt;AutoClickManager&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5C6BC0;fontSize=10;" vertex="1" parent="L_IG">
+          <mxGeometry x="15" y="30" width="120" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="ig_monster" value="&lt;b&gt;Monster&lt;/b&gt;&lt;br&gt;&lt;font color='#666' style='font-size:9px'&gt;Monster · Health&lt;br&gt;Reward · Spawner&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5C6BC0;fontSize=10;" vertex="1" parent="L_IG">
+          <mxGeometry x="155" y="30" width="120" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="ig_hero" value="&lt;b&gt;Hero&lt;/b&gt;&lt;br&gt;&lt;font color='#666' style='font-size:9px'&gt;HeroVisual&lt;br&gt;HeroAnimator&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5C6BC0;fontSize=10;" vertex="1" parent="L_IG">
+          <mxGeometry x="295" y="30" width="120" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="ig_comp" value="&lt;b&gt;Companion&lt;/b&gt;&lt;br&gt;&lt;font color='#666' style='font-size:9px'&gt;CompanionVisual&lt;br&gt;Manager&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5C6BC0;fontSize=10;" vertex="1" parent="L_IG">
+          <mxGeometry x="435" y="30" width="120" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="ig_feedback" value="&lt;b&gt;Feedback&lt;/b&gt;&lt;br&gt;&lt;font color='#666' style='font-size:9px'&gt;FeedbackPlayer&lt;br&gt;Scale·Particle·Popup&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5C6BC0;fontSize=10;" vertex="1" parent="L_IG">
+          <mxGeometry x="575" y="30" width="130" height="55" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LAYER: MANAGERS (매니저) -->
+        <!-- ============================================================ -->
+        <mxCell id="L_MGR" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#E53935;strokeWidth=2;fontSize=12;arcSize=10;shadow=1;container=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="220" y="340" width="800" height="85" as="geometry"/>
+        </mxCell>
+        <mxCell id="L_MGR_title" value="&lt;b style='font-size:13px'&gt;Outgame Managers&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontColor=#E53935;" vertex="1" parent="L_MGR">
+          <mxGeometry x="10" y="5" width="200" height="20" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="mgr_currency" value="&lt;b&gt;CurrencyManager&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E53935;fontSize=11;" vertex="1" parent="L_MGR">
+          <mxGeometry x="15" y="35" width="160" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="mgr_upgrade" value="&lt;b&gt;UpgradeManager&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E53935;fontSize=11;" vertex="1" parent="L_MGR">
+          <mxGeometry x="200" y="35" width="155" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="mgr_stage" value="&lt;b&gt;StageManager&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E53935;fontSize=11;" vertex="1" parent="L_MGR">
+          <mxGeometry x="380" y="35" width="140" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="mgr_account" value="&lt;b&gt;AccountManager&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E53935;fontSize=11;" vertex="1" parent="L_MGR">
+          <mxGeometry x="545" y="35" width="150" height="35" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LAYER: INTERFACES (추상화 - 핵심!) -->
+        <!-- ============================================================ -->
+        <mxCell id="L_IF" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#43A047;strokeWidth=3;fontSize=12;arcSize=10;shadow=1;container=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="220" y="480" width="800" height="85" as="geometry"/>
+        </mxCell>
+        <mxCell id="L_IF_title" value="&lt;b style='font-size:13px'&gt;Interfaces (추상화 계층)&lt;/b&gt; &amp;nbsp;← DIP 핵심" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontColor=#43A047;" vertex="1" parent="L_IF">
+          <mxGeometry x="10" y="5" width="350" height="20" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="if_curr" value="&lt;b&gt;ICurrencyRepository&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#43A047;fontSize=10;dashed=1;dashPattern=5 5;" vertex="1" parent="L_IF">
+          <mxGeometry x="15" y="35" width="155" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="if_upg" value="&lt;b&gt;IUpgradeRepository&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#43A047;fontSize=10;dashed=1;dashPattern=5 5;" vertex="1" parent="L_IF">
+          <mxGeometry x="190" y="35" width="155" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="if_stage" value="&lt;b&gt;IStageRepository&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#43A047;fontSize=10;dashed=1;dashPattern=5 5;" vertex="1" parent="L_IF">
+          <mxGeometry x="365" y="35" width="140" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="if_acc" value="&lt;b&gt;IAccountRepository&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#43A047;fontSize=10;dashed=1;dashPattern=5 5;" vertex="1" parent="L_IF">
+          <mxGeometry x="525" y="35" width="150" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="if_game" value="&lt;b&gt;IDamageable&lt;/b&gt;&lt;br&gt;&lt;b&gt;IClickable&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#43A047;fontSize=10;dashed=1;dashPattern=5 5;" vertex="1" parent="L_IF">
+          <mxGeometry x="695" y="30" width="95" height="45" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LAYER: REPOSITORY (저장소 구현체) -->
+        <!-- ============================================================ -->
+        <mxCell id="L_REPO" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9800;strokeWidth=2;fontSize=12;arcSize=10;shadow=1;container=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="220" y="620" width="800" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="L_REPO_title" value="&lt;b style='font-size:13px'&gt;Repository 구현체 (저수준)&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontColor=#FF9800;" vertex="1" parent="L_REPO">
+          <mxGeometry x="10" y="5" width="300" height="20" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="repo_local_title" value="&lt;font color='#F9A825'&gt;&lt;b&gt;Local (JSON)&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="L_REPO">
+          <mxGeometry x="15" y="28" width="100" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="repo_l1" value="CurrencyRepository" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontSize=9;" vertex="1" parent="L_REPO">
+          <mxGeometry x="15" y="48" width="135" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="repo_l2" value="UpgradeRepository" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontSize=9;" vertex="1" parent="L_REPO">
+          <mxGeometry x="160" y="48" width="130" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="repo_l3" value="StageRepository" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontSize=9;" vertex="1" parent="L_REPO">
+          <mxGeometry x="300" y="48" width="120" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="repo_l4" value="AccountRepository" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontSize=9;" vertex="1" parent="L_REPO">
+          <mxGeometry x="430" y="48" width="130" height="22" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="repo_fb_title" value="&lt;font color='#FF9800'&gt;&lt;b&gt;Firebase (Firestore)&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="L_REPO">
+          <mxGeometry x="15" y="72" width="140" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="repo_f1" value="FirebaseCurrencyRepo" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#FF9800;fontSize=9;" vertex="1" parent="L_REPO">
+          <mxGeometry x="15" y="75" width="140" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="repo_f2" value="FirebaseUpgradeRepo" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#FF9800;fontSize=9;" vertex="1" parent="L_REPO">
+          <mxGeometry x="165" y="75" width="140" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="repo_f3" value="FirebaseStageRepo" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#FF9800;fontSize=9;" vertex="1" parent="L_REPO">
+          <mxGeometry x="315" y="75" width="130" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="repo_f4" value="FirebaseAccountRepo" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#FF9800;fontSize=9;" vertex="1" parent="L_REPO">
+          <mxGeometry x="455" y="75" width="140" height="22" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LAYER: CORE (최하위) -->
+        <!-- ============================================================ -->
+        <mxCell id="L_CORE" value="&lt;b style='font-size:13px'&gt;Core&lt;/b&gt;&lt;br&gt;&lt;font color='#555' style='font-size:10px'&gt;BigNumber · NumberFormatter · SFXManager · FirebaseInitializer&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#90A4AE;strokeWidth=2;fontSize=12;arcSize=10;shadow=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="220" y="770" width="800" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- DEPENDENCY ARROWS (위 → 아래) -->
+        <!-- ============================================================ -->
+
+        <!-- UI → Ingame (이벤트 구독) -->
+        <mxCell id="dep_ui_ig" value="" style="endArrow=block;endFill=1;strokeColor=#999999;strokeWidth=2;" edge="1" parent="1" source="L_UI" target="L_IG">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- UI → Managers (이벤트 구독) -->
+        <mxCell id="dep_ui_mgr" value="이벤트 구독" style="endArrow=block;endFill=1;strokeColor=#999999;strokeWidth=2;curved=1;fontSize=9;fontColor=#999999;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1040" y="140" as="sourcePoint"/>
+            <mxPoint x="1040" y="340" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Ingame → Managers -->
+        <mxCell id="dep_ig_mgr" value="" style="endArrow=block;endFill=1;strokeColor=#999999;strokeWidth=2;" edge="1" parent="1" source="L_IG" target="L_MGR">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Managers → Interfaces (DIP!) -->
+        <mxCell id="dep_mgr_if" value="&lt;b&gt;depends on&lt;/b&gt;" style="endArrow=block;endFill=1;strokeColor=#43A047;strokeWidth=3;fontSize=10;fontColor=#43A047;" edge="1" parent="1" source="L_MGR" target="L_IF">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Repo → Interfaces (implements - 방향 위로!) -->
+        <mxCell id="dep_repo_if" value="&lt;b&gt;implements&lt;/b&gt;" style="endArrow=block;endFill=0;dashed=1;dashPattern=8 4;strokeColor=#43A047;strokeWidth=3;fontSize=10;fontColor=#43A047;" edge="1" parent="1" source="L_REPO" target="L_IF">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Repo → Core -->
+        <mxCell id="dep_repo_core" value="" style="endArrow=block;endFill=1;strokeColor=#999999;strokeWidth=1.5;" edge="1" parent="1" source="L_REPO" target="L_CORE">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- DIP HIGHLIGHT (중앙 강조) -->
+        <!-- ============================================================ -->
+        <mxCell id="dip_highlight" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#43A047;strokeWidth=3;dashed=1;dashPattern=10 5;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="200" y="325" width="840" height="260" as="geometry"/>
+        </mxCell>
+        <mxCell id="dip_label" value="&lt;b style='font-size:14px; color:#43A047'&gt;DIP (의존성 역전)&lt;/b&gt;&lt;br&gt;&lt;font color='#666' style='font-size:10px'&gt;고수준(Manager)과 저수준(Repository)이&lt;br&gt;모두 추상화(Interface)에 의존&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="430" width="200" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- SIDE NOTE: Key Design Points -->
+        <!-- ============================================================ -->
+        <mxCell id="note" value="&lt;b style='font-size:12px'&gt;설계 핵심&lt;/b&gt;&lt;hr&gt;&lt;b&gt;1. 단방향 의존&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;위 → 아래로만 의존&lt;br&gt;&lt;br&gt;&lt;b&gt;2. DIP 적용&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;Manager는 Interface에 의존&lt;br&gt;&amp;nbsp;&amp;nbsp;Repo도 Interface를 구현&lt;br&gt;&lt;br&gt;&lt;b&gt;3. 교체 용이&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;Local ↔ Firebase 전환 시&lt;br&gt;&amp;nbsp;&amp;nbsp;Manager 코드 수정 없음&lt;br&gt;&lt;br&gt;&lt;b&gt;4. 느슨한 결합&lt;/b&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;이벤트(Action)로 UI 갱신&lt;br&gt;&amp;nbsp;&amp;nbsp;static event로 모듈간 통신" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#BDBDBD;fontSize=10;align=left;verticalAlign=top;spacingLeft=8;spacingTop=5;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="85" width="195" height="300" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LEGEND -->
+        <!-- ============================================================ -->
+        <mxCell id="legend_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#E0E0E0;container=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="220" y="840" width="800" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg1" value="&lt;font color='#999'&gt;━━▶&lt;/font&gt; 의존 (uses)" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="legend_box">
+          <mxGeometry x="10" y="12" width="120" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg2" value="&lt;font color='#43A047'&gt;━━▶&lt;/font&gt; DIP: depends on" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="legend_box">
+          <mxGeometry x="140" y="12" width="150" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg3" value="&lt;font color='#43A047'&gt;- - -▷&lt;/font&gt; DIP: implements" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="legend_box">
+          <mxGeometry x="310" y="12" width="150" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg4" value="┆점선 테두리┆= Interface" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#43A047;" vertex="1" parent="legend_box">
+          <mxGeometry x="480" y="12" width="160" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg5" value="&lt;font color='#43A047'&gt;초록 점선 박스&lt;/font&gt; = DIP 적용 영역" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" vertex="1" parent="legend_box">
+          <mxGeometry x="640" y="12" width="160" height="20" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,211 @@
+<mxfile host="app.diagrams.net" modified="2026-02-04T00:00:00.000Z" agent="Claude" version="24.0.0" type="device">
+  <diagram name="클릭 → 재화 시퀀스" id="seq-click-gold">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- TITLE -->
+        <mxCell id="t1" value="클릭 → 재화 시퀀스" style="text;html=1;align=left;verticalAlign=middle;fontSize=22;fontColor=#222222;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="15" width="350" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="t2" value="&quot;유저가 화면을 터치하면 내부에서 뭐가 일어나는가?&quot;" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#888888;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="45" width="450" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- ====== ACTORS (6개만) ====== -->
+
+        <mxCell id="a_user" value="User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fillColor=#E8EAF6;strokeColor=#5C6BC0;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="55" y="80" width="25" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_user" value="" style="endArrow=none;dashed=1;strokeColor=#DDD;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="67" y="130" as="sourcePoint"/>
+            <mxPoint x="67" y="750" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="a_click" value="&lt;b&gt;ClickManager&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#5C6BC0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="120" y="85" width="110" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_click" value="" style="endArrow=none;dashed=1;strokeColor=#DDD;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="175" y="115" as="sourcePoint"/>
+            <mxPoint x="175" y="750" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="a_monster" value="&lt;b&gt;Monster&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:8px' color='#888'&gt;IDamageable&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#E53935;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="280" y="80" width="100" height="38" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_monster" value="" style="endArrow=none;dashed=1;strokeColor=#DDD;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="330" y="118" as="sourcePoint"/>
+            <mxPoint x="330" y="750" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="a_reward" value="&lt;b&gt;MonsterReward&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#E53935;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="435" y="85" width="120" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_reward" value="" style="endArrow=none;dashed=1;strokeColor=#DDD;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="495" y="115" as="sourcePoint"/>
+            <mxPoint x="495" y="750" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="a_curr" value="&lt;b&gt;CurrencyManager&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9800;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="610" y="85" width="130" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_curr" value="" style="endArrow=none;dashed=1;strokeColor=#DDD;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="675" y="115" as="sourcePoint"/>
+            <mxPoint x="675" y="750" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="a_ui" value="&lt;b&gt;UI&lt;/b&gt;&lt;br&gt;&lt;font style='font-size:8px' color='#888'&gt;GoldDisplay 등&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B2DFDB;strokeColor=#00897B;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="800" y="80" width="90" height="38" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_ui" value="" style="endArrow=none;dashed=1;strokeColor=#DDD;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="845" y="118" as="sourcePoint"/>
+            <mxPoint x="845" y="750" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ====== PHASE 1: 클릭 → 데미지 ====== -->
+        <mxCell id="phase1" value="① 클릭 &amp; 데미지" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#5C6BC0;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="920" y="145" width="130" height="20" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="m1" value="터치" style="endArrow=block;endFill=1;strokeColor=#5C6BC0;strokeWidth=2;fontSize=10;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="67" y="160" as="sourcePoint"/>
+            <mxPoint x="175" y="160" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="m2" value="TakeDamage(ClickInfo)" style="endArrow=block;endFill=1;strokeColor=#E53935;strokeWidth=2;fontSize=10;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="175" y="200" as="sourcePoint"/>
+            <mxPoint x="330" y="200" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="m2b" value="피드백 (팝업, 파티클, 카메라 쉐이크)" style="endArrow=open;endFill=0;strokeColor=#AB47BC;strokeWidth=1;dashed=1;fontSize=9;fontColor=#AB47BC;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="330" y="235" as="sourcePoint"/>
+            <mxPoint x="845" y="235" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ====== PHASE 2: 사망 → 골드 ====== -->
+        <mxCell id="phase2" value="② 사망 &amp; 보상" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#FF9800;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="920" y="280" width="130" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- alt box -->
+        <mxCell id="alt" value="" style="shape=frame;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#E53935;rounded=0;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="55" y="275" width="810" height="200" as="geometry"/>
+        </mxCell>
+        <mxCell id="alt_label" value="[alt] HP ≤ 0 (사망)" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#E53935;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="275" width="140" height="18" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="m3" value="OnDeath 이벤트" style="endArrow=block;endFill=1;strokeColor=#E53935;strokeWidth=1.5;fontSize=10;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="330" y="310" as="sourcePoint"/>
+            <mxPoint x="495" y="310" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="m4" value="DropReward()" style="endArrow=block;endFill=1;strokeColor=#E53935;strokeWidth=1.5;fontSize=10;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="495" y="345" as="sourcePoint"/>
+            <mxPoint x="495" y="370" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="530" y="345"/>
+              <mxPoint x="530" y="370"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="m5" value="OnGoldDropped (static event)" style="endArrow=block;endFill=1;strokeColor=#FF9800;strokeWidth=2;fontSize=10;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="495" y="400" as="sourcePoint"/>
+            <mxPoint x="675" y="400" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="m6" value="AddGold(amount)" style="endArrow=block;endFill=1;strokeColor=#FF9800;strokeWidth=1.5;fontSize=10;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="675" y="435" as="sourcePoint"/>
+            <mxPoint x="675" y="455" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="710" y="435"/>
+              <mxPoint x="710" y="455"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ====== PHASE 3: UI 갱신 + 저장 ====== -->
+        <mxCell id="phase3" value="③ UI 갱신 &amp; 저장" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#00897B;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="920" y="495" width="130" height="20" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="m7" value="OnCurrencyChanged 이벤트" style="endArrow=open;endFill=0;strokeColor=#00897B;strokeWidth=2;dashed=1;fontSize=10;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="675" y="510" as="sourcePoint"/>
+            <mxPoint x="845" y="510" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="m7b" value="골드 표시 갱신" style="text;html=1;align=left;verticalAlign=middle;fontSize=9;fontColor=#00897B;" vertex="1" parent="1">
+          <mxGeometry x="850" y="500" width="100" height="18" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="m8" value="Firebase 저장 (비동기)" style="endArrow=open;endFill=0;strokeColor=#F9A825;strokeWidth=1;dashed=1;fontSize=9;fontColor=#F9A825;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="675" y="550" as="sourcePoint"/>
+            <mxPoint x="675" y="575" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="720" y="550"/>
+              <mxPoint x="720" y="575"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ====== PHASE 4: 스테이지 진행 ====== -->
+        <mxCell id="phase4" value="④ 스테이지 진행" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#1976D2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="920" y="610" width="130" height="20" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="m9" value="OnMonsterDeath → MonsterSpawner → StageManager.OnMonsterKilled()" style="endArrow=open;endFill=0;strokeColor=#1976D2;strokeWidth=1.5;dashed=1;fontSize=9;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="330" y="625" as="sourcePoint"/>
+            <mxPoint x="845" y="625" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="m9b" value="스테이지/킬 카운트 갱신" style="text;html=1;align=left;verticalAlign=middle;fontSize=9;fontColor=#1976D2;" vertex="1" parent="1">
+          <mxGeometry x="510" y="630" width="160" height="18" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="m10" value="다음 몬스터 스폰 (0.5s 딜레이)" style="endArrow=block;endFill=1;strokeColor=#1976D2;strokeWidth=1.5;fontSize=9;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="175" y="670" as="sourcePoint"/>
+            <mxPoint x="330" y="670" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ====== 판단 근거 ====== -->
+        <mxCell id="note" value="&lt;b&gt;왜 이렇게 흐르는가&lt;/b&gt;&lt;hr&gt;&lt;b&gt;이벤트 체이닝&lt;/b&gt;&lt;br&gt;각 단계는 이벤트(Action)로 연결.&lt;br&gt;호출자가 수신자를 모름 → 느슨한 결합&lt;br&gt;&lt;br&gt;&lt;b&gt;static event&lt;/b&gt;&lt;br&gt;MonsterReward와 CurrencyManager는&lt;br&gt;서로 참조하지 않음.&lt;br&gt;static event로 모듈간 경계 유지&lt;br&gt;&lt;br&gt;&lt;b&gt;단방향 흐름&lt;/b&gt;&lt;br&gt;클릭→데미지→사망→골드→UI&lt;br&gt;역방향 의존 없음" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#E0E0E0;fontSize=10;align=left;verticalAlign=top;spacingLeft=8;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="940" y="310" width="220" height="250" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

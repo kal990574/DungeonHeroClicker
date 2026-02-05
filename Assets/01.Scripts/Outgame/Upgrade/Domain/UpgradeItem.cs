@@ -1,5 +1,4 @@
 using System;
-using _01.Scripts.Core.Utils;
 using _01.Scripts.Outgame.Upgrade.Config;
 using UnityEngine;
 
@@ -8,9 +7,10 @@ namespace _01.Scripts.Outgame.Upgrade.Domain
     public class UpgradeItem
     {
         private readonly UpgradeConfigBase _config;
-        private int _currentLevel;
-        private bool _isPurchased;
+        private readonly int _currentLevel;
+        private readonly bool _isPurchased;
 
+        public UpgradeConfigBase Config => _config;
         public string Id => _config.Id;
         public string DisplayName => _config.DisplayName;
         public Sprite Icon => _config.Icon;
@@ -18,38 +18,6 @@ namespace _01.Scripts.Outgame.Upgrade.Domain
 
         public int CurrentLevel => _currentLevel;
         public bool IsPurchased => _isPurchased;
-        public bool RequiresPurchase => _config.Type == EUpgradeType.Companion;
-
-        public BigNumber UpgradeCost
-        {
-            get
-            {
-                double cost = _config.BaseCost * Math.Pow(_config.CostMultiplier, _currentLevel);
-                return new BigNumber(Math.Round(cost));
-            }
-        }
-
-        public BigNumber CurrentEffect
-        {
-            get
-            {
-                double effect = _config.BaseEffect * Math.Pow(_config.EffectMultiplier, _currentLevel);
-                return new BigNumber(effect);
-            }
-        }
-
-        public BigNumber PurchaseCost
-        {
-            get
-            {
-                if (_config is CompanionUpgradeConfig companion)
-                {
-                    return companion.PurchaseCost;
-                }
-
-                return BigNumber.Zero;
-            }
-        }
 
         public UpgradeItem(UpgradeConfigBase config, int level, bool isPurchased)
         {
@@ -90,40 +58,7 @@ namespace _01.Scripts.Outgame.Upgrade.Domain
 
             _config = config;
             _currentLevel = level;
-            _isPurchased = isPurchased || !RequiresPurchase;
-        }
-
-        public bool CanUpgrade()
-        {
-            return _isPurchased;
-        }
-
-        public bool TryUpgrade()
-        {
-            if (!CanUpgrade())
-            {
-                return false;
-            }
-
-            _currentLevel++;
-            return true;
-        }
-
-        public bool CanPurchase()
-        {
-            return RequiresPurchase && !_isPurchased;
-        }
-
-        public bool TryPurchase()
-        {
-            if (!CanPurchase())
-            {
-                return false;
-            }
-
-            _isPurchased = true;
-            _currentLevel = 1;
-            return true;
+            _isPurchased = isPurchased || config.Type != EUpgradeType.Companion;
         }
     }
 }

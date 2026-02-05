@@ -1,0 +1,285 @@
+// =============================================
+//  DungeonHeroClicker - Eraser.io Diagrams
+// =============================================
+//
+//  사용법:
+//  1. eraser.io 접속 → 새 문서 생성
+//  2. 각 섹션의 코드를 별도 다이어그램 블록에 붙여넣기
+//  3. 다이어그램 타입은 각 섹션 상단에 [Type] 표시
+//
+//  규칙: 클래스/인터페이스명 = 영문, 설명/관계 = 한글
+
+
+// =============================================
+//  1. 전체 구조도
+//  [Type: Architecture Diagram]
+//  "이 시스템은 뭘로 구성되어 있는가?"
+// =============================================
+
+colorMode bold
+typeface clean
+
+Ingame [color: blue] {
+  Click System [icon: mouse-pointer, color: blue]
+  Monster System [icon: skull, color: red]
+  "Hero & Companion" [icon: users, color: purple]
+}
+
+Outgame [color: orange] {
+  Currency [icon: coins, color: orange]
+  Upgrade [icon: arrow-up-circle, color: green]
+  Stage [icon: map, color: blue]
+}
+
+"UI Layer" [icon: monitor, color: green]
+
+// 코어 루프 (순환)
+Click System > Monster System: 데미지
+Monster System > Currency: 골드 드롭
+Currency > Upgrade: 골드 소비
+Upgrade > Click System: 데미지 증가
+
+// 부가 흐름
+Upgrade > "Hero & Companion": 비주얼 변경
+Monster System > Stage: 킬 카운트
+Stage --> Monster System: 스탯 스케일링
+
+// UI 이벤트
+Ingame --> "UI Layer": 이벤트 구독
+Outgame --> "UI Layer": 이벤트 구독
+
+
+// =============================================
+//  2. 클래스 관계도
+//  [Type: Architecture Diagram]
+//  "각 클래스가 어떻게 연결되지?"
+// =============================================
+//
+//  범례: 실선(>) = 의존/이벤트, 점선(-->) = 구현/갱신
+
+colorMode bold
+typeface clean
+
+// === Ingame Layer ===
+"Ingame Layer" [color: blue] {
+  ClickManager [icon: mouse-pointer]
+  IDamageable [icon: shield]
+  Monster [icon: skull]
+  MonsterReward [icon: gift]
+  MonsterSpawner [icon: plus-circle]
+}
+
+// === Outgame Layer ===
+"Outgame Layer" [color: orange] {
+  Manager [color: orange] {
+    CurrencyManager [icon: coins]
+    UpgradeManager [icon: arrow-up-circle]
+    StageManager [icon: map]
+  }
+  Domain [color: blue] {
+    Currency [icon: coins]
+    UpgradeItem [icon: layers]
+    StageStatCalculator [icon: chart-line]
+  }
+  Interface [color: blue] {
+    ICurrencyRepository [icon: database]
+    IUpgradeRepository [icon: database]
+    IStageRepository [icon: database]
+  }
+  Repository [color: green] {
+    FirebaseCurrencyRepo [icon: database]
+    FirebaseUpgradeRepo [icon: database]
+    FirebaseStageRepo [icon: database]
+  }
+}
+
+// === UI Layer ===
+"UI Layer" [color: green] {
+  GoldDisplay [icon: coins]
+  DPSDisplay [icon: activity]
+  MonsterHealthBar [icon: heart]
+  StageDisplay [icon: map]
+  UpgradeItemButton [icon: arrow-up-circle]
+}
+
+// --- Ingame 내부 ---
+ClickManager > IDamageable: 데미지 전달
+Monster --> IDamageable: 구현
+Monster > MonsterReward: 사망 이벤트
+MonsterSpawner > Monster: 스폰
+
+// --- Outgame: Manager → Domain ---
+CurrencyManager > Currency: 소유
+UpgradeManager > UpgradeItem: 소유
+StageManager > StageStatCalculator: 스탯 계산
+
+// --- Outgame: Manager → Interface → Repository ---
+CurrencyManager > ICurrencyRepository: 의존
+UpgradeManager > IUpgradeRepository: 의존
+StageManager > IStageRepository: 의존
+FirebaseCurrencyRepo --> ICurrencyRepository: 구현
+FirebaseUpgradeRepo --> IUpgradeRepository: 구현
+FirebaseStageRepo --> IStageRepository: 구현
+
+// --- 레이어 간 통신 (Ingame ↔ Outgame) ---
+MonsterReward > CurrencyManager: 골드 드롭
+Monster > StageManager: 처치 이벤트
+UpgradeManager > ClickManager: 데미지 증가
+StageManager --> MonsterSpawner: 스탯 스케일링
+
+// --- Outgame/Ingame → UI 갱신 ---
+CurrencyManager --> GoldDisplay: 재화 변경
+UpgradeManager --> DPSDisplay: DPS 변경
+StageManager --> StageDisplay: 스테이지 변경
+Monster --> MonsterHealthBar: HP 변경
+
+
+// =============================================
+//  3. 핵심 시스템: 클릭 시퀀스
+//  [Type: Sequence Diagram]
+//  "클릭하면 내부에서 뭐가 일어나지?"
+// =============================================
+
+colorMode bold
+typeface clean
+
+User [icon: user, color: blue] > ClickManager [icon: mouse-pointer, color: blue]: 터치
+
+activate ClickManager
+ClickManager > Monster [icon: skull, color: red]: 데미지 전달
+deactivate ClickManager
+
+activate Monster
+Monster > "UI Feedback" [icon: zap, color: purple]: 팝업, 파티클, 쉐이크
+
+alt [label: HP <= 0 사망] {
+  Monster > MonsterReward [icon: gift, color: red]: 사망 이벤트
+
+  activate MonsterReward
+  MonsterReward > CurrencyManager [icon: coins, color: orange]: 골드 드롭 이벤트
+  deactivate MonsterReward
+
+  activate CurrencyManager
+  CurrencyManager > "UI Display" [icon: monitor, color: green]: 재화 변경 이벤트
+  CurrencyManager --> Firebase [icon: database, color: yellow]: 비동기 저장
+  deactivate CurrencyManager
+
+  Monster > StageManager [icon: map, color: blue]: 몬스터 처치 이벤트
+  StageManager > MonsterSpawner [icon: plus-circle, color: red]: 다음 몬스터 스폰
+}
+
+deactivate Monster
+
+
+// =============================================
+//  4. 인게임 데이터 플로우
+//  [Type: Flow Chart]
+//  "데이터가 어디서 어디로 흐르지?"
+// =============================================
+
+direction right
+colorMode bold
+typeface clean
+
+// 입력
+User [shape: oval, color: blue, icon: user]
+"Config (SO)" [shape: parallelogram, color: gray]
+
+// 프로세스
+ClickManager [color: blue]
+Monster [color: red]
+"사망 여부" [shape: diamond, color: red]
+CurrencyManager [color: orange]
+UpgradeManager [color: green]
+StageManager [color: blue]
+
+// 출력
+"UI Layer" [color: green]
+Firebase [shape: cylinder, color: yellow]
+
+// 설정값 주입
+"Config (SO)" --> ClickManager: 기본 데미지, 치명타
+"Config (SO)" --> StageManager: 스케일링 데이터
+
+// 코어 루프
+User > ClickManager: 터치 이벤트
+ClickManager > Monster: ClickInfo (데미지, 타입, 치명타)
+Monster > "사망 여부"
+"사망 여부" > CurrencyManager: 사망 → BigNumber (골드)
+"사망 여부" --> ClickManager: 생존 → 다음 클릭 대기
+
+CurrencyManager > UpgradeManager: BigNumber (골드 소비)
+UpgradeManager > ClickManager: BigNumber (데미지 증가)
+
+// 스테이지 스케일링
+"사망 여부" > StageManager: 킬 카운트
+StageManager --> Monster: HP, 골드 배율
+
+// UI 출력
+CurrencyManager --> "UI Layer": 재화 변경 이벤트
+UpgradeManager --> "UI Layer": DPS 변경 이벤트
+StageManager --> "UI Layer": 스테이지 변경 이벤트
+
+// Firebase 저장
+CurrencyManager --> Firebase: 비동기 저장
+UpgradeManager --> Firebase: 비동기 저장
+StageManager --> Firebase: 비동기 저장
+
+
+// =============================================
+//  5. 레포지토리 패턴 & Firebase 연동
+//  [Type: Architecture Diagram]
+//  "저장/로드는 어떻게 동작하지?"
+// =============================================
+
+direction down
+colorMode bold
+typeface clean
+
+// 1계층: 매니저 (고수준 모듈)
+"Manager Layer" [color: blue] {
+  AccountManager [icon: user]
+  CurrencyManager [icon: coins]
+  UpgradeManager [icon: arrow-up-circle]
+  StageManager [icon: map]
+}
+
+// 2계층: 인터페이스 (추상화 경계)
+"Interface Layer (DIP)" [color: blue] {
+  IAccountRepository [icon: shield]
+  ICurrencyRepository [icon: shield]
+  IUpgradeRepository [icon: shield]
+  IStageRepository [icon: shield]
+}
+
+// 3계층: Firebase 구현체 (저수준 모듈)
+"Firebase Implementation" [color: orange] {
+  FirebaseAccountRepo [icon: database]
+  FirebaseCurrencyRepo [icon: database]
+  FirebaseUpgradeRepo [icon: database]
+  FirebaseStageRepo [icon: database]
+}
+
+// 4계층: Firebase Cloud
+"Firebase Cloud" [color: yellow] {
+  "Firebase Auth" [icon: lock]
+  "Firestore DB" [icon: database]
+}
+
+// 매니저 → 인터페이스 의존
+AccountManager > IAccountRepository: 의존
+CurrencyManager > ICurrencyRepository: 의존
+UpgradeManager > IUpgradeRepository: 의존
+StageManager > IStageRepository: 의존
+
+// 구현체 → 인터페이스 구현
+FirebaseAccountRepo --> IAccountRepository: 구현
+FirebaseCurrencyRepo --> ICurrencyRepository: 구현
+FirebaseUpgradeRepo --> IUpgradeRepository: 구현
+FirebaseStageRepo --> IStageRepository: 구현
+
+// Firebase 클라우드 연동
+FirebaseAccountRepo > "Firebase Auth": 로그인 / 회원가입
+FirebaseCurrencyRepo > "Firestore DB": 비동기 저장 (병합)
+FirebaseUpgradeRepo > "Firestore DB": 비동기 저장 (병합)
+FirebaseStageRepo > "Firestore DB": 비동기 저장 (병합)

@@ -16,20 +16,18 @@ namespace _01.Scripts.Outgame.Stage
 
         private IStageRepository _repository;
 
-        private int _currentStage = 1;
-        private int _currentKillCount;
+        private StageProgress _progress = new StageProgress();
         private StageStatCalculator _statCalculator;
 
-        public int CurrentStage => _currentStage;
-        public int CurrentKillCount => _currentKillCount;
+        public int CurrentStage => _progress.CurrentStage;
+        public int CurrentKillCount => _progress.CurrentKillCount;
         public int RequiredKillCount => _stageData.MonstersPerStage;
-        public bool IsNextMonsterBoss => _currentKillCount + 1 >= RequiredKillCount;
+        public bool IsNextMonsterBoss => _progress.CurrentKillCount + 1 >= RequiredKillCount;
 
         public IMonsterStatModifier StatCalculator => _statCalculator;
 
         public bool IsInitialized { get; private set; }
 
-        public event Action OnInitialized;
         public event Action<int> OnStageChanged;
         public event Action<int, int> OnKillCountChanged;
 
@@ -40,17 +38,16 @@ namespace _01.Scripts.Outgame.Stage
 
             await LoadOrDefaultAsync();
             IsInitialized = true;
-            OnInitialized?.Invoke();
-            OnStageChanged?.Invoke(_currentStage);
-            OnKillCountChanged?.Invoke(_currentKillCount, RequiredKillCount);
+            OnStageChanged?.Invoke(_progress.CurrentStage);
+            OnKillCountChanged?.Invoke(_progress.CurrentKillCount, RequiredKillCount);
         }
 
         public void OnMonsterKilled()
         {
-            _currentKillCount++;
-            OnKillCountChanged?.Invoke(_currentKillCount, RequiredKillCount);
+            _progress = new StageProgress(_progress.CurrentStage, _progress.CurrentKillCount + 1);
+            OnKillCountChanged?.Invoke(_progress.CurrentKillCount, RequiredKillCount);
 
-            if (_currentKillCount >= RequiredKillCount)
+            if (_progress.CurrentKillCount >= RequiredKillCount)
             {
                 OnStageCleared();
             }
@@ -62,13 +59,11 @@ namespace _01.Scripts.Outgame.Stage
 
         public void OnStageCleared()
         {
-            _currentStage++;
-            _currentKillCount = 0;
-
+            _progress = new StageProgress(_progress.CurrentStage + 1, 0);
             PersistState();
 
-            OnStageChanged?.Invoke(_currentStage);
-            OnKillCountChanged?.Invoke(_currentKillCount, RequiredKillCount);
+            OnStageChanged?.Invoke(_progress.CurrentStage);
+            OnKillCountChanged?.Invoke(_progress.CurrentKillCount, RequiredKillCount);
         }
 
         private async UniTask LoadOrDefaultAsync()
@@ -77,8 +72,11 @@ namespace _01.Scripts.Outgame.Stage
 
             if (data != null)
             {
-                _currentStage = data.CurrentStage;
-                _currentKillCount = data.CurrentKillCount;
+                _progress = new StageProgress(data.CurrentStage, data.CurrentKillCount);
+            }
+            else
+            {
+                _progress = new StageProgress();
             }
         }
 
@@ -91,8 +89,8 @@ namespace _01.Scripts.Outgame.Stage
         {
             return new StageSaveData
             {
-                CurrentStage = _currentStage,
-                CurrentKillCount = _currentKillCount
+                CurrentStage = _progress.CurrentStage,
+                CurrentKillCount = _progress.CurrentKillCount
             };
         }
 
