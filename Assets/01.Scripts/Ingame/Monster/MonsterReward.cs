@@ -9,32 +9,30 @@ namespace _01.Scripts.Ingame.Monster
         [Header("Reward")]
         [SerializeField] private long _goldAmount = 10;
 
-        private MonsterHealth _health;
+        private Monster _monster;
         private BigNumber _calculatedGoldAmount;
-
-        public BigNumber GoldAmount => _calculatedGoldAmount;
 
         public static event Action<BigNumber, Vector3> OnGoldDropped;
 
         private void Awake()
         {
-            _health = GetComponent<MonsterHealth>();
+            _monster = GetComponent<Monster>();
             _calculatedGoldAmount = new BigNumber(_goldAmount);
         }
 
         private void OnEnable()
         {
-            if (_health != null)
+            if (_monster != null)
             {
-                _health.OnDeath += DropReward;
+                _monster.OnMonsterDeath += DropReward;
             }
         }
 
         private void OnDisable()
         {
-            if (_health != null)
+            if (_monster != null)
             {
-                _health.OnDeath -= DropReward;
+                _monster.OnMonsterDeath -= DropReward;
             }
         }
 
