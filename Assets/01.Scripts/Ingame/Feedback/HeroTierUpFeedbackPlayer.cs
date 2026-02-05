@@ -35,12 +35,12 @@ namespace _01.Scripts.Ingame.Feedback
             }
         }
 
-        private void HandleTierChanged(TierChangeInfo info)
+        private void HandleTierChanged(string tierName)
         {
-            PlayTierUpEffect(info);
+            PlayTierUpEffect(tierName);
         }
 
-        private void PlayTierUpEffect(TierChangeInfo info)
+        private void PlayTierUpEffect(string tierName)
         {
             var heroTransform = _heroVisual.CurrentHero?.transform;
             var position = heroTransform != null ? heroTransform.position : transform.position;
@@ -50,7 +50,7 @@ namespace _01.Scripts.Ingame.Feedback
 
             if (_textFeedback != null)
             {
-                _textFeedback.SetTierName(info.NewTierName);
+                _textFeedback.SetTierName(tierName);
                 var textPosition = _useScreenCenter ? GetScreenCenterWorld() : position;
                 _textFeedback.Play(textPosition + _textOffset);
             }
