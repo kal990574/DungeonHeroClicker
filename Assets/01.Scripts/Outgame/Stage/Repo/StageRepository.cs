@@ -2,6 +2,7 @@ using System.IO;
 using Cysharp.Threading.Tasks;
 using _01.Scripts.Core.Utils;
 using _01.Scripts.Interfaces;
+using _01.Scripts.Outgame.Account.Manager;
 using UnityEngine;
 
 namespace _01.Scripts.Outgame.Stage.Repo
@@ -10,8 +11,9 @@ namespace _01.Scripts.Outgame.Stage.Repo
     {
         private readonly string _savePath;
 
-        public StageRepository(string accountId)
+        public StageRepository()
         {
+            string accountId = AccountManager.Instance.CurrentAccountId;
             string directory = Path.Combine(Application.persistentDataPath, accountId);
             Directory.CreateDirectory(directory);
             _savePath = Path.Combine(directory, "stage_data.json");

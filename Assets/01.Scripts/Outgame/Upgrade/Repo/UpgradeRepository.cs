@@ -2,6 +2,7 @@ using System.IO;
 using Cysharp.Threading.Tasks;
 using _01.Scripts.Core.Utils;
 using _01.Scripts.Interfaces.Upgrade;
+using _01.Scripts.Outgame.Account.Manager;
 using UnityEngine;
 
 namespace _01.Scripts.Outgame.Upgrade.Repo
@@ -10,8 +11,9 @@ namespace _01.Scripts.Outgame.Upgrade.Repo
     {
         private readonly string _savePath;
 
-        public UpgradeRepository(string accountId)
+        public UpgradeRepository()
         {
+            string accountId = AccountManager.Instance.CurrentAccountId;
             string directory = Path.Combine(Application.persistentDataPath, accountId);
             Directory.CreateDirectory(directory);
             _savePath = Path.Combine(directory, "upgrade_data.json");

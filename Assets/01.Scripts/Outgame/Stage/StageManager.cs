@@ -33,7 +33,11 @@ namespace _01.Scripts.Outgame.Stage
 
         private async void Awake()
         {
+#if UNITY_WEBGL
+            _repository = new StageRepository();
+#else
             _repository = new FirebaseStageRepository();
+#endif
             _statCalculator = new StageStatCalculator(_scalingData, _stageData);
 
             await LoadOrDefaultAsync();

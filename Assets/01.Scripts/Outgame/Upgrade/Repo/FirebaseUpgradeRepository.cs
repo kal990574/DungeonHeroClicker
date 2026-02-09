@@ -1,3 +1,4 @@
+#if !UNITY_WEBGL
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
@@ -51,3 +52,4 @@ namespace _01.Scripts.Outgame.Upgrade.Repo
         }
     }
 }
+#endif

@@ -33,7 +33,11 @@ namespace _01.Scripts.Outgame.Upgrade
 
         private async void Awake()
         {
+#if UNITY_WEBGL
+            _repository = new UpgradeRepository();
+#else
             _repository = new FirebaseUpgradeRepository();
+#endif
             await InitializeItemsAsync();
             IsInitialized = true;
             OnInitialized?.Invoke();

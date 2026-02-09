@@ -80,7 +80,11 @@ namespace _01.Scripts.Outgame.Currency
 
         private async void Awake()
         {
+#if UNITY_WEBGL
+            _repository = new CurrencyRepository();
+#else
             _repository = new FirebaseCurrencyRepository();
+#endif
             _currencies = new Domain.Currency[(int)ECurrencyType.Count];
 
             await LoadOrDefaultAsync();

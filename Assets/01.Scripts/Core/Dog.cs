@@ -1,3 +1,4 @@
+#if !UNITY_WEBGL
 using System;
 using Firebase.Firestore;
 using UnityEngine;
@@ -34,3 +35,4 @@ public class Dog
         Age = age;
     }
 }
+#endif

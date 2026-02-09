@@ -1,3 +1,4 @@
+#if !UNITY_WEBGL
 using System;
 using Cysharp.Threading.Tasks;
 using Firebase;
@@ -48,3 +49,4 @@ namespace _01.Scripts.Core
         }
     }
 }
+#endif

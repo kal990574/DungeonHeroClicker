@@ -31,7 +31,11 @@ namespace _01.Scripts.Outgame.Account.Manager
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
+#if UNITY_WEBGL
+            _repository = new AccountRepository();
+#else
             _repository = new FirebaseAccountRepository();
+#endif
         }
 
         public async UniTask<AccountResult> TryLogin(string id, string password)

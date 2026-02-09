@@ -1,3 +1,4 @@
+#if !UNITY_WEBGL
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -254,3 +255,4 @@ public class FirebaseTutorial : MonoBehaviour
         }
     }
 }
+#endif
